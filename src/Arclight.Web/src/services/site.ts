@@ -110,7 +110,7 @@ export const features: Feature[] = [
 export const changelog: ChangelogEntry[] = [
   {
     version: '0.1.0',
-    date: '2026-10-14',
+    date: '2026-10-15',
     summary: 'The first public build of Arclight: a working library, launcher and playtime tracker for Windows.',
     groups: [
       {
@@ -120,6 +120,7 @@ export const changelog: ChangelogEntry[] = [
           'Grid, compact grid and list views with search, combinable filters and eight sort orders.',
           'Favorites, collections with drag-and-drop ordering, tags, personal notes and 5-star ratings.',
           'Scans never add duplicates; removed games can be hidden from future scans.',
+          'Official covers and backgrounds for Steam, Epic, Xbox and other games (online lookups can be turned off).',
         ],
       },
       {
@@ -134,6 +135,7 @@ export const changelog: ChangelogEntry[] = [
         title: 'App',
         items: [
           'Home dashboard, Recently Played, Statistics and Settings.',
+          'English and Turkish interface that follows your Windows language and switches instantly.',
           'Local SQLite storage with automatic backups before upgrades and JSON export.',
           'Installer and portable builds for Windows 10 and 11 (x64).',
         ],
