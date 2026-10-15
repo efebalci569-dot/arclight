@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using Arclight.Core.Interfaces;
 using Arclight.Core.Launching;
 using Arclight.Core.Models;
@@ -9,7 +9,8 @@ namespace Arclight.Platforms.Epic;
 
 /// <summary>
 /// Reads the Epic Games Launcher's install manifests (<c>*.item</c> JSON files under
-/// ProgramData). The format is undocumented, so parsing is defensive and isolated here.
+/// ProgramData), plus the launcher's catalog cache for official artwork (<see cref="EpicCatalog"/>).
+/// The formats are undocumented, so parsing is defensive and isolated here.
 /// </summary>
 public sealed class EpicScanner(IRegistryReader registry, string? manifestDirectoryOverride = null) : IPlatformScanner
 {
@@ -29,6 +30,7 @@ public sealed class EpicScanner(IRegistryReader registry, string? manifestDirect
             return Task.FromResult(PlatformScanResult.NotFound(Platform, DisplayName, SupportLevel));
         }
 
+        var catalog = EpicCatalog.Load(Path.Combine(Path.GetDirectoryName(directory) ?? directory, "Catalog", "catcache.bin"));
         var games = new List<DetectedGame>();
         var errors = new List<string>();
         foreach (var file in Directory.EnumerateFiles(directory, "*.item"))
@@ -36,7 +38,7 @@ public sealed class EpicScanner(IRegistryReader registry, string? manifestDirect
             cancellationToken.ThrowIfCancellationRequested();
             try
             {
-                if (ParseManifest(File.ReadAllText(file)) is { } game &&
+                if (ParseManifest(File.ReadAllText(file), catalog) is { } game &&
                     !games.Any(g => g.PlatformIdentifier.Equals(game.PlatformIdentifier, StringComparison.OrdinalIgnoreCase)))
                 {
                     games.Add(game);
@@ -69,7 +71,7 @@ public sealed class EpicScanner(IRegistryReader registry, string? manifestDirect
     }
 
     /// <summary>Turns one manifest into a detected game, or null for DLC, engines and other non-game items.</summary>
-    internal static DetectedGame? ParseManifest(string json)
+    internal static DetectedGame? ParseManifest(string json, IReadOnlyDictionary<string, IReadOnlyList<ArtworkCandidate>>? catalog = null)
     {
         using var document = JsonDocument.Parse(json, new JsonDocumentOptions { AllowTrailingCommas = true });
         var root = document.RootElement;
@@ -121,7 +123,11 @@ public sealed class EpicScanner(IRegistryReader registry, string? manifestDirect
             LaunchMethod = LaunchMethod.LauncherUri,
             LaunchTarget = LauncherUris.EpicRun(catalogNamespace, catalogItemId, appName),
             IsInstalled = installed,
-            Artwork = executable is not null && installed ? [new ArtworkCandidate(ArtworkKind.Icon, executable)] : [],
+            Artwork =
+            [
+                .. catalog is not null && catalog.TryGetValue(catalogItemId, out var art) ? art : [],
+                .. executable is not null && installed ? [new ArtworkCandidate(ArtworkKind.Icon, executable)] : Array.Empty<ArtworkCandidate>(),
+            ],
         };
     }
 

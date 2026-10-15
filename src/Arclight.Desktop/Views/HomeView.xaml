@@ -76,6 +76,43 @@
                                     </LinearGradientBrush>
                                 </Border.Background>
                             </Border>
+                            <!-- A few of the library's own covers so the empty slot isn't bare; clicking one features it. -->
+                            <ItemsControl ItemsSource="{Binding FeaturedSuggestions}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,32,0"
+                                          Visibility="{Binding HasFeatured, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}">
+                                <ItemsControl.OpacityMask>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Offset="0" Color="#00000000" />
+                                        <GradientStop Offset="0.4" Color="#B3000000" />
+                                        <GradientStop Offset="1" Color="#F2000000" />
+                                    </LinearGradientBrush>
+                                </ItemsControl.OpacityMask>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.FeatureSuggestionCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding}" ToolTip="{DynamicResource Game.FeatureOnHome}" Cursor="Hand" Margin="14,0,0,0"
+                                                AutomationProperties.Name="{Binding Name}">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Grid x:Name="Root" Opacity="0.85">
+                                                        <ContentPresenter />
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="Root" Property="Opacity" Value="1" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                            <controls:GameArt Width="150" Height="225" ImagePath="{Binding CoverPath}" IconPath="{Binding IconPath}" Title="{Binding Name}" />
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Grid>
                     </controls:ClipBorder>
                     <Border CornerRadius="18" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border.Subtle}" IsHitTestVisible="False" />

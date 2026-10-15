@@ -1,5 +1,8 @@
-﻿using System.Security.Cryptography;
+using System.Collections.Concurrent;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
+using Arclight.Core.Artwork;
 using Arclight.Core.Data;
 using Arclight.Core.Interfaces;
 using Arclight.Core.Models;
@@ -12,8 +15,9 @@ public sealed record ResolvedArtwork(string? Cover, string? Background, string? 
 
 /// <summary>
 /// Finds and caches artwork. Order of preference: the user's own image (never overwritten),
-/// artwork the launcher already stores on disk, then the platform's public CDN when downloads are
-/// allowed. Anything that cannot be matched to the exact game id falls back to a placeholder.
+/// artwork the launcher already stores on disk, then the platform's public image servers when downloads
+/// are allowed. Games whose launcher keeps no artwork are looked up online (<see cref="FindOnlineAsync"/>);
+/// anything that cannot be matched exactly falls back to a placeholder.
 /// </summary>
 public sealed class ArtworkService
 {
@@ -29,6 +33,7 @@ public sealed class ArtworkService
     private readonly IClock _clock;
     private readonly ILogger _logger;
     private readonly SemaphoreSlim _downloadSlots = new(4);
+    private readonly ConcurrentDictionary<string, SemaphoreSlim> _keyLocks = new(StringComparer.Ordinal);
     private readonly IIconExtractor? _iconExtractor;
 
     public ArtworkService(
@@ -89,6 +94,44 @@ public sealed class ArtworkService
         var background = await ResolveKindAsync(platform, platformIdentifier, ArtworkKind.Background, candidates, allowDownload, cancellationToken);
         var icon = await ResolveKindAsync(platform, platformIdentifier, ArtworkKind.Icon, candidates, allowDownload, cancellationToken);
         return new ResolvedArtwork(cover, background, icon);
+    }
+
+    /// <summary>
+    /// Artwork for a game whose launcher stores none: the Microsoft Store catalog for Xbox games (by
+    /// package family name), otherwise a strict name match in the Steam store. A lookup that finds
+    /// nothing is not repeated for a week; network errors are simply retried next time.
+    /// </summary>
+    public async Task<IReadOnlyList<ArtworkCandidate>> FindOnlineAsync(
+        GamePlatform platform,
+        string? platformIdentifier,
+        string name,
+        CancellationToken cancellationToken = default)
+    {
+        if (platform == GamePlatform.Xbox && !string.IsNullOrWhiteSpace(platformIdentifier))
+        {
+            var store = await LookupAsync(
+                "msstore|" + platformIdentifier.ToUpperInvariant(),
+                MicrosoftStore.LookupUrl(platformIdentifier),
+                MicrosoftStore.ReadArtwork,
+                cancellationToken);
+            if (store.Count > 0)
+            {
+                return store;
+            }
+        }
+
+        // Steam games already use their own app id; searching by name could only find the same game.
+        var title = SteamStore.NormalizeTitle(name);
+        if (platform == GamePlatform.Steam || title.Length == 0)
+        {
+            return [];
+        }
+
+        return await LookupAsync(
+            "steam-search|" + title,
+            SteamStore.SearchUrl(name),
+            result => SteamStore.FindMatch(name, result) is { } appId ? SteamStore.CdnArtwork(appId) : [],
+            cancellationToken);
     }
 
     /// <summary>Copies an image the user picked into Arclight's own folder so it survives the original moving.</summary>
@@ -167,37 +210,90 @@ public sealed class ArtworkService
 
         Directory.CreateDirectory(_paths.ArtworkCache);
         var key = CacheKey(platform, platformIdentifier, kind);
-        var existing = Directory.EnumerateFiles(_paths.ArtworkCache, key + ".*").FirstOrDefault();
-        if (existing is not null)
-        {
-            return existing;
-        }
 
-        foreach (var candidate in options)
+        // A scan and the startup pass may ask for the same image at once; the second one waits and reuses the file.
+        var gate = _keyLocks.GetOrAdd(key, _ => new SemaphoreSlim(1, 1));
+        await gate.WaitAsync(cancellationToken);
+        try
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            if (!candidate.IsRemote)
+            var existing = Directory.EnumerateFiles(_paths.ArtworkCache, key + ".*")
+                .FirstOrDefault(f => !f.EndsWith(".download", StringComparison.OrdinalIgnoreCase));
+            if (existing is not null)
             {
-                if (CopyLocal(candidate.Source, key) is { } copied)
+                return existing;
+            }
+
+            foreach (var candidate in options)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (!candidate.IsRemote)
                 {
-                    return copied;
+                    if (CopyLocal(candidate.Source, key) is { } copied)
+                    {
+                        return copied;
+                    }
+
+                    continue;
                 }
 
-                continue;
+                if (!allowDownload)
+                {
+                    continue;
+                }
+
+                if (await DownloadAsync(candidate.Source, key, cancellationToken) is { } downloaded)
+                {
+                    return downloaded;
+                }
             }
 
-            if (!allowDownload)
-            {
-                continue;
-            }
+            return null;
+        }
+        finally
+        {
+            gate.Release();
+        }
+    }
 
-            if (await DownloadAsync(candidate.Source, key, cancellationToken) is { } downloaded)
-            {
-                return downloaded;
-            }
+    private async Task<IReadOnlyList<ArtworkCandidate>> LookupAsync(
+        string entryKey,
+        string url,
+        Func<JsonElement, IReadOnlyList<ArtworkCandidate>> read,
+        CancellationToken cancellationToken)
+    {
+        var previous = _store.GetImageCacheEntry(entryKey);
+        if (previous is { Status: "failed" } && _clock.UtcNow - previous.UpdatedAt < FailureCooldown)
+        {
+            return [];
         }
 
-        return null;
+        try
+        {
+            using var response = await _http.GetAsync(url, cancellationToken);
+            IReadOnlyList<ArtworkCandidate> found = [];
+            if (response.IsSuccessStatusCode)
+            {
+                await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+                using var json = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken);
+                found = read(json.RootElement);
+            }
+            else if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+            {
+                return [];
+            }
+
+            if (found.Count == 0)
+            {
+                _store.SetImageCacheEntry(new ImageCacheEntry(entryKey, url, null, "failed", _clock.UtcNow));
+            }
+
+            return found;
+        }
+        catch (Exception ex) when (ex is HttpRequestException or JsonException or TaskCanceledException && !cancellationToken.IsCancellationRequested)
+        {
+            _logger.LogDebug(ex, "Artwork lookup failed for {Url}", url);
+            return [];
+        }
     }
 
     private string? CopyLocal(string source, string key)

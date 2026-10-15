@@ -140,6 +140,7 @@ public sealed class GameActions(
         var editor = new GameEditorViewModel(library, artwork, dialogs, existing: null, executablePath);
         if (await dialogs.ShowAsync<Game>(editor) is { } added)
         {
+            _ = scans.FillArtworkOnlineAsync(added);
             notifications.Success(Loc.Format("Toast.GameAdded.Title", added.Name), Loc.Get("Toast.GameAdded.Message"), Loc.Get("Toast.View"), () =>
             {
                 OpenDetails(added);
@@ -153,6 +154,11 @@ public sealed class GameActions(
         var editor = new GameEditorViewModel(library, artwork, dialogs, existing: game);
         if (await dialogs.ShowAsync<Game>(editor) is { } saved)
         {
+            if (!string.Equals(saved.Name, game.Name, StringComparison.Ordinal))
+            {
+                _ = scans.FillArtworkOnlineAsync(saved);
+            }
+
             notifications.Show(NoticeKind.Success, Loc.Get("Toast.ChangesSaved"), saved.Name, keepInHistory: false);
         }
     }

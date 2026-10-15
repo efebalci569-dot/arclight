@@ -1,3 +1,4 @@
+using Arclight.Core.Artwork;
 using Arclight.Core.Interfaces;
 using Arclight.Core.Launching;
 using Arclight.Core.Library;
@@ -216,10 +217,7 @@ public sealed class SteamScanner(IRegistryReader registry, string? steamPathOver
         AddLocal(ArtworkKind.Background, "header.jpg");
         AddLocal(ArtworkKind.Logo, "logo.png");
 
-        const string Cdn = "https://shared.steamstatic.com/store_item_assets/steam/apps";
-        candidates.Add(new ArtworkCandidate(ArtworkKind.Cover, $"{Cdn}/{appId}/library_600x900.jpg"));
-        candidates.Add(new ArtworkCandidate(ArtworkKind.Background, $"{Cdn}/{appId}/library_hero.jpg"));
-        candidates.Add(new ArtworkCandidate(ArtworkKind.Background, $"{Cdn}/{appId}/header.jpg"));
+        candidates.AddRange(SteamStore.CdnArtwork(appId));
         return candidates;
     }
 }

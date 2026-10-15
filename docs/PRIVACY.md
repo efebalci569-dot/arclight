@@ -18,7 +18,13 @@ You can export everything to a JSON file (Settings › Privacy › Export my dat
 
 Only in these cases:
 
-1. **Missing Steam artwork.** For Steam games without artwork in Steam's own local cache, Arclight requests the cover, hero and header images for that app id from Steam's public image server (`shared.steamstatic.com`). This reveals the app ids of those games to Valve's CDN. Turn it off in Settings › Library › Download missing artwork.
+1. **Missing artwork.** When a game has no cover or background on disk, Arclight fetches it from the platform's public image servers:
+   - Steam games: the cover, hero and header images for that app id from `shared.steamstatic.com`.
+   - Epic games: the image links already stored in the Epic launcher's local catalog, from `cdn1.epicgames.com`.
+   - Xbox games: the installed package's family name is looked up in the Microsoft Store catalog (`displaycatalog.mp.microsoft.com`) and its poster and hero images are downloaded from `store-images.s-microsoft.com`.
+   - Any other game that still has no cover (GOG, Ubisoft, games you added yourself): its name is searched in the Steam store (`store.steampowered.com`). Only an exact name match is used, and then that game's Steam images are downloaded.
+
+   These requests reveal the app ids, package names or names of those games to Valve, Epic or Microsoft — nothing else about your library. Downloaded images are cached, and a lookup that finds nothing is not repeated for a week. Turn it all off in Settings › Library › Download missing artwork.
 2. **Update checks.** When you press *Check for updates*, or if you turned on *Check for updates on startup*, Arclight requests the latest release information from the public GitHub API. No library data is sent.
 
 Launching a game through a launcher link (for example `steam://`) hands the request to that launcher, which may of course contact its own servers.

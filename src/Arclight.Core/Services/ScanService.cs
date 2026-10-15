@@ -117,6 +117,46 @@ public sealed class ScanService
         return added;
     }
 
+    /// <summary>
+    /// Looks up artwork online for every game that still has no cover — manual games, and games whose
+    /// launcher keeps none. Does nothing when "Download missing artwork" is off.
+    /// </summary>
+    public async Task FillMissingArtworkOnlineAsync(CancellationToken cancellationToken = default)
+    {
+        foreach (var game in _library.Games.Where(g => g.Platform != GamePlatform.Steam && !HasImage(g.CoverImagePath)).ToList())
+        {
+            await FillArtworkOnlineAsync(game, cancellationToken);
+        }
+    }
+
+    /// <summary>Looks up artwork online for one game without a cover (for example right after it was added by hand).</summary>
+    public async Task FillArtworkOnlineAsync(Game game, CancellationToken cancellationToken = default)
+    {
+        if (!_library.Settings.DownloadMissingArtwork || game.Platform == GamePlatform.Steam || HasImage(game.CoverImagePath))
+        {
+            return;
+        }
+
+        try
+        {
+            var candidates = await _artwork.FindOnlineAsync(game.Platform, game.PlatformIdentifier, game.Name, cancellationToken);
+            if (candidates.Count == 0)
+            {
+                return;
+            }
+
+            var resolved = await _artwork.ResolveAsync(game.Platform, game.PlatformIdentifier ?? $"game:{game.Id}", candidates, allowDownload: true, cancellationToken);
+            if (_library.FindGame(game.Id) is { } current)
+            {
+                await SetArtworkKeepingExistingAsync(current, resolved);
+            }
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            _logger.LogWarning(ex, "Could not look up artwork for {Name}", game.Name);
+        }
+    }
+
     public Task IgnoreAsync(DetectedGame detected) =>
         _library.IgnoreAsync(ScanMerger.IdentityKey(detected.Platform, detected.PlatformIdentifier), detected.Name);
 
@@ -182,28 +222,45 @@ public sealed class ScanService
 
     private async Task ApplyArtworkAsync(Game game, DetectedGame detected)
     {
-        if (detected.Artwork.Count == 0)
-        {
-            return;
-        }
-
         try
         {
-            var resolved = await _artwork.ResolveAsync(detected.Platform, detected.PlatformIdentifier, detected.Artwork, _library.Settings.DownloadMissingArtwork);
-            var cover = Keep(game.CoverImagePath) ?? resolved.Cover;
-            var background = Keep(game.BackgroundImagePath) ?? resolved.Background;
-            var icon = Keep(game.IconImagePath) ?? resolved.Icon;
-            if (cover != game.CoverImagePath || background != game.BackgroundImagePath || icon != game.IconImagePath)
+            var allowDownload = _library.Settings.DownloadMissingArtwork;
+            var candidates = detected.Artwork;
+
+            // The launcher keeps no cover for this game (Xbox, GOG, Ubisoft…): look it up online.
+            if (allowDownload && detected.Platform != GamePlatform.Steam && !HasImage(game.CoverImagePath) &&
+                !candidates.Any(c => c.Kind == ArtworkKind.Cover))
             {
-                await _library.SetArtworkAsync(game.Id, cover, background, icon);
+                candidates = [.. candidates, .. await _artwork.FindOnlineAsync(detected.Platform, detected.PlatformIdentifier, detected.Name)];
             }
+
+            if (candidates.Count == 0)
+            {
+                return;
+            }
+
+            var resolved = await _artwork.ResolveAsync(detected.Platform, detected.PlatformIdentifier, candidates, allowDownload);
+            await SetArtworkKeepingExistingAsync(game, resolved);
         }
         catch (Exception ex)
         {
             _logger.LogWarning(ex, "Could not resolve artwork for {Name}", game.Name);
         }
-
-        // Existing images (especially ones the user picked) always win over detected artwork.
-        static string? Keep(string? path) => path is not null && File.Exists(path) ? path : null;
     }
+
+    /// <summary>Existing images (especially ones the user picked) always win over found artwork.</summary>
+    private async Task SetArtworkKeepingExistingAsync(Game game, ResolvedArtwork resolved)
+    {
+        var cover = Keep(game.CoverImagePath) ?? resolved.Cover;
+        var background = Keep(game.BackgroundImagePath) ?? resolved.Background;
+        var icon = Keep(game.IconImagePath) ?? resolved.Icon;
+        if (cover != game.CoverImagePath || background != game.BackgroundImagePath || icon != game.IconImagePath)
+        {
+            await _library.SetArtworkAsync(game.Id, cover, background, icon);
+        }
+
+        static string? Keep(string? path) => HasImage(path) ? path : null;
+    }
+
+    private static bool HasImage(string? path) => path is not null && File.Exists(path);
 }

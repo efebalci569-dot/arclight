@@ -20,7 +20,7 @@ export function Privacy() {
         <div>
           <h3>The only times Arclight goes online</h3>
           <ul className="plain-list">
-            <li>Downloading missing cover art for Steam games from Steam’s public image server. You can turn this off.</li>
+            <li>Downloading missing cover art from Steam, Epic and Microsoft Store image servers (other games are matched by name in the Steam store). You can turn this off.</li>
             <li>Checking GitHub for a new version — only when you press Check for updates, or turn on the startup check.</li>
           </ul>
         </div>

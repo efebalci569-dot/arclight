@@ -474,11 +474,11 @@
     <sys:String x:Key="Settings.Export.Filter">JSON file (*.json)|*.json</sys:String>
     <sys:String x:Key="Settings.ExportMyData">Export my data</sys:String>
     <sys:String x:Key="Settings.ExtraSteamLibraryFolders">Extra Steam library folders</sys:String>
-    <sys:String x:Key="Settings.FetchesCoverArtFromSteams">Fetches cover art from Steam's public image server for Steam games that have none on disk. Images are cached and never re-downloaded. Turn off to stay fully offline.</sys:String>
+    <sys:String x:Key="Settings.FetchesCoverArtFromSteams">Fills in covers and backgrounds that aren't on disk: Steam games from Steam's public image server, Epic games from the links in the Epic launcher's own catalog, Xbox games from the Microsoft Store catalog, and other games by searching their name in the Steam store. Images are cached and never re-downloaded. Turn off to stay fully offline.</sys:String>
     <sys:String x:Key="Settings.FilterGames">Filter games…</sys:String>
     <sys:String x:Key="Settings.ForDRMFreeAndStandalone">For DRM-free and standalone games: each subfolder is suggested as a game with its most likely executable. You confirm each one in the scan window.</sys:String>
     <sys:String x:Key="Settings.GameFolders">Game folders</sys:String>
-    <sys:String x:Key="Settings.GamesNotesTagsCollectionsSettings">Games, notes, tags, collections, settings and playtime are stored in a local SQLite database. Arclight has no account system and never uploads your library. Network requests are limited to downloading missing Steam artwork (can be turned off) and checking GitHub for updates when you ask.</sys:String>
+    <sys:String x:Key="Settings.GamesNotesTagsCollectionsSettings">Games, notes, tags, collections, settings and playtime are stored in a local SQLite database. Arclight has no account system and never uploads your library. Network requests are limited to downloading missing artwork (can be turned off) and checking GitHub for updates when you ask.</sys:String>
     <sys:String x:Key="Settings.GAMESTHEBACKGROUNDTRACKERMAY">GAMES THE BACKGROUND TRACKER MAY COUNT</sys:String>
     <sys:String x:Key="Settings.General">General</sys:String>
     <sys:String x:Key="Settings.GitHubRepository">GitHub repository</sys:String>

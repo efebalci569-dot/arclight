@@ -474,11 +474,11 @@
     <sys:String x:Key="Settings.Export.Filter">JSON dosyası (*.json)|*.json</sys:String>
     <sys:String x:Key="Settings.ExportMyData">Verilerimi dışa aktar</sys:String>
     <sys:String x:Key="Settings.ExtraSteamLibraryFolders">Ek Steam kütüphane klasörleri</sys:String>
-    <sys:String x:Key="Settings.FetchesCoverArtFromSteams">Diskte görseli olmayan Steam oyunları için kapak görsellerini Steam'in herkese açık görsel sunucusundan alır. Görseller önbelleğe alınır ve bir daha indirilmez. Tamamen çevrimdışı kalmak için kapat.</sys:String>
+    <sys:String x:Key="Settings.FetchesCoverArtFromSteams">Diskte olmayan kapak ve arka plan görsellerini tamamlar: Steam oyunları için Steam'in herkese açık görsel sunucusundan, Epic oyunları için Epic başlatıcısının kendi kataloğundaki bağlantılardan, Xbox oyunları için Microsoft Store kataloğundan, diğer oyunlar için ise adlarını Steam mağazasında arayarak. Görseller önbelleğe alınır ve bir daha indirilmez. Tamamen çevrimdışı kalmak için kapat.</sys:String>
     <sys:String x:Key="Settings.FilterGames">Oyunları filtrele…</sys:String>
     <sys:String x:Key="Settings.ForDRMFreeAndStandalone">DRM'siz ve bağımsız oyunlar için: her alt klasör, en olası çalıştırılabilir dosyasıyla birlikte oyun olarak önerilir. Her birini tarama penceresinde sen onaylarsın.</sys:String>
     <sys:String x:Key="Settings.GameFolders">Oyun klasörleri</sys:String>
-    <sys:String x:Key="Settings.GamesNotesTagsCollectionsSettings">Oyunlar, notlar, etiketler, koleksiyonlar, ayarlar ve oynama süreleri yerel bir SQLite veritabanında saklanır. Arclight'ın hesap sistemi yoktur ve kütüphaneni asla bir yere yüklemez. Ağ istekleri, eksik Steam görsellerinin indirilmesi (kapatılabilir) ve istediğinde GitHub'da güncelleme kontrolüyle sınırlıdır.</sys:String>
+    <sys:String x:Key="Settings.GamesNotesTagsCollectionsSettings">Oyunlar, notlar, etiketler, koleksiyonlar, ayarlar ve oynama süreleri yerel bir SQLite veritabanında saklanır. Arclight'ın hesap sistemi yoktur ve kütüphaneni asla bir yere yüklemez. Ağ istekleri, eksik görsellerin indirilmesi (kapatılabilir) ve istediğinde GitHub'da güncelleme kontrolüyle sınırlıdır.</sys:String>
     <sys:String x:Key="Settings.GAMESTHEBACKGROUNDTRACKERMAY">ARKA PLAN İZLEYİCİSİNİN SAYABİLECEĞİ OYUNLAR</sys:String>
     <sys:String x:Key="Settings.General">Genel</sys:String>
     <sys:String x:Key="Settings.GitHubRepository">GitHub deposu</sys:String>

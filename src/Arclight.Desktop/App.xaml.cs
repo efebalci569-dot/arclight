@@ -299,6 +299,9 @@ public partial class App : Application
                 }
             }
 
+            // Covers for games whose launcher keeps none (only when "Download missing artwork" is on).
+            await services.GetRequiredService<ScanService>().FillMissingArtworkOnlineAsync();
+
             if (library.Settings.CheckForUpdatesOnStartup)
             {
                 var update = await services.GetRequiredService<UpdateChecker>().CheckAsync();

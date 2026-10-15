@@ -13,7 +13,7 @@ The first public build: a working library, launcher and playtime tracker for Win
 - Scans never add duplicates (platform id, then executable, then install folder); removed games can be hidden from future scans; uninstalled games are marked instead of deleted.
 - Grid, compact grid and virtualized list views; search across names, tags, collections, platforms and notes; combinable filters; eight sort orders.
 - Favorites, collections with drag-and-drop ordering, tags, personal notes (auto-saved) and 5-star ratings.
-- Artwork from Steam's local cache first, Steam's public CDN second (can be turned off), icons from executables and Xbox packages, and a designed placeholder otherwise.
+- Official covers and backgrounds: Steam's local cache and public CDN, the image links in the Epic launcher's own catalog, the Microsoft Store catalog for Xbox games, and an exact-name match in the Steam store for any other game without a cover. Every online lookup can be turned off with one setting; icons come from executables and Xbox packages, with a designed placeholder otherwise.
 
 ### Playing
 - Launch through Steam, Epic Games, Ubisoft Connect and Windows app links, or directly from an executable without a command shell.
@@ -22,7 +22,7 @@ The first public build: a working library, launcher and playtime tracker for Win
 - Optional background tracker for games started outside Arclight, per-game opt-out and user-defined process exclusions.
 
 ### App
-- Home dashboard (featured game, Continue Playing, Recently Added, quick stats), Recently Played, Statistics (30-day chart, most played, platforms) and Settings.
+- Home dashboard (featured game — with a row of your own covers to pick from until you choose one — Continue Playing, Recently Added, quick stats), Recently Played, Statistics (30-day chart, most played, platforms) and Settings.
 - Local SQLite storage with backups before schema upgrades, JSON export, statistics reset, play-history clearing and log clearing.
 - English and Turkish interface. It follows the Windows display language by default and switches instantly from Settings › General, including dates, numbers and playtime units.
 - Accent colors, OLED-black theme, card sizes, grid density and reduced motion.

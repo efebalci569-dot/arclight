@@ -46,6 +46,9 @@ public sealed partial class HomeViewModel : PageViewModel
 
     public ObservableCollection<StatTile> Stats { get; } = [];
 
+    /// <summary>Covers shown beside the "choose a featured game" prompt: recently played first, then recently added.</summary>
+    public ObservableCollection<GameItemViewModel> FeaturedSuggestions { get; } = [];
+
     [ObservableProperty]
     private string _greeting = string.Empty;
 
@@ -90,6 +93,12 @@ public sealed partial class HomeViewModel : PageViewModel
         var games = _library.Games;
         HasGames = games.Count > 0;
         Featured = _library.Settings.FeaturedGameId is { } featuredId ? _items.Find(featuredId) : null;
+        Replace(FeaturedSuggestions, Featured is not null ? [] : games
+            .Select(_items.Get)
+            .Where(item => item.CoverPath is not null)
+            .OrderByDescending(item => item.Game.LastPlayed ?? DateTimeOffset.MinValue)
+            .ThenByDescending(item => item.Game.DateAdded)
+            .Take(4));
 
         Replace(ContinuePlaying, games
             .Where(g => g.LastPlayed is not null || _items.Get(g).IsRunning)
@@ -144,6 +153,13 @@ public sealed partial class HomeViewModel : PageViewModel
             await _actions.FeatureOnHomeAsync(game);
             Refresh();
         }
+    }
+
+    [RelayCommand]
+    private async Task FeatureSuggestionAsync(GameItemViewModel item)
+    {
+        await _actions.FeatureOnHomeAsync(item.Game);
+        Refresh();
     }
 
     [RelayCommand]

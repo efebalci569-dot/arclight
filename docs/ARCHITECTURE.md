@@ -56,7 +56,7 @@ The optional background tracker adds every installed game with tracking enabled 
 
 ## Artwork
 
-Resolution order: images the user picked → artwork the launcher already stores locally (Steam library cache, Xbox package logos, GOG `.ico`, executable icons) → the platform's public CDN for the exact app id (Steam only, can be turned off) → a generated placeholder (gradient, icon and title). Downloads are limited in size and concurrency, written to a temp file first and cached forever.
+Resolution order: images the user picked → artwork the launcher already stores locally (Steam library cache, Xbox package logos, GOG `.ico`, executable icons) → the platform's own public images for the exact game (Steam CDN by app id, Epic links from the launcher's `catcache.bin`, Microsoft Store catalog by package family name) → for games that still have no cover, a strict name match in the Steam store (`Arclight.Core.Artwork`) → a generated placeholder (gradient, icon and title). Everything online can be turned off with one setting. Lookups that find nothing are remembered for a week; downloads are limited in size and concurrency, serialized per image, written to a temp file first and cached forever.
 
 ## Localization
 

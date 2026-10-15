@@ -51,6 +51,49 @@ public sealed class EpicScannerTests : IDisposable
     }
 
     [Fact]
+    public async Task Covers_and_backgrounds_come_from_the_launchers_catalog_cache()
+    {
+        var gameDir = _temp.Dir(@"Games\GTAV");
+        var manifests = _temp.Dir("Manifests");
+        _temp.File("Manifests/a.item", Item("Grand Theft Auto V", "gta", gameDir));
+        _temp.File("Manifests/b.item", Item("Unknown To Catalog", "other", gameDir));
+        var catalog = """
+            [
+              { "id": "item-gta", "title": "Grand Theft Auto V", "keyImages": [
+                { "type": "Thumbnail", "url": "https://cdn1.epicgames.com/x/thumb.jpg" },
+                { "type": "DieselGameBox", "url": "https://cdn1.epicgames.com/ns/item/GTAV Landscape-2560x1440.jpg" },
+                { "type": "DieselGameBoxTall", "url": "https://cdn1.epicgames.com/ns/item/GTAV Portrait-1200x1600.jpg" },
+                { "type": "OfferImageTall", "url": "https://evil.example.com/tall.jpg" }
+              ] },
+              { "id": "item-broken", "keyImages": "nope" }
+            ]
+            """;
+        _temp.File("Catalog/catcache.bin", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(catalog)));
+
+        var result = await new EpicScanner(new FakeRegistry(), manifests).ScanAsync(new ScanOptions(), CancellationToken.None);
+
+        var gta = result.Games.Single(g => g.Name == "Grand Theft Auto V");
+        Assert.Equal("https://cdn1.epicgames.com/ns/item/GTAV%20Portrait-1200x1600.jpg", gta.Artwork.Single(a => a.Kind == ArtworkKind.Cover).Source);
+        Assert.Equal("https://cdn1.epicgames.com/ns/item/GTAV%20Landscape-2560x1440.jpg", gta.Artwork.Single(a => a.Kind == ArtworkKind.Background).Source);
+        Assert.Contains(gta.Artwork, a => a.Kind == ArtworkKind.Icon);
+        Assert.DoesNotContain(result.Games.Single(g => g.Name == "Unknown To Catalog").Artwork, a => a.IsRemote);
+    }
+
+    [Fact]
+    public async Task A_damaged_catalog_cache_only_means_no_artwork()
+    {
+        var gameDir = _temp.Dir(@"Games\Game");
+        var manifests = _temp.Dir("Manifests");
+        _temp.File("Manifests/a.item", Item("Game", "game", gameDir));
+        _temp.File("Catalog/catcache.bin", "this is not base64!");
+
+        var result = await new EpicScanner(new FakeRegistry(), manifests).ScanAsync(new ScanOptions(), CancellationToken.None);
+
+        Assert.Empty(result.Errors);
+        Assert.DoesNotContain(Assert.Single(result.Games).Artwork, a => a.IsRemote);
+    }
+
+    [Fact]
     public async Task Missing_manifest_folder_means_launcher_not_found()
     {
         var result = await new EpicScanner(new FakeRegistry(), Path.Combine(_temp.Path, "missing")).ScanAsync(new ScanOptions(), CancellationToken.None);
