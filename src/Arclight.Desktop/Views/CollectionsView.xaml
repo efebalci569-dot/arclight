@@ -1,0 +1,96 @@
+<UserControl x:Class="Arclight.Desktop.Views.CollectionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Arclight.Desktop.Controls"
+             xmlns:vm="clr-namespace:Arclight.Desktop.ViewModels"
+             x:Name="Root">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="36,8,36,20">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Common.Collections}" Style="{StaticResource Text.Title}" />
+                <TextBlock Text="{DynamicResource Collections.GroupGamesYourWayDrag}" Style="{StaticResource Text.Secondary}" Margin="0,3,0,0" />
+            </StackPanel>
+            <Button Style="{StaticResource Button.Primary}" Command="{Binding CreateCommand}" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="16,9" FontSize="13">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource Icon}" Text="&#xE710;" FontSize="12" Foreground="White" Margin="0,0,8,0" />
+                    <TextBlock Text="{DynamicResource Collections.NewCollection}" />
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,80" MaxWidth="440"
+                    Visibility="{Binding IsEmpty, Converter={StaticResource VisibleWhen}}">
+            <TextBlock Style="{StaticResource Icon}" Text="&#xE81E;" FontSize="40" Foreground="{DynamicResource Brush.Accent.Text}" />
+            <TextBlock Text="{DynamicResource Collections.NoCollectionsYet}" Style="{StaticResource Text.Section}" TextAlignment="Center" Margin="0,16,0,0" />
+            <TextBlock Style="{StaticResource Text.Body}" Foreground="{DynamicResource Brush.Text.Secondary}" TextAlignment="Center" Margin="0,8,0,0"
+                       Text="{DynamicResource Collections.CreateCollectionsLikeBacklogCompleted}" />
+            <Button Style="{StaticResource Button.Primary}" Content="{DynamicResource Collections.CreateACollection}" Command="{Binding CreateCommand}" HorizontalAlignment="Center" Padding="18,10" Margin="0,22,0,0" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="List" ItemsSource="{Binding Collections}" Margin="36,0,22,40" AllowDrop="True">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:CollectionCardViewModel}">
+                        <Grid x:Name="Tile" Width="290" Margin="0,0,18,22" Cursor="Hand" Background="Transparent" AllowDrop="True"
+                              controls:Ui.ClickCommand="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" controls:Ui.ClickCommandParameter="{Binding}"
+                              Tag="{Binding}" PreviewMouseLeftButtonDown="OnTilePressed" MouseMove="OnTileMouseMove" Drop="OnTileDrop" DragOver="OnTileDragOver">
+                            <StackPanel>
+                                <Grid Height="172">
+                                    <controls:ClipBorder CornerRadius="14" Background="{DynamicResource Brush.Bg.Card}">
+                                        <Grid>
+                                            <!-- Mosaic of the first games when the collection has no cover of its own -->
+                                            <UniformGrid Columns="4" Visibility="{Binding HasCustomCover, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}">
+                                                <controls:GameArt ImagePath="{Binding PreviewCovers[0]}" Title="{Binding PreviewNames[0]}" ShowTitle="False" CornerRadius="0" DecodeWidth="160" />
+                                                <controls:GameArt ImagePath="{Binding PreviewCovers[1]}" Title="{Binding PreviewNames[1]}" ShowTitle="False" CornerRadius="0" DecodeWidth="160" />
+                                                <controls:GameArt ImagePath="{Binding PreviewCovers[2]}" Title="{Binding PreviewNames[2]}" ShowTitle="False" CornerRadius="0" DecodeWidth="160" />
+                                                <controls:GameArt ImagePath="{Binding PreviewCovers[3]}" Title="{Binding PreviewNames[3]}" ShowTitle="False" CornerRadius="0" DecodeWidth="160" />
+                                            </UniformGrid>
+                                            <controls:GameArt ImagePath="{Binding CoverPath}" Title="{Binding Name}" ShowTitle="False" CornerRadius="0" DecodeWidth="580"
+                                                              Visibility="{Binding HasCustomCover, Converter={StaticResource VisibleWhen}}" />
+                                            <Border Visibility="{Binding IsEmpty, Converter={StaticResource VisibleWhen}}">
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                        <GradientStop Offset="0" Color="#241A3D" />
+                                                        <GradientStop Offset="1" Color="#13131A" />
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE81E;" FontSize="34" Foreground="#40FFFFFF" />
+                                            </Border>
+                                            <Border Background="{DynamicResource Brush.Scrim.Card}" />
+                                        </Grid>
+                                    </controls:ClipBorder>
+                                    <Border x:Name="Outline" CornerRadius="14" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border.Subtle}" IsHitTestVisible="False" />
+                                    <Border Background="#E609090B" CornerRadius="999" Padding="10,4" Margin="12" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                        <TextBlock Text="{Binding CountText}" FontSize="12" FontWeight="SemiBold" />
+                                    </Border>
+                                    <Button x:Name="More" Style="{StaticResource Button.Icon}" Content="&#xE712;" Width="32" Height="32" FontSize="13" Margin="10"
+                                            HorizontalAlignment="Right" VerticalAlignment="Top" Background="#B3000000" Foreground="White" Opacity="0"
+                                            controls:Ui.CornerRadius="16" Click="OnMoreClick" ToolTip="{DynamicResource Collections.CollectionOptions}" />
+                                </Grid>
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource Text.Subtitle}" Margin="2,12,2,0" />
+                                <TextBlock Text="{Binding Description}" Style="{StaticResource Text.Caption}" Margin="2,3,2,0"
+                                           Visibility="{Binding HasDescription, Converter={StaticResource VisibleWhen}}" />
+                            </StackPanel>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <Trigger SourceName="Tile" Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Outline" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+                                <Setter TargetName="More" Property="Opacity" Value="1" />
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

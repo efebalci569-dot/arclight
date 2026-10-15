@@ -1,0 +1,374 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Arclight.Desktop.Controls"
+                    xmlns:vm="clr-namespace:Arclight.Desktop.ViewModels">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Arclight;component/Resources/Theme/Converters.xaml" />
+        <ResourceDictionary Source="/Arclight;component/Resources/Theme/Controls.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ===================================================================== Game context menu -->
+    <ContextMenu x:Key="ContextMenu.Game" x:Shared="False">
+        <MenuItem Header="{Binding PrimaryActionText}" Command="{Binding PlayCommand}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE768;" FontSize="14" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="{DynamicResource Game.ViewDetails}" Command="{Binding DetailsCommand}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE946;" FontSize="14" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <Separator />
+        <MenuItem Command="{Binding ToggleFavoriteCommand}">
+            <MenuItem.Style>
+                <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="Header" Value="{DynamicResource Game.AddToFavorites}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                            <Setter Property="Header" Value="{DynamicResource Game.RemoveFromFavorites}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </MenuItem.Style>
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xEB51;" FontSize="14" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="{DynamicResource Common.AddToCollection}" ItemsSource="{Binding CollectionOptions}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE81E;" FontSize="14" />
+            </MenuItem.Icon>
+            <MenuItem.ItemContainerStyle>
+                <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="Command" Value="{Binding Command}" />
+                </Style>
+            </MenuItem.ItemContainerStyle>
+            <MenuItem.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource Icon}" Text="&#xE73E;" FontSize="12" Width="18" Margin="-26,0,8,0"
+                                   Foreground="{DynamicResource Brush.Accent.Text}" Visibility="{Binding Contains, Converter={StaticResource VisibleWhen}}" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </MenuItem.ItemTemplate>
+        </MenuItem>
+        <MenuItem Header="{DynamicResource Game.AddToANewCollection}" Command="{Binding NewCollectionCommand}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE710;" FontSize="14" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="{DynamicResource Game.FeatureOnHome}" Command="{Binding FeatureCommand}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE734;" FontSize="14" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <Separator />
+        <MenuItem Header="{DynamicResource Game.Edit}" Command="{Binding EditCommand}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE70F;" FontSize="14" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="{DynamicResource Game.OpenInstallFolder}" Command="{Binding OpenFolderCommand}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE838;" FontSize="14" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="{DynamicResource Game.LocateExecutable}" Command="{Binding LocateCommand}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE721;" FontSize="14" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <Separator />
+        <MenuItem Header="{DynamicResource Game.RemoveFromLibrary}" Command="{Binding RemoveCommand}" Foreground="{DynamicResource Brush.Danger}">
+            <MenuItem.Icon>
+                <TextBlock Style="{StaticResource Icon}" Text="&#xE74D;" FontSize="14" Foreground="{DynamicResource Brush.Danger}" />
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
+
+    <!-- Small platform label used on cards and rows (text only — no third-party logos). -->
+    <DataTemplate x:Key="Template.PlatformBadge" DataType="{x:Type vm:GameItemViewModel}">
+        <Border Background="#1AFFFFFF" CornerRadius="5" Padding="6,2" VerticalAlignment="Center">
+            <TextBlock Text="{Binding PlatformBadge}" FontSize="9.5" FontWeight="Bold" Foreground="{DynamicResource Brush.Text.Secondary}" />
+        </Border>
+    </DataTemplate>
+
+    <!-- ===================================================================== Grid card (3:4) -->
+    <DataTemplate x:Key="Template.GameCard" DataType="{x:Type vm:GameItemViewModel}">
+        <Grid x:Name="Card" Background="Transparent" Cursor="Hand" ContextMenu="{StaticResource ContextMenu.Game}"
+              controls:Ui.ClickCommand="{Binding DetailsCommand}"
+              Width="{Binding CardWidth, RelativeSource={RelativeSource AncestorType=controls:GameGrid}}"
+              ToolTipService.InitialShowDelay="900">
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="Lift" />
+            </Grid.RenderTransform>
+            <StackPanel>
+                <Grid Height="{Binding CardWidth, RelativeSource={RelativeSource AncestorType=controls:GameGrid}, Converter={StaticResource Multiply}, ConverterParameter=1.3333}">
+                    <Border x:Name="Glow" CornerRadius="12" Background="{DynamicResource Brush.Bg.Card}" />
+                    <controls:GameArt ImagePath="{Binding CoverPath}" IconPath="{Binding IconPath}" Title="{Binding Name}" DecodeWidth="330" CornerRadius="12" />
+                    <Border CornerRadius="12" Background="#8C09090B" Visibility="{Binding IsInstalled, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}" />
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="8">
+                        <Border Background="#E609090B" CornerRadius="999" Padding="8,3" Margin="0,0,4,0"
+                                Visibility="{Binding IsRunning, Converter={StaticResource VisibleWhen}}">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Width="6" Height="6" Fill="{DynamicResource Brush.Success}" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                <TextBlock Text="{DynamicResource Game.Playing}" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Success}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#E609090B" CornerRadius="999" Padding="8,3"
+                                Visibility="{Binding IsInstalled, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}">
+                            <TextBlock Text="{DynamicResource Game.NotInstalled}" FontSize="11" Foreground="{DynamicResource Brush.Text.Secondary}" />
+                        </Border>
+                    </StackPanel>
+
+                    <Border x:Name="FavBadge" Width="28" Height="28" CornerRadius="14" Background="#CC09090B" Margin="8"
+                            HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Visibility="{Binding IsFavorite, Converter={StaticResource VisibleWhen}}">
+                        <TextBlock Style="{StaticResource Icon}" Text="&#xEB52;" FontSize="13" Foreground="{DynamicResource Brush.Danger}" />
+                    </Border>
+
+                    <Border x:Name="Overlay" CornerRadius="12" Background="{DynamicResource Brush.Scrim.Card}" Opacity="0" IsHitTestVisible="False">
+                        <Grid>
+                            <Button Style="{StaticResource Button.PlayCircle}" Command="{Binding PlayCommand}" ToolTip="{Binding PrimaryActionText}"
+                                    HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="12" Width="46" Height="46"
+                                    controls:Ui.CornerRadius="23" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,12">
+                                <Button Style="{StaticResource Button.Icon}" Content="&#xEB51;" Command="{Binding ToggleFavoriteCommand}" ToolTip="{DynamicResource Common.Favorite}"
+                                        Background="#99000000" Foreground="White" Width="34" Height="34" FontSize="14" controls:Ui.CornerRadius="17" Margin="0,0,6,0" />
+                                <Button Style="{StaticResource Button.Icon}" Content="&#xE712;" Command="{Binding DetailsCommand}" ToolTip="{DynamicResource Game.ViewDetails}"
+                                        Background="#99000000" Foreground="White" Width="34" Height="34" FontSize="14" controls:Ui.CornerRadius="17" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border x:Name="Outline" CornerRadius="12" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border.Subtle}" IsHitTestVisible="False" />
+                </Grid>
+                <TextBlock Text="{Binding Name}" Style="{StaticResource Text.Subtitle}" FontSize="14" Margin="2,10,2,0" ToolTip="{Binding Name}" />
+                <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
+                    <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource Template.PlatformBadge}" />
+                    <TextBlock Text="{Binding PlaytimeShort}" Style="{StaticResource Text.Caption}" Margin="8,0,0,0" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <DataTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition SourceName="Card" Property="IsMouseOver" Value="True" />
+                    <Condition SourceName="Card" Property="controls:Ui.ReduceMotion" Value="False" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Overlay" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.14" />
+                            <DoubleAnimation Storyboard.TargetName="Lift" Storyboard.TargetProperty="Y" To="-4" Duration="0:0:0.16">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Overlay" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.12" />
+                            <DoubleAnimation Storyboard.TargetName="Lift" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.14" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition SourceName="Card" Property="IsMouseOver" Value="True" />
+                    <Condition SourceName="Card" Property="controls:Ui.ReduceMotion" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Overlay" Property="Opacity" Value="1" />
+            </MultiTrigger>
+            <Trigger SourceName="Card" Property="IsMouseOver" Value="True">
+                <Setter TargetName="Overlay" Property="IsHitTestVisible" Value="True" />
+                <Setter TargetName="Outline" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+                <Setter TargetName="Glow" Property="Effect" Value="{StaticResource Shadow.Glow}" />
+                <Setter TargetName="FavBadge" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- ===================================================================== Compact card -->
+    <DataTemplate x:Key="Template.GameCardCompact" DataType="{x:Type vm:GameItemViewModel}">
+        <Grid x:Name="Card" Background="Transparent" Cursor="Hand" ContextMenu="{StaticResource ContextMenu.Game}"
+              controls:Ui.ClickCommand="{Binding DetailsCommand}" ToolTip="{Binding Name}"
+              Width="{Binding CardWidth, RelativeSource={RelativeSource AncestorType=controls:GameGrid}}">
+            <StackPanel>
+                <Grid Height="{Binding CardWidth, RelativeSource={RelativeSource AncestorType=controls:GameGrid}, Converter={StaticResource Multiply}, ConverterParameter=1.3333}">
+                    <controls:GameArt ImagePath="{Binding CoverPath}" IconPath="{Binding IconPath}" Title="{Binding Name}" DecodeWidth="220" CornerRadius="9" TitleSize="12" />
+                    <Border CornerRadius="9" Background="#8C09090B" Visibility="{Binding IsInstalled, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}" />
+                    <Border x:Name="Overlay" CornerRadius="9" Background="{DynamicResource Brush.Scrim.Card}" Opacity="0">
+                        <Button Style="{StaticResource Button.PlayCircle}" Command="{Binding PlayCommand}" Width="38" Height="38"
+                                controls:Ui.CornerRadius="19" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="{Binding PrimaryActionText}" />
+                    </Border>
+                    <Border x:Name="Outline" CornerRadius="9" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border.Subtle}" IsHitTestVisible="False" />
+                    <Ellipse Width="8" Height="8" Fill="{DynamicResource Brush.Success}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8"
+                             Visibility="{Binding IsRunning, Converter={StaticResource VisibleWhen}}" />
+                </Grid>
+                <TextBlock Text="{Binding Name}" FontSize="12.5" Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis" Margin="1,7,1,0" />
+            </StackPanel>
+        </Grid>
+        <DataTemplate.Triggers>
+            <Trigger SourceName="Card" Property="IsMouseOver" Value="True">
+                <Setter TargetName="Overlay" Property="Opacity" Value="1" />
+                <Setter TargetName="Outline" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- ===================================================================== List row -->
+    <DataTemplate x:Key="Template.GameRow" DataType="{x:Type vm:GameItemViewModel}">
+        <Border x:Name="Row" Background="Transparent" CornerRadius="10" Padding="10,7" Margin="0,1" Cursor="Hand"
+                ContextMenu="{StaticResource ContextMenu.Game}" controls:Ui.ClickCommand="{Binding DetailsCommand}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="44" />
+                    <ColumnDefinition Width="3*" MinWidth="180" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <controls:GameArt Width="36" Height="48" ImagePath="{Binding CoverPath}" IconPath="{Binding IconPath}" Title="{Binding Name}"
+                                  ShowTitle="False" DecodeWidth="72" CornerRadius="6" HorizontalAlignment="Left" />
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="8,0,16,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource Text.Subtitle}" FontSize="14" />
+                        <TextBlock Style="{StaticResource Icon}" Text="&#xEB52;" FontSize="11" Margin="8,1,0,0" Foreground="{DynamicResource Brush.Danger}"
+                                   Visibility="{Binding IsFavorite, Converter={StaticResource VisibleWhen}}" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding Genre}" Style="{StaticResource Text.Caption}" Margin="0,2,0,0" Visibility="{Binding Genre, Converter={StaticResource VisibleWhen}}" />
+                </StackPanel>
+                <ContentPresenter Grid.Column="2" Content="{Binding}" ContentTemplate="{StaticResource Template.PlatformBadge}" HorizontalAlignment="Left" />
+                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Ellipse x:Name="Dot" Width="7" Height="7" Fill="{DynamicResource Brush.Success}" Margin="0,0,7,0" />
+                    <TextBlock Text="{Binding InstallStatus}" Style="{StaticResource Text.Secondary}" />
+                </StackPanel>
+                <TextBlock Grid.Column="4" Text="{Binding PlaytimeShort}" Style="{StaticResource Text.Secondary}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="5" Text="{Binding LastPlayedText}" Style="{StaticResource Text.Secondary}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="6" Text="{Binding DateAddedText}" Style="{StaticResource Text.Secondary}" VerticalAlignment="Center" />
+                <Button Grid.Column="7" Style="{StaticResource Button.Secondary}" Command="{Binding PlayCommand}" Padding="14,6" FontSize="13"
+                        Content="{Binding PrimaryActionText}" MinWidth="86" />
+            </Grid>
+        </Border>
+        <DataTemplate.Triggers>
+            <Trigger SourceName="Row" Property="IsMouseOver" Value="True">
+                <Setter TargetName="Row" Property="Background" Value="{DynamicResource Brush.Bg.Hover}" />
+            </Trigger>
+            <DataTrigger Binding="{Binding IsInstalled}" Value="False">
+                <Setter TargetName="Dot" Property="Fill" Value="{DynamicResource Brush.Text.Muted}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- ===================================================================== Wide card (Continue Playing) -->
+    <DataTemplate x:Key="Template.WideCard" DataType="{x:Type vm:GameItemViewModel}">
+        <Grid x:Name="Card" Width="300" Margin="0,0,16,0" Cursor="Hand" Background="Transparent"
+              ContextMenu="{StaticResource ContextMenu.Game}" controls:Ui.ClickCommand="{Binding DetailsCommand}">
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="Lift" />
+            </Grid.RenderTransform>
+            <Grid Height="169">
+                <Border x:Name="Glow" CornerRadius="12" Background="{DynamicResource Brush.Bg.Card}" />
+                <controls:GameArt ImagePath="{Binding WideArtPath}" IconPath="{Binding IconPath}" Title="{Binding Name}" ShowTitle="False" DecodeWidth="600" CornerRadius="12" />
+                <Border CornerRadius="12" Background="{DynamicResource Brush.Scrim.Card}" />
+                <StackPanel VerticalAlignment="Bottom" Margin="14,0,70,13">
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource Text.Subtitle}" Foreground="White" />
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource Template.PlatformBadge}" />
+                        <TextBlock Text="{Binding PlaytimeShort}" FontSize="12" Foreground="#D9FFFFFF" Margin="8,0,0,0" VerticalAlignment="Center" />
+                        <TextBlock Text="·" FontSize="12" Foreground="#99FFFFFF" Margin="6,0" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding StatusLine}" FontSize="12" Foreground="#D9FFFFFF" VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+                <Button Style="{StaticResource Button.PlayCircle}" Command="{Binding PlayCommand}" ToolTip="{Binding PrimaryActionText}"
+                        Width="42" Height="42" controls:Ui.CornerRadius="21" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="14,12" />
+                <Border Background="#E609090B" CornerRadius="999" Padding="8,3" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"
+                        Visibility="{Binding IsRunning, Converter={StaticResource VisibleWhen}}">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="6" Height="6" Fill="{DynamicResource Brush.Success}" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Text="{DynamicResource Common.PlayingNow}" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Success}" />
+                    </StackPanel>
+                </Border>
+                <Border x:Name="Outline" CornerRadius="12" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border.Subtle}" IsHitTestVisible="False" />
+            </Grid>
+        </Grid>
+        <DataTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition SourceName="Card" Property="IsMouseOver" Value="True" />
+                    <Condition SourceName="Card" Property="controls:Ui.ReduceMotion" Value="False" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Lift" Storyboard.TargetProperty="Y" To="-3" Duration="0:0:0.15" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Lift" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.14" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
+            <Trigger SourceName="Card" Property="IsMouseOver" Value="True">
+                <Setter TargetName="Outline" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+                <Setter TargetName="Glow" Property="Effect" Value="{StaticResource Shadow.Glow}" />
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- ===================================================================== Small cover (Recently Added) -->
+    <DataTemplate x:Key="Template.SmallCover" DataType="{x:Type vm:GameItemViewModel}">
+        <Grid x:Name="Card" Width="136" Margin="0,0,14,0" Cursor="Hand" Background="Transparent" ToolTip="{Binding Name}"
+              ContextMenu="{StaticResource ContextMenu.Game}" controls:Ui.ClickCommand="{Binding DetailsCommand}">
+            <StackPanel>
+                <Grid Height="181">
+                    <controls:GameArt ImagePath="{Binding CoverPath}" IconPath="{Binding IconPath}" Title="{Binding Name}" DecodeWidth="272" CornerRadius="10" TitleSize="13" />
+                    <Border CornerRadius="10" Background="#8C09090B" Visibility="{Binding IsInstalled, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}" />
+                    <Border x:Name="Outline" CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border.Subtle}" IsHitTestVisible="False" />
+                </Grid>
+                <TextBlock Text="{Binding Name}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis" Margin="1,8,1,0" />
+                <TextBlock Text="{Binding PlatformName}" Style="{StaticResource Text.Caption}" Margin="1,2,1,0" />
+            </StackPanel>
+        </Grid>
+        <DataTemplate.Triggers>
+            <Trigger SourceName="Card" Property="IsMouseOver" Value="True">
+                <Setter TargetName="Outline" Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- Statistic tile used on Home and Statistics. -->
+    <DataTemplate x:Key="Template.StatTile" DataType="{x:Type vm:StatTile}">
+        <Border Style="{StaticResource Card}" Padding="18,16" Margin="0,0,14,14">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="{Binding Label}" Style="{StaticResource Text.Secondary}" />
+                    <TextBlock Text="{Binding Value}" Style="{StaticResource Text.Metric}" Margin="0,6,0,0" />
+                    <TextBlock Text="{Binding Detail}" Style="{StaticResource Text.Caption}" Margin="0,4,0,0" />
+                </StackPanel>
+                <Border Grid.Column="1" Width="34" Height="34" CornerRadius="10" Background="{DynamicResource Brush.Accent.Soft}" VerticalAlignment="Top">
+                    <TextBlock Style="{StaticResource Icon}" Text="{Binding Glyph}" FontSize="15" Foreground="{DynamicResource Brush.Accent.Text}" />
+                </Border>
+            </Grid>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

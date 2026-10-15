@@ -1,0 +1,700 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <!-- English (en-US) user interface text. Every key here must also exist in the other Strings.*.xaml file
+         (a test checks this). {0}, {1} are filled in by code; keep them. -->
+
+    <!-- About -->
+    <sys:String x:Key="About.Finding.Body">Scan for Games reads the install records that Steam, Epic Games, GOG, Ubisoft Connect and the Xbox app keep on this PC. It never asks for launcher passwords and never changes launcher files. EA app games and anything Arclight can't detect can be added with Add a Game.</sys:String>
+    <sys:String x:Key="About.Finding.Heading">Finding games</sys:String>
+    <sys:String x:Key="About.Launching.Body">Games start through their own launcher link (for example Steam) or directly from their executable. Arclight never runs games as administrator on its own.</sys:String>
+    <sys:String x:Key="About.Launching.Heading">Launching</sys:String>
+    <sys:String x:Key="About.Library.Body">Arclight keeps your games, notes, tags, collections and playtime in a local database on this computer. Nothing is uploaded and no account is needed.</sys:String>
+    <sys:String x:Key="About.Library.Heading">Your library, on your PC</sys:String>
+    <sys:String x:Key="About.Playtime.Body">Playtime is counted only while Arclight sees the game's own process running — launchers, crash reporters and anti-cheat helpers don't count. Arclight doesn't import or estimate playtime from Steam or other stores.</sys:String>
+    <sys:String x:Key="About.Playtime.Heading">Playtime</sys:String>
+    <sys:String x:Key="About.Title">How Arclight works</sys:String>
+
+    <!-- Accent -->
+    <sys:String x:Key="Accent.Amber">Amber</sys:String>
+    <sys:String x:Key="Accent.Emerald">Emerald</sys:String>
+    <sys:String x:Key="Accent.Fuchsia">Fuchsia</sys:String>
+    <sys:String x:Key="Accent.Indigo">Indigo</sys:String>
+    <sys:String x:Key="Accent.Rose">Rose</sys:String>
+    <sys:String x:Key="Accent.Sky">Sky</sys:String>
+    <sys:String x:Key="Accent.Violet">Violet</sys:String>
+
+    <!-- Action -->
+    <sys:String x:Key="Action.Install">Install</sys:String>
+    <sys:String x:Key="Action.LocateGame">Locate game</sys:String>
+    <sys:String x:Key="Action.OpenLauncher">Open launcher</sys:String>
+    <sys:String x:Key="Action.Play">Play</sys:String>
+
+    <!-- Badge -->
+    <sys:String x:Key="Badge.Other">OTHER</sys:String>
+
+    <!-- Chart -->
+    <sys:String x:Key="Chart.Hours">{0}h</sys:String>
+    <sys:String x:Key="Chart.Minutes">{0}m</sys:String>
+
+    <!-- Collection -->
+    <sys:String x:Key="Collection.AddGames.Title">Add games to {0}</sys:String>
+    <sys:String x:Key="Collection.Created.Message">Add games from their menu or from the collection page.</sys:String>
+    <sys:String x:Key="Collection.Created.Title">Collection "{0}" created</sys:String>
+    <sys:String x:Key="Collection.Delete.Message">Only the collection is deleted. All of its games stay in your library.</sys:String>
+    <sys:String x:Key="Collection.Delete.Title">Delete "{0}"?</sys:String>
+    <sys:String x:Key="Collection.Deleted.Message">Its games are still in your library.</sys:String>
+    <sys:String x:Key="Collection.Deleted.Title">Collection "{0}" deleted</sys:String>
+    <sys:String x:Key="Collection.GamesAdded">Added {0} to {1}</sys:String>
+    <sys:String x:Key="Collection.Menu.New">New collection…</sys:String>
+    <sys:String x:Key="Collection.Menu.Open">Open</sys:String>
+    <sys:String x:Key="Collection.NotFound">Collection not found</sys:String>
+
+    <!-- CollectionEditor -->
+    <sys:String x:Key="CollectionEditor.ChooseImage">Choose image…</sys:String>
+    <sys:String x:Key="CollectionEditor.CoverOptional">Cover (optional)</sys:String>
+    <sys:String x:Key="CollectionEditor.DescriptionOptional">Description (optional)</sys:String>
+    <sys:String x:Key="CollectionEditor.EGWeekendGames">e.g. Weekend Games</sys:String>
+    <sys:String x:Key="CollectionEditor.Error.NameRequired">Give the collection a name.</sys:String>
+    <sys:String x:Key="CollectionEditor.Error.NameTooLong">Keep the name under 60 characters.</sys:String>
+    <sys:String x:Key="CollectionEditor.Name">Name</sys:String>
+    <sys:String x:Key="CollectionEditor.Pick.Cover">Choose a collection cover</sys:String>
+    <sys:String x:Key="CollectionEditor.Save.New">Create collection</sys:String>
+    <sys:String x:Key="CollectionEditor.Title.Edit">Edit collection</sys:String>
+    <sys:String x:Key="CollectionEditor.Title.New">New collection</sys:String>
+    <sys:String x:Key="CollectionEditor.UseGameCoversInstead">Use game covers instead</sys:String>
+    <sys:String x:Key="CollectionEditor.WhatBelongsHere">What belongs here?</sys:String>
+
+    <!-- Collections -->
+    <sys:String x:Key="Collections.CollectionOptions">Collection options</sys:String>
+    <sys:String x:Key="Collections.CreateACollection">Create a collection</sys:String>
+    <sys:String x:Key="Collections.CreateCollectionsLikeBacklogCompleted">Create collections like Backlog, Completed or Weekend Games. A game can be in as many collections as you like.</sys:String>
+    <sys:String x:Key="Collections.GroupGamesYourWayDrag">Group games your way. Drag a collection to change the order; deleting one never deletes its games.</sys:String>
+    <sys:String x:Key="Collections.NewCollection">New collection</sys:String>
+    <sys:String x:Key="Collections.NoCollectionsYet">No collections yet</sys:String>
+
+    <!-- Common -->
+    <sys:String x:Key="Common.About">About</sys:String>
+    <sys:String x:Key="Common.AddAGame">Add a Game</sys:String>
+    <sys:String x:Key="Common.AddToCollection">Add to collection</sys:String>
+    <sys:String x:Key="Common.Cancel">Cancel</sys:String>
+    <sys:String x:Key="Common.Collections">Collections</sys:String>
+    <sys:String x:Key="Common.Confirm">Confirm</sys:String>
+    <sys:String x:Key="Common.Favorite">Favorite</sys:String>
+    <sys:String x:Key="Common.Favorites">Favorites</sys:String>
+    <sys:String x:Key="Common.PlayingNow">Playing now</sys:String>
+    <sys:String x:Key="Common.RecentlyPlayed">Recently Played</sys:String>
+    <sys:String x:Key="Common.Remove">Remove</sys:String>
+    <sys:String x:Key="Common.ScanForGames">Scan for Games</sys:String>
+    <sys:String x:Key="Common.SelectAll">Select all</sys:String>
+    <sys:String x:Key="Common.Settings">Settings</sys:String>
+    <sys:String x:Key="Common.Statistics">Statistics</sys:String>
+    <sys:String x:Key="Common.Tags">Tags</sys:String>
+
+    <!-- Count -->
+    <sys:String x:Key="Count.Day.One">{0} day</sys:String>
+    <sys:String x:Key="Count.Day.Other">{0} days</sys:String>
+    <sys:String x:Key="Count.Game.One">{0} game</sys:String>
+    <sys:String x:Key="Count.Game.Other">{0} games</sys:String>
+    <sys:String x:Key="Count.LogFile.One">{0} log file</sys:String>
+    <sys:String x:Key="Count.LogFile.Other">{0} log files</sys:String>
+    <sys:String x:Key="Count.NewGame.One">{0} new game</sys:String>
+    <sys:String x:Key="Count.NewGame.Other">{0} new games</sys:String>
+    <sys:String x:Key="Count.Session.One">{0} session</sys:String>
+    <sys:String x:Key="Count.Session.Other">{0} sessions</sys:String>
+
+    <!-- Detail -->
+    <sys:String x:Key="Detail.Back">Back</sys:String>
+    <sys:String x:Key="Detail.BackgroundTracking">Background tracking</sys:String>
+    <sys:String x:Key="Detail.Edit">Edit</sys:String>
+    <sys:String x:Key="Detail.EditDetails">Edit details</sys:String>
+    <sys:String x:Key="Detail.Hint.Tracked">Playtime is tracked when you launch from Arclight. Allow the background tracker to also count launches from other places.</sys:String>
+    <sys:String x:Key="Detail.Hint.TrackingOff">Playtime tracking is off in Settings.</sys:String>
+    <sys:String x:Key="Detail.Hint.Untrackable">Arclight doesn't know where this game is installed, so it can't track its playtime. Edit the game to set its install folder.</sys:String>
+    <sys:String x:Key="Detail.Info.Added">Added</sys:String>
+    <sys:String x:Key="Detail.Info.Executable">Executable</sys:String>
+    <sys:String x:Key="Detail.Info.InstallFolder">Install folder</sys:String>
+    <sys:String x:Key="Detail.Info.Launch">Launch</sys:String>
+    <sys:String x:Key="Detail.Info.NotSet">Not set</sys:String>
+    <sys:String x:Key="Detail.Info.Through">Through {0}</sys:String>
+    <sys:String x:Key="Detail.Info.WindowsApp">Windows app (Xbox / Microsoft Store)</sys:String>
+    <sys:String x:Key="Detail.LastPlayed">Last played</sys:String>
+    <sys:String x:Key="Detail.LetTheOptionalBackgroundTracker">Let the optional background tracker count this game when it's started outside Arclight.</sys:String>
+    <sys:String x:Key="Detail.More">More</sys:String>
+    <sys:String x:Key="Detail.NoSessionsRecordedYet">No sessions recorded yet.</sys:String>
+    <sys:String x:Key="Detail.Notes.AutoSave">Notes are saved automatically</sys:String>
+    <sys:String x:Key="Detail.Notes.Editing">Editing…</sys:String>
+    <sys:String x:Key="Detail.Notes.Saved">Saved {0}</sys:String>
+    <sys:String x:Key="Detail.Notes.SavedNow">Saved just now</sys:String>
+    <sys:String x:Key="Detail.NotInAnyCollectionYet">Not in any collection yet.</sys:String>
+    <sys:String x:Key="Detail.PersonalNotes">Personal notes</sys:String>
+    <sys:String x:Key="Detail.PLAYINGNOW">PLAYING NOW</sys:String>
+    <sys:String x:Key="Detail.RecentSessions">Recent sessions</sys:String>
+    <sys:String x:Key="Detail.RemoveFromThisCollection">Remove from this collection</sys:String>
+    <sys:String x:Key="Detail.SessionDateFormat">ddd, d MMM yyyy</sys:String>
+    <sys:String x:Key="Detail.Sessions">Sessions</sys:String>
+    <sys:String x:Key="Detail.TotalPlaytime">Total playtime</sys:String>
+    <sys:String x:Key="Detail.UseTagsLikeToFinish">Use tags like To Finish, Multiplayer or Relaxing — then filter your library by them.</sys:String>
+    <sys:String x:Key="Detail.WhereYouLeftOffQuests">Where you left off, quests to finish, settings that work well, your own review…</sys:String>
+    <sys:String x:Key="Detail.YourRating">Your rating</sys:String>
+
+    <!-- Dialog -->
+    <sys:String x:Key="Dialog.GotIt">Got it</sys:String>
+    <sys:String x:Key="Dialog.OpenGitHub">Open GitHub</sys:String>
+
+    <!-- Discover -->
+    <sys:String x:Key="Discover.BrowseMyLibrary">Browse my library</sys:String>
+    <sys:String x:Key="Discover.DiscoverIsOnItsWay">Discover is on its way</sys:String>
+    <sys:String x:Key="Discover.DiscoverWillShowPopularAnd">Discover will show popular and new releases, browsing by genre and a personal wishlist once Arclight is connected to a licensed game-data provider. Until then this page stays empty on purpose — Arclight doesn't show sample games as if they were live store data.</sys:String>
+    <sys:String x:Key="Discover.PlannedForAFutureVersion">Planned for a future version</sys:String>
+
+    <!-- Editor -->
+    <sys:String x:Key="Editor.AllowedSteamComEpicgamesLauncher">Allowed: steam://, com.epicgames.launcher://, goggalaxy://, uplay://, origin2://, link2ea://, battlenet://, itchio:// and Windows app ids. For Steam, typing the App ID above fills this in.</sys:String>
+    <sys:String x:Key="Editor.AnythingYouWantToRemember">Anything you want to remember about this game</sys:String>
+    <sys:String x:Key="Editor.ARTWORK">ARTWORK</sys:String>
+    <sys:String x:Key="Editor.BackgroundWide">Background (wide)</sys:String>
+    <sys:String x:Key="Editor.Browse">Browse…</sys:String>
+    <sys:String x:Key="Editor.CGamesMyGameGameExe">C:\Games\MyGame\Game.exe</sys:String>
+    <sys:String x:Key="Editor.Choose">Choose…</sys:String>
+    <sys:String x:Key="Editor.Cover34">Cover (3:4)</sys:String>
+    <sys:String x:Key="Editor.CToolsModLauncherExe">C:\Tools\ModLauncher.exe</sys:String>
+    <sys:String x:Key="Editor.CustomCommand">Custom command</sys:String>
+    <sys:String x:Key="Editor.Description">Description</sys:String>
+    <sys:String x:Key="Editor.DETAILS">DETAILS</sys:String>
+    <sys:String x:Key="Editor.Developer">Developer</sys:String>
+    <sys:String x:Key="Editor.EGHollowKnight">e.g. Hollow Knight</sys:String>
+    <sys:String x:Key="Editor.EGRPGAdventure">e.g. RPG, Adventure</sys:String>
+    <sys:String x:Key="Editor.Error.ExeMissing">The executable doesn't exist. Use Browse to pick the game's .exe file.</sys:String>
+    <sys:String x:Key="Editor.Error.ReleaseYear">Release year should be a four-digit year, for example 2020.</sys:String>
+    <sys:String x:Key="Editor.ExecutableExe">Executable (.exe)</sys:String>
+    <sys:String x:Key="Editor.ExecutablePath">Executable path</sys:String>
+    <sys:String x:Key="Editor.FilledInFromTheExecutable">Filled in from the executable</sys:String>
+    <sys:String x:Key="Editor.GAME">GAME</sys:String>
+    <sys:String x:Key="Editor.GameName">Game name *</sys:String>
+    <sys:String x:Key="Editor.Genre">Genre</sys:String>
+    <sys:String x:Key="Editor.HOWTOSTARTIT">HOW TO START IT</sys:String>
+    <sys:String x:Key="Editor.InstalledOnThisPC">Installed on this PC</sys:String>
+    <sys:String x:Key="Editor.InstallFolderUsedForPlaytime">Install folder (used for playtime tracking)</sys:String>
+    <sys:String x:Key="Editor.LaunchArgumentsOptional">Launch arguments (optional)</sys:String>
+    <sys:String x:Key="Editor.LauncherLink">Launcher link</sys:String>
+    <sys:String x:Key="Editor.LaunchSettingsAreCheckedBefore">Launch settings are checked before saving. Arclight never runs a game as administrator by itself.</sys:String>
+    <sys:String x:Key="Editor.Notes">Notes</sys:String>
+    <sys:String x:Key="Editor.Pick.Background">Choose a background image (wide works best)</sys:String>
+    <sys:String x:Key="Editor.Pick.Cover">Choose a cover image (portrait works best)</sys:String>
+    <sys:String x:Key="Editor.Pick.InstallFolder">Choose the game's install folder</sys:String>
+    <sys:String x:Key="Editor.PicturesAreCopiedIntoArclights">Pictures are copied into Arclight's folder, so moving the originals won't break them.</sys:String>
+    <sys:String x:Key="Editor.Platform">Platform</sys:String>
+    <sys:String x:Key="Editor.Platform.Other">Other launcher</sys:String>
+    <sys:String x:Key="Editor.Platform.Pc">PC (standalone)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Epic">Epic id — namespace:item:app (optional)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Gog">GOG product id (optional)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Other">Platform id (optional)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Steam">Steam App ID (optional)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Ubisoft">Ubisoft install id (optional)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Xbox">Package family name (optional)</sys:String>
+    <sys:String x:Key="Editor.ProgramToRun">Program to run</sys:String>
+    <sys:String x:Key="Editor.Publisher">Publisher</sys:String>
+    <sys:String x:Key="Editor.ReleaseYear">Release year</sys:String>
+    <sys:String x:Key="Editor.Save.Add">Add to library</sys:String>
+    <sys:String x:Key="Editor.Save.Edit">Save changes</sys:String>
+    <sys:String x:Key="Editor.SteamRungameid730">steam://rungameid/730</sys:String>
+    <sys:String x:Key="Editor.TheProgramIsStartedDirectly">The program is started directly with the arguments below — never through a command shell.</sys:String>
+    <sys:String x:Key="Editor.Title.Add">Add a Game</sys:String>
+    <sys:String x:Key="Editor.Title.Edit">Edit {0}</sys:String>
+    <sys:String x:Key="Editor.WindowedSkipintro">-windowed -skipintro</sys:String>
+
+    <!-- Error -->
+    <sys:String x:Key="Error.Unexpected">Something went wrong</sys:String>
+
+    <!-- FirstRun -->
+    <sys:String x:Key="FirstRun.Backlog.Description">Games waiting for their turn.</sys:String>
+    <sys:String x:Key="FirstRun.Backlog.Name">Backlog</sys:String>
+    <sys:String x:Key="FirstRun.Completed.Description">Games you've finished.</sys:String>
+    <sys:String x:Key="FirstRun.Completed.Name">Completed</sys:String>
+    <sys:String x:Key="FirstRun.Playing.Description">Games you're in the middle of.</sys:String>
+    <sys:String x:Key="FirstRun.Playing.Name">Currently Playing</sys:String>
+
+    <!-- Format -->
+    <sys:String x:Key="Format.DaysAgo">{0} days ago</sys:String>
+    <sys:String x:Key="Format.Hours">{0} h</sys:String>
+    <sys:String x:Key="Format.HoursAgo">{0} h ago</sys:String>
+    <sys:String x:Key="Format.HoursMinutes">{0} h {1} min</sys:String>
+    <sys:String x:Key="Format.JustNow">Just now</sys:String>
+    <sys:String x:Key="Format.LessThanMinute">&lt; 1 min</sys:String>
+    <sys:String x:Key="Format.LongDate">d MMM yyyy</sys:String>
+    <sys:String x:Key="Format.LongDateTime">d MMM yyyy, HH:mm</sys:String>
+    <sys:String x:Key="Format.Minutes">{0} min</sys:String>
+    <sys:String x:Key="Format.MinutesAgo">{0} min ago</sys:String>
+    <sys:String x:Key="Format.NeverPlayed">Never played</sys:String>
+    <sys:String x:Key="Format.NoPlaytime">0 hours tracked</sys:String>
+    <sys:String x:Key="Format.NotPlayed">Not played</sys:String>
+    <sys:String x:Key="Format.ShortDate">d MMM</sys:String>
+    <sys:String x:Key="Format.WeekAgo">1 week ago</sys:String>
+    <sys:String x:Key="Format.WeeksAgo">{0} weeks ago</sys:String>
+    <sys:String x:Key="Format.Yesterday">Yesterday</sys:String>
+
+    <!-- Game -->
+    <sys:String x:Key="Game.AddToANewCollection">Add to a new collection…</sys:String>
+    <sys:String x:Key="Game.AddToFavorites">Add to favorites</sys:String>
+    <sys:String x:Key="Game.Edit">Edit…</sys:String>
+    <sys:String x:Key="Game.FeatureOnHome">Feature on Home</sys:String>
+    <sys:String x:Key="Game.Installed">Installed</sys:String>
+    <sys:String x:Key="Game.LocateExecutable">Locate executable…</sys:String>
+    <sys:String x:Key="Game.NotInstalled">Not installed</sys:String>
+    <sys:String x:Key="Game.OpenInstallFolder">Open install folder</sys:String>
+    <sys:String x:Key="Game.Playing">Playing</sys:String>
+    <sys:String x:Key="Game.RemoveFromFavorites">Remove from favorites</sys:String>
+    <sys:String x:Key="Game.RemoveFromLibrary">Remove from library</sys:String>
+    <sys:String x:Key="Game.ViewDetails">View details</sys:String>
+
+    <!-- Grid -->
+    <sys:String x:Key="Grid.ADDED">ADDED</sys:String>
+    <sys:String x:Key="Grid.LASTPLAYED">LAST PLAYED</sys:String>
+    <sys:String x:Key="Grid.NAME">NAME</sys:String>
+    <sys:String x:Key="Grid.PLATFORM">PLATFORM</sys:String>
+    <sys:String x:Key="Grid.PLAYTIME">PLAYTIME</sys:String>
+    <sys:String x:Key="Grid.STATUS">STATUS</sys:String>
+
+    <!-- Home -->
+    <sys:String x:Key="Home.ArclightBringsYourSteamEpic">Arclight brings your Steam, Epic Games, GOG, Ubisoft Connect and Xbox games together. Scan your PC to find installed games, or add any game yourself.</sys:String>
+    <sys:String x:Key="Home.Change">Change</sys:String>
+    <sys:String x:Key="Home.ChooseAGame">Choose a game</sys:String>
+    <sys:String x:Key="Home.ContinuePlaying">Continue Playing</sys:String>
+    <sys:String x:Key="Home.DefaultName">Player</sys:String>
+    <sys:String x:Key="Home.FEATURED">FEATURED</sys:String>
+    <sys:String x:Key="Home.GamesYouPlayFromArclight">Games you play from Arclight show up here, with the time you spent in them.</sys:String>
+    <sys:String x:Key="Home.Greeting.Afternoon">Good afternoon, {0}</sys:String>
+    <sys:String x:Key="Home.Greeting.Evening">Good evening, {0}</sys:String>
+    <sys:String x:Key="Home.Greeting.Morning">Good morning, {0}</sys:String>
+    <sys:String x:Key="Home.HeresYourGameUniverseToday">Here's your game universe today.</sys:String>
+    <sys:String x:Key="Home.LearnMore">Learn More</sys:String>
+    <sys:String x:Key="Home.NewGamesWereFoundOn">new games were found on this PC. Choose which ones to add.</sys:String>
+    <sys:String x:Key="Home.OpenLibrary">Open library</sys:String>
+    <sys:String x:Key="Home.PickFeatured.Confirm">Feature</sys:String>
+    <sys:String x:Key="Home.PickFeatured.Title">Choose a game to feature</sys:String>
+    <sys:String x:Key="Home.PickTheGameYouWant">Pick the game you want to see first whenever Arclight opens. You can also right-click any game and choose Feature on Home.</sys:String>
+    <sys:String x:Key="Home.PutAFavoriteInThe">Put a favorite in the spotlight</sys:String>
+    <sys:String x:Key="Home.RecentlyAdded">Recently Added</sys:String>
+    <sys:String x:Key="Home.Review">Review</sys:String>
+    <sys:String x:Key="Home.ScrollLeft">Scroll left</sys:String>
+    <sys:String x:Key="Home.ScrollRight">Scroll right</sys:String>
+    <sys:String x:Key="Home.SeeAll">See all</sys:String>
+    <sys:String x:Key="Home.Tile.Installed">{0} installed</sys:String>
+    <sys:String x:Key="Home.Tile.MostPlayed">Most Played</sys:String>
+    <sys:String x:Key="Home.Tile.NoSessionsYet">No sessions yet</sys:String>
+    <sys:String x:Key="Home.Tile.PlayedThisWeek">Played This Week</sys:String>
+    <sys:String x:Key="Home.Tile.PlayToSee">Play a game to see it here</sys:String>
+    <sys:String x:Key="Home.Tile.TotalGames">Total Games</sys:String>
+    <sys:String x:Key="Home.Tile.TotalPlaytime">Total Playtime</sys:String>
+    <sys:String x:Key="Home.Tile.TrackedByArclight">Tracked by Arclight</sys:String>
+    <sys:String x:Key="Home.ViewDetails">View Details</sys:String>
+    <sys:String x:Key="Home.YourGameLibraryStartsHere">Your game library starts here.</sys:String>
+
+    <!-- Language -->
+    <sys:String x:Key="Language.Auto">Windows language</sys:String>
+    <sys:String x:Key="Language.English">English</sys:String>
+    <sys:String x:Key="Language.Turkish">Türkçe</sys:String>
+
+    <!-- Launch -->
+    <sys:String x:Key="Launch.AccessDenied.Message">Windows blocked access to the game's files. Check the folder permissions or your antivirus quarantine.</sys:String>
+    <sys:String x:Key="Launch.AccessDenied.Title">Access to {0} was denied</sys:String>
+    <sys:String x:Key="Launch.Action.EditGame">Edit game</sys:String>
+    <sys:String x:Key="Launch.Action.RunAsAdmin">Run as administrator</sys:String>
+    <sys:String x:Key="Launch.Cancelled.Message">The administrator prompt was declined, so the game was not started.</sys:String>
+    <sys:String x:Key="Launch.Cancelled.Title">Launch cancelled</sys:String>
+    <sys:String x:Key="Launch.ConfirmAdmin.Message">The game asks for administrator rights. Windows will show a permission prompt. Only continue if you trust this game — Arclight itself never needs these rights.</sys:String>
+    <sys:String x:Key="Launch.ConfirmAdmin.Title">Run {0} as administrator?</sys:String>
+    <sys:String x:Key="Launch.Elevation.Message">This game asks to run as administrator. Arclight never elevates on its own — choose Run as administrator if you trust it.</sys:String>
+    <sys:String x:Key="Launch.Elevation.Title">{0} needs administrator rights</sys:String>
+    <sys:String x:Key="Launch.ExeMissing.Message">"{0}" could not be found. The game may have been updated, moved or uninstalled. Use Locate game to choose the right file.</sys:String>
+    <sys:String x:Key="Launch.ExeMissing.Title">{0}'s executable is missing</sys:String>
+    <sys:String x:Key="Launch.Failed.Title">{0} could not be started</sys:String>
+    <sys:String x:Key="Launch.FolderMissing.Message">The game folder "{0}" no longer exists. If you moved the game, use Locate game to pick its new executable.</sys:String>
+    <sys:String x:Key="Launch.FolderMissing.Title">{0} seems to be uninstalled</sys:String>
+    <sys:String x:Key="Launch.Hint.Tracked">Playtime will be tracked once the game is running.</sys:String>
+    <sys:String x:Key="Launch.Hint.TrackingOff">Playtime tracking is turned off in Settings.</sys:String>
+    <sys:String x:Key="Launch.Hint.Untrackable">Arclight doesn't know where this game is installed, so its playtime can't be tracked. Set the install folder in Edit.</sys:String>
+    <sys:String x:Key="Launch.Invalid.Title">Launch settings need attention</sys:String>
+    <sys:String x:Key="Launch.LauncherMissing.Message">No app on this PC handles "{0}://" links. Install or repair {1} and try again.</sys:String>
+    <sys:String x:Key="Launch.LauncherMissing.Title">{0} isn't available</sys:String>
+    <sys:String x:Key="Launch.NoLauncherLink.Message">Arclight can't open a launcher for {0} games.</sys:String>
+    <sys:String x:Key="Launch.NoLauncherLink.Title">No launcher link</sys:String>
+    <sys:String x:Key="Launch.NotInstalled.Message">Install it from {0} first, then scan again.</sys:String>
+    <sys:String x:Key="Launch.NotInstalled.Title">{0} isn't installed</sys:String>
+    <sys:String x:Key="Launch.Starting">Launching {0}</sys:String>
+
+    <!-- Library -->
+    <sys:String x:Key="Library.AddGames">Add games</sys:String>
+    <sys:String x:Key="Library.AddGamesToThisCollection">Add games to this collection from here, or from any game's menu.</sys:String>
+    <sys:String x:Key="Library.AllGames">All Games</sys:String>
+    <sys:String x:Key="Library.ClearFilters">Clear filters</sys:String>
+    <sys:String x:Key="Library.COLLECTION">COLLECTION</sys:String>
+    <sys:String x:Key="Library.CompactGrid">Compact grid</sys:String>
+    <sys:String x:Key="Library.DeleteCollection">Delete collection</sys:String>
+    <sys:String x:Key="Library.EditCollection">Edit collection</sys:String>
+    <sys:String x:Key="Library.Filter.Genre">Genre</sys:String>
+    <sys:String x:Key="Library.Filter.Platform">Platform</sys:String>
+    <sys:String x:Key="Library.Filter.Tags">Tags</sys:String>
+    <sys:String x:Key="Library.Grid">Grid</sys:String>
+    <sys:String x:Key="Library.Installed">Installed</sys:String>
+    <sys:String x:Key="Library.List">List</sys:String>
+    <sys:String x:Key="Library.MarkGamesAsFavoritesWith">Mark games as favorites with the heart button and they will appear here.</sys:String>
+    <sys:String x:Key="Library.NeverPlayed">Never Played</sys:String>
+    <sys:String x:Key="Library.NoMatchFilters">No games match these filters.</sys:String>
+    <sys:String x:Key="Library.NoMatchSearch">No games match "{0}".</sys:String>
+    <sys:String x:Key="Library.NothingHereYet">Nothing here yet</sys:String>
+    <sys:String x:Key="Library.NotInstalled">Not Installed</sys:String>
+    <sys:String x:Key="Library.PlayedInTheLast14">Played in the last 14 days</sys:String>
+    <sys:String x:Key="Library.ScanYourPCForInstalled">Scan your PC for installed games or add one yourself.</sys:String>
+    <sys:String x:Key="Library.Showing">Showing {0} of {1}</sys:String>
+    <sys:String x:Key="Library.Sort">Sort</sys:String>
+    <sys:String x:Key="Library.TryADifferentSearchClear">Try a different search, clear the filters, or add the game if it isn't in your library yet.</sys:String>
+
+    <!-- Picker -->
+    <sys:String x:Key="Picker.AllFiles">All files</sys:String>
+    <sys:String x:Key="Picker.Exe.Filter">Programs and shortcuts</sys:String>
+    <sys:String x:Key="Picker.Exe.Title">Choose the game's executable</sys:String>
+    <sys:String x:Key="Picker.Image.Title">Choose an image</sys:String>
+    <sys:String x:Key="Picker.Images">Images</sys:String>
+    <sys:String x:Key="Picker.SearchYourLibrary">Search your library</sys:String>
+    <sys:String x:Key="Picker.ThereAreNoGamesTo">There are no games to choose from yet.</sys:String>
+
+    <!-- Platform -->
+    <sys:String x:Key="Platform.Other">Other</sys:String>
+    <sys:String x:Key="Platform.PC">PC</sys:String>
+
+    <!-- Rating -->
+    <sys:String x:Key="Rating.ToolTip">Your personal rating</sys:String>
+
+    <!-- Recent -->
+    <sys:String x:Key="Recent.DayFormat">ddd, d MMM</sys:String>
+    <sys:String x:Key="Recent.GoToMyLibrary">Go to My Library</sys:String>
+    <sys:String x:Key="Recent.LaunchAGameFromArclight">Launch a game from Arclight and it will appear here with its sessions. Turn on the background tracker in Settings to also count games started elsewhere.</sys:String>
+    <sys:String x:Key="Recent.NoCompletedSessionsYet">No completed sessions yet.</sys:String>
+    <sys:String x:Key="Recent.NothingPlayedYet">Nothing played yet</sys:String>
+    <sys:String x:Key="Recent.OnlyVerifiedTimeIsListed">Only verified time is listed.</sys:String>
+    <sys:String x:Key="Recent.RemovedGame">Removed game</sys:String>
+    <sys:String x:Key="Recent.SessionHistory">Session history</sys:String>
+    <sys:String x:Key="Recent.Today">Today</sys:String>
+    <sys:String x:Key="Recent.YourLatestGamesAndEvery">Your latest games and every session Arclight verified.</sys:String>
+
+    <!-- Remove -->
+    <sys:String x:Key="Remove.DontSuggestAgain">Don't suggest it again when scanning</sys:String>
+    <sys:String x:Key="Remove.Message">Only Arclight's entry for this game is removed — including its notes, tags and playtime history. The game's files stay on your PC and nothing is uninstalled.</sys:String>
+    <sys:String x:Key="Remove.Title">Remove {0} from your library?</sys:String>
+
+    <!-- Scan -->
+    <sys:String x:Key="Scan.AddSelected">Add selected (</sys:String>
+    <sys:String x:Key="Scan.Done">Done</sys:String>
+    <sys:String x:Key="Scan.DontSuggestTheseAgain">Don't suggest these again</sys:String>
+    <sys:String x:Key="Scan.Empty.Hidden">No hidden games. Games you remove can be hidden from future scans.</sys:String>
+    <sys:String x:Key="Scan.Empty.InLibrary">None of the detected games are in your library yet.</sys:String>
+    <sys:String x:Key="Scan.Empty.New">No new games found. Everything detected is already in your library.</sys:String>
+    <sys:String x:Key="Scan.Error.Unsupported">Automatic detection for {0} games is not available yet. Add them with "Add a Game".</sys:String>
+    <sys:String x:Key="Scan.Header.Reading">Reading launcher records on this PC…</sys:String>
+    <sys:String x:Key="Scan.Header.Ready">Ready to scan</sys:String>
+    <sys:String x:Key="Scan.Header.Summary">Found {0} · {1} new · {2} already in your library</sys:String>
+    <sys:String x:Key="Scan.Hidden" xml:space="preserve">Hidden </sys:String>
+    <sys:String x:Key="Scan.HideSelected">Hide selected</sys:String>
+    <sys:String x:Key="Scan.InLibrary" xml:space="preserve">In library </sys:String>
+    <sys:String x:Key="Scan.Match.Executable">Matched: same executable</sys:String>
+    <sys:String x:Key="Scan.Match.Folder">Matched: same install folder</sys:String>
+    <sys:String x:Key="Scan.Match.Other">Matched: {0}</sys:String>
+    <sys:String x:Key="Scan.Match.PlatformId">Matched: same platform id</sys:String>
+    <sys:String x:Key="Scan.New" xml:space="preserve">New </sys:String>
+    <sys:String x:Key="Scan.None">None</sys:String>
+    <sys:String x:Key="Scan.Note.NotAGame">Probably not a game (tool, runtime or launcher)</sys:String>
+    <sys:String x:Key="Scan.Note.NotFullyInstalled">Not fully installed</sys:String>
+    <sys:String x:Key="Scan.Note.SuggestedExe">Suggested executable: {0}</sys:String>
+    <sys:String x:Key="Scan.OnlyLauncherRecordsAreRead">Only launcher records are read. Nothing is installed, moved or changed.</sys:String>
+    <sys:String x:Key="Scan.PLATFORMS">PLATFORMS</sys:String>
+    <sys:String x:Key="Scan.ScanAgain">Scan again</sys:String>
+    <sys:String x:Key="Scan.SomeItemsWereSkipped">Some items were skipped</sys:String>
+    <sys:String x:Key="Scan.Status.AddManually">Add games manually</sys:String>
+    <sys:String x:Key="Scan.Status.Failed">Failed</sys:String>
+    <sys:String x:Key="Scan.Status.NoFolders">No folders set</sys:String>
+    <sys:String x:Key="Scan.Status.Skipped">{0} skipped</sys:String>
+    <sys:String x:Key="Scan.Status.TurnedOff">Turned off</sys:String>
+    <sys:String x:Key="Scan.Status.Waiting">Waiting</sys:String>
+    <sys:String x:Key="Scan.Toast.Added.Message">Artwork is loading in the background.</sys:String>
+    <sys:String x:Key="Scan.Toast.Added.Title">Added {0} to your library</sys:String>
+    <sys:String x:Key="Scan.Toast.AddFailed">Some games couldn't be added</sys:String>
+    <sys:String x:Key="Scan.Toast.AutoAdded.Message">Automatic adding is on in Settings.</sys:String>
+    <sys:String x:Key="Scan.Toast.AutoAdded.Title">Added {0}</sys:String>
+
+    <!-- Scanner -->
+    <sys:String x:Key="Scanner.Folders">Game folders</sys:String>
+
+    <!-- Session -->
+    <sys:String x:Key="Session.Source.Arclight">Launched from Arclight</sys:String>
+    <sys:String x:Key="Session.Source.Watcher">Background tracker</sys:String>
+
+    <!-- Settings -->
+    <sys:String x:Key="Settings.AccentColor">Accent color</sys:String>
+    <sys:String x:Key="Settings.Add">Add</sys:String>
+    <sys:String x:Key="Settings.AddFolder">Add folder</sys:String>
+    <sys:String x:Key="Settings.AddNewGamesAutomatically">Add new games automatically</sys:String>
+    <sys:String x:Key="Settings.AddsArclightToYourUsers">Adds Arclight to your user's startup programs (no administrator rights needed).</sys:String>
+    <sys:String x:Key="Settings.AlsoChangesWhenYouSwitch">Also changes when you switch views in the library.</sys:String>
+    <sys:String x:Key="Settings.AlsoCountsTheGamesBelow">Also counts the games below when you start them from Steam, Epic or a desktop shortcut. Works while Arclight is open (or in the tray).</sys:String>
+    <sys:String x:Key="Settings.Appearance">Appearance</sys:String>
+    <sys:String x:Key="Settings.ArclightIsCurrentlyAvailableIn">Windows language follows the display language set in Windows. Changes apply right away.</sys:String>
+    <sys:String x:Key="Settings.ArclightIsOpenSourceSoftware">Arclight is open-source software released under the MIT License. Game names, artwork and trademarks belong to their respective owners; Arclight is not affiliated with Valve, Epic Games, Microsoft, CD PROJEKT, Ubisoft or Electronic Arts.</sys:String>
+    <sys:String x:Key="Settings.ArtworkCopiedFromLaunchersOr" xml:space="preserve">Artwork copied from launchers or downloaded: </sys:String>
+    <sys:String x:Key="Settings.AsksGitHubForTheLatest">Asks GitHub for the latest release. Off by default — no request is made unless you turn this on or press Check for updates.</sys:String>
+    <sys:String x:Key="Settings.BackgroundTracker">Background tracker</sys:String>
+    <sys:String x:Key="Settings.CardSize">Card size</sys:String>
+    <sys:String x:Key="Settings.CheckForUpdates">Check for updates</sys:String>
+    <sys:String x:Key="Settings.CheckForUpdatesOnStartup">Check for updates on startup</sys:String>
+    <sys:String x:Key="Settings.ClearApplicationLogs">Clear application logs</sys:String>
+    <sys:String x:Key="Settings.ClearCache">Clear cache</sys:String>
+    <sys:String x:Key="Settings.ClearCache.Message">Downloaded and copied artwork is deleted. Images you picked yourself are kept. Arclight will fetch artwork again on the next scan.</sys:String>
+    <sys:String x:Key="Settings.ClearCache.Title">Clear the image cache?</sys:String>
+    <sys:String x:Key="Settings.ClearHistory">Clear history</sys:String>
+    <sys:String x:Key="Settings.ClearHistory.Message">This deletes the list of individual sessions (when you played). Each game's total playtime is kept, but weekly, monthly and daily charts start over.</sys:String>
+    <sys:String x:Key="Settings.ClearHistory.Title">Clear play history?</sys:String>
+    <sys:String x:Key="Settings.ClearLogs">Clear logs</sys:String>
+    <sys:String x:Key="Settings.ClearPlayHistory">Clear play history</sys:String>
+    <sys:String x:Key="Settings.CloseToTray">Close to tray</sys:String>
+    <sys:String x:Key="Settings.ClosingTheWindowKeepsArclight">Closing the window keeps Arclight running in the notification area so the background tracker can keep counting playtime.</sys:String>
+    <sys:String x:Key="Settings.CountsTimeWhileAGame">Counts time while a game launched from Arclight is running. Only verified sessions add time.</sys:String>
+    <sys:String x:Key="Settings.DefaultSort">Default sort</sys:String>
+    <sys:String x:Key="Settings.DefaultView">Default view</sys:String>
+    <sys:String x:Key="Settings.DeletesAllSessionsAndSets">Deletes all sessions and sets every game's playtime back to zero.</sys:String>
+    <sys:String x:Key="Settings.DeletesTheListOfIndividual">Deletes the list of individual sessions. Total playtime per game is kept.</sys:String>
+    <sys:String x:Key="Settings.Density.Comfortable">Comfortable</sys:String>
+    <sys:String x:Key="Settings.Density.Compact">Compact</sys:String>
+    <sys:String x:Key="Settings.DETECTION">DETECTION</sys:String>
+    <sys:String x:Key="Settings.DownloadMissingArtwork">Download missing artwork</sys:String>
+    <sys:String x:Key="Settings.DUPLICATESANDHIDDENGAMES">DUPLICATES AND HIDDEN GAMES</sys:String>
+    <sys:String x:Key="Settings.EXCLUDEDPROCESSES">EXCLUDED PROCESSES</sys:String>
+    <sys:String x:Key="Settings.ExperimentalScannersReadUndocumentedLauncher">Experimental scanners read undocumented launcher data and may miss games. Anything not detected can be added manually.</sys:String>
+    <sys:String x:Key="Settings.Export">Export…</sys:String>
+    <sys:String x:Key="Settings.Export.DialogTitle">Export your Arclight data</sys:String>
+    <sys:String x:Key="Settings.Export.Filter">JSON file (*.json)|*.json</sys:String>
+    <sys:String x:Key="Settings.ExportMyData">Export my data</sys:String>
+    <sys:String x:Key="Settings.ExtraSteamLibraryFolders">Extra Steam library folders</sys:String>
+    <sys:String x:Key="Settings.FetchesCoverArtFromSteams">Fetches cover art from Steam's public image server for Steam games that have none on disk. Images are cached and never re-downloaded. Turn off to stay fully offline.</sys:String>
+    <sys:String x:Key="Settings.FilterGames">Filter games…</sys:String>
+    <sys:String x:Key="Settings.ForDRMFreeAndStandalone">For DRM-free and standalone games: each subfolder is suggested as a game with its most likely executable. You confirm each one in the scan window.</sys:String>
+    <sys:String x:Key="Settings.GameFolders">Game folders</sys:String>
+    <sys:String x:Key="Settings.GamesNotesTagsCollectionsSettings">Games, notes, tags, collections, settings and playtime are stored in a local SQLite database. Arclight has no account system and never uploads your library. Network requests are limited to downloading missing Steam artwork (can be turned off) and checking GitHub for updates when you ask.</sys:String>
+    <sys:String x:Key="Settings.GAMESTHEBACKGROUNDTRACKERMAY">GAMES THE BACKGROUND TRACKER MAY COUNT</sys:String>
+    <sys:String x:Key="Settings.General">General</sys:String>
+    <sys:String x:Key="Settings.GitHubRepository">GitHub repository</sys:String>
+    <sys:String x:Key="Settings.GridDensity">Grid density</sys:String>
+    <sys:String x:Key="Settings.HowArclightWorks">How Arclight works</sys:String>
+    <sys:String x:Key="Settings.HowTheLibraryIsOrdered">How the library is ordered.</sys:String>
+    <sys:String x:Key="Settings.IfALauncherNoLonger">If a launcher no longer lists a game, show it as Not installed instead of removing it.</sys:String>
+    <sys:String x:Key="Settings.ImageCache">Image cache</sys:String>
+    <sys:String x:Key="Settings.ImagesYouPickedYourselfAre">. Images you picked yourself are never removed.</sys:String>
+    <sys:String x:Key="Settings.Language">Language</sys:String>
+    <sys:String x:Key="Settings.LaunchArclightWhenWindowsStarts">Launch Arclight when Windows starts</sys:String>
+    <sys:String x:Key="Settings.Library">Library</sys:String>
+    <sys:String x:Key="Settings.License">License</sys:String>
+    <sys:String x:Key="Settings.LogsHelpDiagnoseProblemsAnd">Logs help diagnose problems and are kept for 14 days. They never leave this PC.</sys:String>
+    <sys:String x:Key="Settings.MarkUninstalledGames">Mark uninstalled games</sys:String>
+    <sys:String x:Key="Settings.ModmanagerExe">modmanager.exe</sys:String>
+    <sys:String x:Key="Settings.NoHiddenGames">No hidden games.</sys:String>
+    <sys:String x:Key="Settings.OLEDBlackUsesPureBlack">OLED black uses pure black backgrounds.</sys:String>
+    <sys:String x:Key="Settings.OnlyNeededIfASteam">Only needed if a Steam library isn't listed in Steam's own settings.</sys:String>
+    <sys:String x:Key="Settings.OpenFolder">Open folder</sys:String>
+    <sys:String x:Key="Settings.OpenInTheTaskbarOr">Open in the taskbar (or the tray, if Close to tray is on) instead of showing the window.</sys:String>
+    <sys:String x:Key="Settings.OpenReleasePage">Open release page</sys:String>
+    <sys:String x:Key="Settings.Pick.GameFolder">Choose a folder that contains game folders</sys:String>
+    <sys:String x:Key="Settings.Pick.SteamFolder">Choose a Steam library folder (the one containing "steamapps")</sys:String>
+    <sys:String x:Key="Settings.PlatformsToScan">Platforms to scan</sys:String>
+    <sys:String x:Key="Settings.Player">Player</sys:String>
+    <sys:String x:Key="Settings.Privacy">Privacy</sys:String>
+    <sys:String x:Key="Settings.ProgramsInsideAGamesFolder">Programs inside a game's folder that should never count as playing — for example a mod manager. Wildcards work: *helper*. Launchers, crash reporters, installers and anti-cheat helpers are already excluded.</sys:String>
+    <sys:String x:Key="Settings.ReadsLauncherInstallRecordsOnly">Reads launcher install records only — Arclight never crawls your whole disk.</sys:String>
+    <sys:String x:Key="Settings.ReduceAnimations">Reduce animations</sys:String>
+    <sys:String x:Key="Settings.Repository">Repository</sys:String>
+    <sys:String x:Key="Settings.Reset">Reset</sys:String>
+    <sys:String x:Key="Settings.ResetStatistics">Reset statistics</sys:String>
+    <sys:String x:Key="Settings.ResetStats.Message">This deletes every recorded play session and sets playtime, session counts and last-played dates back to zero for all games. Your games, notes and collections are kept.</sys:String>
+    <sys:String x:Key="Settings.ResetStats.Title">Reset all statistics?</sys:String>
+    <sys:String x:Key="Settings.SavesEverythingArclightKnowsAbout">Saves everything Arclight knows about your library to a readable JSON file.</sys:String>
+    <sys:String x:Key="Settings.ScanLaunchersWhenArclightStarts">Scan launchers when Arclight starts</sys:String>
+    <sys:String x:Key="Settings.ScanNow">Scan now</sys:String>
+    <sys:String x:Key="Settings.ScansNeverAddAGame">Scans never add a game twice: games are matched by platform id, then executable, then install folder. Games you removed with “Don't suggest it again” are listed here.</sys:String>
+    <sys:String x:Key="Settings.SelectNone">Select none</sys:String>
+    <sys:String x:Key="Settings.Size.Large">Large</sys:String>
+    <sys:String x:Key="Settings.Size.Medium">Medium</sys:String>
+    <sys:String x:Key="Settings.Size.Small">Small</sys:String>
+    <sys:String x:Key="Settings.SizeOfGameCoversIn">Size of game covers in the grid.</sys:String>
+    <sys:String x:Key="Settings.SpaceBetweenCards">Space between cards.</sys:String>
+    <sys:String x:Key="Settings.StartMinimized">Start minimized</sys:String>
+    <sys:String x:Key="Settings.StartPage">Start page</sys:String>
+    <sys:String x:Key="Settings.STARTUP">STARTUP</sys:String>
+    <sys:String x:Key="Settings.Storage.Portable">Portable mode — data is stored next to Arclight.exe.</sys:String>
+    <sys:String x:Key="Settings.Storage.Profile">Stored in your Windows user profile.</sys:String>
+    <sys:String x:Key="Settings.SuggestAgain">Suggest again</sys:String>
+    <sys:String x:Key="Settings.Theme">Theme</sys:String>
+    <sys:String x:Key="Settings.Theme.Dark">Dark</sys:String>
+    <sys:String x:Key="Settings.Theme.Oled">OLED black</sys:String>
+    <sys:String x:Key="Settings.ThePageArclightOpensOn">The page Arclight opens on.</sys:String>
+    <sys:String x:Key="Settings.Toast.CacheCleared.Message">Run a scan to download artwork again.</sys:String>
+    <sys:String x:Key="Settings.Toast.CacheCleared.Title">Image cache cleared</sys:String>
+    <sys:String x:Key="Settings.Toast.Exported">Data exported</sys:String>
+    <sys:String x:Key="Settings.Toast.ExportFailed">Export failed</sys:String>
+    <sys:String x:Key="Settings.Toast.FolderTooBroad.Message">Scanning a whole drive would be slow. Choose the folder your games are installed in.</sys:String>
+    <sys:String x:Key="Settings.Toast.FolderTooBroad.Title">Pick a more specific folder</sys:String>
+    <sys:String x:Key="Settings.Toast.HistoryCleared">Play history cleared</sys:String>
+    <sys:String x:Key="Settings.Toast.LogsCleared.Message">{0} deleted. Today's log is kept until Arclight restarts.</sys:String>
+    <sys:String x:Key="Settings.Toast.LogsCleared.Title">Application logs cleared</sys:String>
+    <sys:String x:Key="Settings.Toast.ProcessName.Message">For example "modmanager.exe" or "*helper*".</sys:String>
+    <sys:String x:Key="Settings.Toast.ProcessName.Title">Enter a process name</sys:String>
+    <sys:String x:Key="Settings.Toast.ShowFile">Show file</sys:String>
+    <sys:String x:Key="Settings.Toast.StartupFailed">Couldn't change the startup setting</sys:String>
+    <sys:String x:Key="Settings.Toast.StatsReset.Message">Playtime starts from zero.</sys:String>
+    <sys:String x:Key="Settings.Toast.StatsReset.Title">Statistics reset</sys:String>
+    <sys:String x:Key="Settings.Toast.Unhidden.Message">Run a scan to add it.</sys:String>
+    <sys:String x:Key="Settings.Toast.Unhidden.Title">{0} will be suggested again</sys:String>
+    <sys:String x:Key="Settings.Tracked.Unknown">Install folder unknown — can't be tracked</sys:String>
+    <sys:String x:Key="Settings.Tracking">Tracking</sys:String>
+    <sys:String x:Key="Settings.TrackPlaytime">Track playtime</sys:String>
+    <sys:String x:Key="Settings.TurnsOffHoverLiftsPage">Turns off hover lifts, page transitions and image fades.</sys:String>
+    <sys:String x:Key="Settings.Update.Checking">Checking GitHub…</sys:String>
+    <sys:String x:Key="Settings.UsedForSelectionsProgressAnd">Used for selections, progress and primary buttons.</sys:String>
+    <sys:String x:Key="Settings.UsedInTheHomeGreeting">Used in the Home greeting. Leave it as Player if you like.</sys:String>
+    <sys:String x:Key="Settings.Version" xml:space="preserve">Version </sys:String>
+    <sys:String x:Key="Settings.WhatTheTrackerReadsThe">What the tracker reads: the names and file paths of running programs, every few seconds, to see whether a game from your library is running. It never records keystrokes, screen contents, window titles or anything about other programs, and nothing leaves your PC.</sys:String>
+    <sys:String x:Key="Settings.WhenOffNewGamesAre">When off, new games are suggested and you choose what to add. Tools and folder-scan suggestions are never added automatically.</sys:String>
+    <sys:String x:Key="Settings.YourGamesOneUniverse" xml:space="preserve"> · Your Games. One Universe.</sys:String>
+    <sys:String x:Key="Settings.YourLibraryStaysOnThis">Your library stays on this PC</sys:String>
+    <sys:String x:Key="Settings.YourName">Your name</sys:String>
+
+    <!-- Shell -->
+    <sys:String x:Key="Shell.AddAGameManuallyCtrl">Add a game manually (Ctrl+N)</sys:String>
+    <sys:String x:Key="Shell.AddGame">Add Game</sys:String>
+    <sys:String x:Key="Shell.BackAltLeft">Back (Alt+Left)</sys:String>
+    <sys:String x:Key="Shell.ClearAll">Clear all</sys:String>
+    <sys:String x:Key="Shell.Close">Close</sys:String>
+    <sys:String x:Key="Shell.Discover">Discover</sys:String>
+    <sys:String x:Key="Shell.Dismiss">Dismiss</sys:String>
+    <sys:String x:Key="Shell.Home">Home</sys:String>
+    <sys:String x:Key="Shell.LIBRARY">LIBRARY</sys:String>
+    <sys:String x:Key="Shell.Maximize">Maximize</sys:String>
+    <sys:String x:Key="Shell.Minimize">Minimize</sys:String>
+    <sys:String x:Key="Shell.MyLibrary">My Library</sys:String>
+    <sys:String x:Key="Shell.Notifications">Notifications</sys:String>
+    <sys:String x:Key="Shell.ProfileAndSettings">Profile and settings</sys:String>
+    <sys:String x:Key="Shell.Restore">Restore</sys:String>
+    <sys:String x:Key="Shell.Scanning">Scanning…</sys:String>
+    <sys:String x:Key="Shell.SearchGamesTagsCollectionsNotes">Search games, tags, collections, notes…</sys:String>
+    <sys:String x:Key="Shell.YoureAllCaughtUp">You're all caught up.</sys:String>
+
+    <!-- Sort -->
+    <sys:String x:Key="Sort.InstallationStatus">Installation status</sys:String>
+    <sys:String x:Key="Sort.LeastPlayed">Least played</sys:String>
+    <sys:String x:Key="Sort.MostPlayed">Most played</sys:String>
+    <sys:String x:Key="Sort.NameAscending">Name A–Z</sys:String>
+    <sys:String x:Key="Sort.NameDescending">Name Z–A</sys:String>
+    <sys:String x:Key="Sort.RecentlyAdded">Recently added</sys:String>
+    <sys:String x:Key="Sort.RecentlyPlayed">Recently played</sys:String>
+    <sys:String x:Key="Sort.ReleaseYear">Release year</sys:String>
+
+    <!-- Startup -->
+    <sys:String x:Key="Startup.AutoAdded.Message">Found while scanning your launchers.</sys:String>
+    <sys:String x:Key="Startup.DatabaseError.Message" xml:space="preserve">{0}&#10;&#10;Yes — keep the current file as a backup and start with a new, empty library.&#10;No — open the data folder and exit (nothing is changed).&#10;Cancel — exit.</sys:String>
+    <sys:String x:Key="Startup.DatabaseError.Title">Arclight — library problem</sys:String>
+    <sys:String x:Key="Startup.DataFolderError" xml:space="preserve">Arclight can't write to its data folder:&#10;{0}&#10;&#10;{1}</sys:String>
+    <sys:String x:Key="Startup.NewGames.Action">Review</sys:String>
+    <sys:String x:Key="Startup.NewGames.Message">Review them and choose what to add.</sys:String>
+    <sys:String x:Key="Startup.NewGames.Title">{0} found</sys:String>
+
+    <!-- Stats -->
+    <sys:String x:Key="Stats.ActivitySummary">{0} across {1}</sys:String>
+    <sys:String x:Key="Stats.ArclightCountsTimeOnlyWhile">Arclight counts time only while it sees a game's own process running — start games from Arclight, or turn on the background tracker in Settings › Tracking to include games launched from Steam, Epic or desktop shortcuts. Playtime from other platforms is never imported.</sys:String>
+    <sys:String x:Key="Stats.CalculatedOnThisPCFrom">Calculated on this PC from sessions Arclight verified. Nothing is imported or estimated.</sys:String>
+    <sys:String x:Key="Stats.ChartDayFormat">ddd d MMM</sys:String>
+    <sys:String x:Key="Stats.DonutCaption">games</sys:String>
+    <sys:String x:Key="Stats.GamesByPlatform">Games by platform</sys:String>
+    <sys:String x:Key="Stats.GamesWithTrackedPlaytimeWill">Games with tracked playtime will be ranked here.</sys:String>
+    <sys:String x:Key="Stats.Last30Days">Last 30 days</sys:String>
+    <sys:String x:Key="Stats.MostPlayed">Most played</sys:String>
+    <sys:String x:Key="Stats.NoPlay">no play</sys:String>
+    <sys:String x:Key="Stats.NoPlaytimeTrackedYet">No playtime tracked yet</sys:String>
+    <sys:String x:Key="Stats.NoSessions30">No tracked sessions in the last 30 days</sys:String>
+    <sys:String x:Key="Stats.Share">{0}%</sys:String>
+    <sys:String x:Key="Stats.Tile.Average">Average per game</sys:String>
+    <sys:String x:Key="Stats.Tile.AverageDetail">Across games you've played</sys:String>
+    <sys:String x:Key="Stats.Tile.Longest">Longest session</sys:String>
+    <sys:String x:Key="Stats.Tile.NotInstalled">{0} not installed</sys:String>
+    <sys:String x:Key="Stats.Tile.Played">{0} played</sys:String>
+    <sys:String x:Key="Stats.Tile.SessionsDetail">Verified play sessions</sys:String>
+    <sys:String x:Key="Stats.Tile.ThisMonth">This month</sys:String>
+    <sys:String x:Key="Stats.Tile.ThisWeek">This week</sys:String>
+    <sys:String x:Key="Stats.Tile.TotalGames">Total games</sys:String>
+    <sys:String x:Key="Stats.Tile.TrackedPlaytime">Tracked playtime</sys:String>
+    <sys:String x:Key="Stats.Tile.VerifiedOnly">Verified sessions only</sys:String>
+
+    <!-- Status -->
+    <sys:String x:Key="Status.LaunchFromArclight">Launch from Arclight</sys:String>
+    <sys:String x:Key="Status.PlayingMany">Playing {0} games</sys:String>
+    <sys:String x:Key="Status.PlayingOne">Playing {0}</sys:String>
+    <sys:String x:Key="Status.Ready">Tracking ready</sys:String>
+    <sys:String x:Key="Status.Since">Since {0}</sys:String>
+    <sys:String x:Key="Status.TrackingOff">Tracking off</sys:String>
+    <sys:String x:Key="Status.TrackingPlaytime">Tracking playtime</sys:String>
+    <sys:String x:Key="Status.TurnOnInSettings">Turn it on in Settings</sys:String>
+    <sys:String x:Key="Status.WatcherOn">Background tracker on</sys:String>
+    <sys:String x:Key="Status.Watching">Watching your games</sys:String>
+
+    <!-- Support -->
+    <sys:String x:Key="Support.Experimental">Experimental</sys:String>
+    <sys:String x:Key="Support.LauncherOnly">Detects the launcher only</sys:String>
+    <sys:String x:Key="Support.ManualOnly">Manual only</sys:String>
+
+    <!-- Tags -->
+    <sys:String x:Key="Tags.AddATagAndPress">Add a tag and press Enter</sys:String>
+    <sys:String x:Key="Tags.RemoveTag">Remove tag</sys:String>
+
+    <!-- Toast -->
+    <sys:String x:Key="Toast.AddedToCollection">Added to {0}</sys:String>
+    <sys:String x:Key="Toast.ChangesSaved">Changes saved</sys:String>
+    <sys:String x:Key="Toast.Featured">{0} is now featured on Home</sys:String>
+    <sys:String x:Key="Toast.FileUnusable">That file can't be used</sys:String>
+    <sys:String x:Key="Toast.FolderNotFound.Message">The game's folder no longer exists. It may have been moved or uninstalled.</sys:String>
+    <sys:String x:Key="Toast.FolderNotFound.Title">Folder not found</sys:String>
+    <sys:String x:Key="Toast.GameAdded.Message">You can edit its details any time.</sys:String>
+    <sys:String x:Key="Toast.GameAdded.Title">{0} was added</sys:String>
+    <sys:String x:Key="Toast.GameRemoved.Message">Its files on disk were not touched.</sys:String>
+    <sys:String x:Key="Toast.GameRemoved.Title">{0} was removed from Arclight</sys:String>
+    <sys:String x:Key="Toast.Located">{0} was located</sys:String>
+    <sys:String x:Key="Toast.RemovedFromCollection">Removed from {0}</sys:String>
+    <sys:String x:Key="Toast.View">View</sys:String>
+
+    <!-- Tray -->
+    <sys:String x:Key="Tray.Exit">Exit</sys:String>
+    <sys:String x:Key="Tray.Open">Open Arclight</sys:String>
+    <sys:String x:Key="Tray.Status.Running">Arclight — running</sys:String>
+    <sys:String x:Key="Tray.Status.Watcher">Arclight — background tracker on</sys:String>
+
+    <!-- Unit -->
+    <sys:String x:Key="Unit.HoursValue">{0} h</sys:String>
+
+    <!-- Update -->
+    <sys:String x:Key="Update.Available">Arclight {0} is available. You have {1}.</sys:String>
+    <sys:String x:Key="Update.NoRelease">No release has been published on GitHub yet.</sys:String>
+    <sys:String x:Key="Update.Offline">Couldn't reach GitHub. Check your connection and try again.</sys:String>
+    <sys:String x:Key="Update.Toast.Action">Open release page</sys:String>
+    <sys:String x:Key="Update.Toast.Title">Update available</sys:String>
+    <sys:String x:Key="Update.UpToDate">You're up to date ({0}).</sys:String>
+
+    <!-- Validation -->
+    <sys:String x:Key="Validation.AppIdFormat">The Windows app id is not in the expected format.</sys:String>
+    <sys:String x:Key="Validation.ArgsControlChars">Launch arguments cannot contain line breaks or control characters.</sys:String>
+    <sys:String x:Key="Validation.ArgsTooLong">Launch arguments are too long.</sys:String>
+    <sys:String x:Key="Validation.ExeInvalidChars">The executable path contains invalid characters.</sys:String>
+    <sys:String x:Key="Validation.ExeNotFullPath">Use a full path, for example C:\Games\MyGame\game.exe.</sys:String>
+    <sys:String x:Key="Validation.ExeRequired">Choose the game's executable file.</sys:String>
+    <sys:String x:Key="Validation.ExeWrongType">Only .exe, .lnk, .url, .bat and .cmd files can be launched.</sys:String>
+    <sys:String x:Key="Validation.NameRequired">The game needs a name.</sys:String>
+    <sys:String x:Key="Validation.SchemeNotAllowed">'{0}://' links are not allowed. Supported: {1}.</sys:String>
+    <sys:String x:Key="Validation.UnknownMethod">Unknown launch method.</sys:String>
+    <sys:String x:Key="Validation.UriInvalidChars">The launcher link contains spaces or invalid characters.</sys:String>
+    <sys:String x:Key="Validation.UriNotValid">The launcher link is not a valid URI.</sys:String>
+    <sys:String x:Key="Validation.UriRequired">Enter the launcher link, for example steam://rungameid/730.</sys:String>
+</ResourceDictionary>

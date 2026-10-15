@@ -1,0 +1,200 @@
+<UserControl x:Class="Arclight.Desktop.Views.Dialogs.GameEditorDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Arclight.Desktop.Controls"
+             xmlns:dialogs="clr-namespace:Arclight.Desktop.ViewModels.Dialogs">
+    <UserControl.Resources>
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12.5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+        </Style>
+        <Style x:Key="GroupTitle" TargetType="TextBlock" BasedOn="{StaticResource Text.Overline}">
+            <Setter Property="Margin" Value="0,22,0,12" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="28,24,28,10">
+            <TextBlock Text="{Binding Title}" Style="{StaticResource Text.Section}" FontSize="20" TextTrimming="CharacterEllipsis" />
+            <TextBlock Text="{DynamicResource Editor.LaunchSettingsAreCheckedBefore}" Style="{StaticResource Text.Caption}" Margin="0,4,0,0" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="28,0,28,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="28" />
+                    <ColumnDefinition Width="190" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <!-- Basics -->
+                    <TextBlock Text="{DynamicResource Editor.GAME}" Style="{StaticResource GroupTitle}" Margin="0,10,0,12" />
+                    <TextBlock Text="{DynamicResource Editor.GameName}" Style="{StaticResource Label}" />
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource Editor.EGHollowKnight}" MaxLength="120" />
+                    <Grid Margin="0,14,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="14" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="{DynamicResource Editor.Platform}" Style="{StaticResource Label}" />
+                            <ComboBox ItemsSource="{x:Static dialogs:GameEditorViewModel.Platforms}" SelectedItem="{Binding SelectedPlatform}" DisplayMemberPath="Name" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Visibility="{Binding ShowPlatformId, Converter={StaticResource VisibleWhen}}">
+                            <TextBlock Text="{Binding PlatformIdLabel}" Style="{StaticResource Label}" />
+                            <TextBox Text="{Binding PlatformIdentifier, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Launch -->
+                    <TextBlock Text="{DynamicResource Editor.HOWTOSTARTIT}" Style="{StaticResource GroupTitle}" />
+                    <!-- Wraps when the labels are long (Turkish). -->
+                    <WrapPanel Margin="0,0,0,6">
+                        <WrapPanel.Resources>
+                            <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+                                <Setter Property="Margin" Value="0,0,18,6" />
+                            </Style>
+                        </WrapPanel.Resources>
+                        <RadioButton Content="{DynamicResource Editor.ExecutableExe}" IsChecked="{Binding IsExecutable}" GroupName="Launch" />
+                        <RadioButton Content="{DynamicResource Editor.LauncherLink}" IsChecked="{Binding IsLauncherUri}" GroupName="Launch" />
+                        <RadioButton Content="{DynamicResource Editor.CustomCommand}" IsChecked="{Binding IsCustomCommand}" GroupName="Launch" />
+                    </WrapPanel>
+
+                    <StackPanel Visibility="{Binding IsExecutable, Converter={StaticResource VisibleWhen}}">
+                        <TextBlock Text="{DynamicResource Editor.ExecutablePath}" Style="{StaticResource Label}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding ExecutablePath, UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource Editor.CGamesMyGameGameExe}" />
+                            <Button Grid.Column="1" Style="{StaticResource Button.Secondary}" Content="{DynamicResource Editor.Browse}" Command="{Binding BrowseExecutableCommand}" Padding="14,8" Margin="8,0,0,0" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Visibility="{Binding IsLauncherUri, Converter={StaticResource VisibleWhen}}">
+                        <TextBlock Text="{DynamicResource Editor.LauncherLink}" Style="{StaticResource Label}" />
+                        <TextBox Text="{Binding LauncherUri, UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource Editor.SteamRungameid730}" />
+                        <TextBlock Style="{StaticResource Text.Caption}" TextWrapping="Wrap" TextTrimming="None" Margin="0,6,0,0"
+                                   Text="{DynamicResource Editor.AllowedSteamComEpicgamesLauncher}" />
+                    </StackPanel>
+
+                    <StackPanel Visibility="{Binding IsCustomCommand, Converter={StaticResource VisibleWhen}}">
+                        <TextBlock Text="{DynamicResource Editor.ProgramToRun}" Style="{StaticResource Label}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding CommandPath, UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource Editor.CToolsModLauncherExe}" />
+                            <Button Grid.Column="1" Style="{StaticResource Button.Secondary}" Content="{DynamicResource Editor.Browse}" Command="{Binding BrowseCommandCommand}" Padding="14,8" Margin="8,0,0,0" />
+                        </Grid>
+                        <TextBlock Style="{StaticResource Text.Caption}" TextWrapping="Wrap" TextTrimming="None" Margin="0,6,0,0"
+                                   Text="{DynamicResource Editor.TheProgramIsStartedDirectly}" />
+                    </StackPanel>
+
+                    <StackPanel Margin="0,14,0,0" Visibility="{Binding IsLauncherUri, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}">
+                        <TextBlock Text="{DynamicResource Editor.LaunchArgumentsOptional}" Style="{StaticResource Label}" />
+                        <TextBox Text="{Binding LaunchArguments, UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource Editor.WindowedSkipintro}" />
+                    </StackPanel>
+
+                    <TextBlock Text="{DynamicResource Editor.InstallFolderUsedForPlaytime}" Style="{StaticResource Label}" Margin="0,14,0,6" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding InstallDirectory, UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource Editor.FilledInFromTheExecutable}" />
+                        <Button Grid.Column="1" Style="{StaticResource Button.Secondary}" Content="{DynamicResource Editor.Browse}" Command="{Binding BrowseInstallFolderCommand}" Padding="14,8" Margin="8,0,0,0" />
+                    </Grid>
+                    <CheckBox Content="{DynamicResource Editor.InstalledOnThisPC}" IsChecked="{Binding IsInstalled}" Margin="0,12,0,0" FontSize="13.5" />
+
+                    <!-- Details -->
+                    <TextBlock Text="{DynamicResource Editor.DETAILS}" Style="{StaticResource GroupTitle}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="14" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="{DynamicResource Editor.Genre}" Style="{StaticResource Label}" />
+                            <TextBox Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource Editor.EGRPGAdventure}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{DynamicResource Editor.ReleaseYear}" Style="{StaticResource Label}" />
+                            <TextBox Text="{Binding ReleaseYear, UpdateSourceTrigger=PropertyChanged}" Tag="2024" MaxLength="4" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="0,14,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="14" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="{DynamicResource Editor.Developer}" Style="{StaticResource Label}" />
+                            <TextBox Text="{Binding Developer, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{DynamicResource Editor.Publisher}" Style="{StaticResource Label}" />
+                            <TextBox Text="{Binding Publisher, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock Text="{DynamicResource Editor.Description}" Style="{StaticResource Label}" Margin="0,14,0,6" />
+                    <TextBox Style="{StaticResource TextBox.Multiline}" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" MinHeight="70" MaxHeight="140" />
+                    <TextBlock Text="{DynamicResource Editor.Notes}" Style="{StaticResource Label}" Margin="0,14,0,6" />
+                    <TextBox Style="{StaticResource TextBox.Multiline}" Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" MinHeight="70" MaxHeight="140"
+                             Tag="{DynamicResource Editor.AnythingYouWantToRemember}" />
+                    <TextBlock Text="{DynamicResource Common.Tags}" Style="{StaticResource Label}" Margin="0,14,0,6" />
+                    <controls:TagEditor Tags="{Binding Tags}" KnownTags="{Binding KnownTags}" />
+                </StackPanel>
+
+                <!-- Artwork -->
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="{DynamicResource Editor.ARTWORK}" Style="{StaticResource GroupTitle}" Margin="0,10,0,12" />
+                    <TextBlock Text="{DynamicResource Editor.Cover34}" Style="{StaticResource Label}" />
+                    <controls:GameArt Width="190" Height="253" CornerRadius="12" ImagePath="{Binding CoverImagePath}" Title="{Binding Name}" DecodeWidth="380" />
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Button Style="{StaticResource Button.Secondary}" Content="{DynamicResource Editor.Choose}" Command="{Binding PickCoverCommand}" Padding="12,6" FontSize="12.5" />
+                        <Button Style="{StaticResource Button.Ghost}" Content="{DynamicResource Common.Remove}" Command="{Binding ClearCoverCommand}" Padding="10,6" FontSize="12.5" Margin="6,0,0,0"
+                                Visibility="{Binding HasCover, Converter={StaticResource VisibleWhen}}" />
+                    </StackPanel>
+                    <TextBlock Text="{DynamicResource Editor.BackgroundWide}" Style="{StaticResource Label}" Margin="0,18,0,6" />
+                    <controls:GameArt Width="190" Height="107" CornerRadius="10" ImagePath="{Binding BackgroundImagePath}" Title="{Binding Name}" ShowTitle="False" DecodeWidth="380" />
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Button Style="{StaticResource Button.Secondary}" Content="{DynamicResource Editor.Choose}" Command="{Binding PickBackgroundCommand}" Padding="12,6" FontSize="12.5" />
+                        <Button Style="{StaticResource Button.Ghost}" Content="{DynamicResource Common.Remove}" Command="{Binding ClearBackgroundCommand}" Padding="10,6" FontSize="12.5" Margin="6,0,0,0"
+                                Visibility="{Binding HasBackground, Converter={StaticResource VisibleWhen}}" />
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource Text.Caption}" TextWrapping="Wrap" TextTrimming="None" Margin="0,12,0,0"
+                               Text="{DynamicResource Editor.PicturesAreCopiedIntoArclights}" />
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="0,1,0,0" Padding="28,16,28,20">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Visibility="{Binding HasError, Converter={StaticResource VisibleWhen}}" Margin="0,0,280,0">
+                    <TextBlock Style="{StaticResource Icon}" Text="&#xE783;" FontSize="14" Foreground="{DynamicResource Brush.Danger}" Margin="0,0,8,0" />
+                    <TextBlock Text="{Binding ErrorMessage}" Foreground="{DynamicResource Brush.Danger}" FontSize="13" TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource Button.Ghost}" Content="{DynamicResource Common.Cancel}" Command="{Binding CancelCommand}" Padding="16,9" Margin="0,0,8,0" />
+                    <Button Style="{StaticResource Button.Primary}" Content="{Binding SaveText}" Command="{Binding SaveCommand}" Padding="18,9"
+                            IsEnabled="{Binding IsSaving, Converter={StaticResource InverseBool}}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

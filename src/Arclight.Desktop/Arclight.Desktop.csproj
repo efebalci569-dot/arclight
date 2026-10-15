@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>Arclight.Desktop</RootNamespace>
+    <AssemblyName>Arclight</AssemblyName>
+    <ApplicationIcon>Resources\Brand\arclight.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyTitle>Arclight</AssemblyTitle>
+    <Description>Arclight — Your Games. One Universe.</Description>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <SelfContained>false</SelfContained>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <TieredPGO>true</TieredPGO>
+    <NoWarn>$(NoWarn);WFO0003</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WPF and WinForms both define types such as Application and MessageBox; only the tray icon uses WinForms. -->
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Arclight.Core\Arclight.Core.csproj" />
+    <ProjectReference Include="..\Arclight.Platforms\Arclight.Platforms.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Brand\arclight.ico" />
+    <Resource Include="Resources\Brand\arclight-mark-128.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Arclight.Desktop.Tests" />
+  </ItemGroup>
+
+</Project>

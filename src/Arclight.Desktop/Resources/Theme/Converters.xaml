@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Arclight.Desktop.Converters">
+    <converters:VisibleWhenConverter x:Key="VisibleWhen" />
+    <converters:InverseBoolConverter x:Key="InverseBool" />
+    <converters:EnumEqualsConverter x:Key="EnumEquals" />
+    <converters:ResourceBrushConverter x:Key="ResourceBrush" />
+    <converters:MultiplyConverter x:Key="Multiply" />
+    <converters:BadgeConverter x:Key="Badge" />
+</ResourceDictionary>

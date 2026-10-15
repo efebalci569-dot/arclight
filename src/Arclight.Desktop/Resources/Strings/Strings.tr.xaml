@@ -1,0 +1,700 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <!-- Türkçe (tr-TR) arayüz metinleri. Every key here must also exist in the other Strings.*.xaml file
+         (a test checks this). {0}, {1} are filled in by code; keep them. -->
+
+    <!-- About -->
+    <sys:String x:Key="About.Finding.Body">Oyunları Tara; Steam, Epic Games, GOG, Ubisoft Connect ve Xbox uygulamasının bu bilgisayarda tuttuğu kurulum kayıtlarını okur. Başlatıcı şifresi istemez ve başlatıcı dosyalarını değiştirmez. EA app oyunları ve Arclight'ın bulamadığı her şey Oyun Ekle ile eklenebilir.</sys:String>
+    <sys:String x:Key="About.Finding.Heading">Oyunları bulma</sys:String>
+    <sys:String x:Key="About.Launching.Body">Oyunlar kendi başlatıcı bağlantısıyla (örneğin Steam) ya da doğrudan çalıştırılabilir dosyalarından açılır. Arclight oyunları kendiliğinden yönetici olarak çalıştırmaz.</sys:String>
+    <sys:String x:Key="About.Launching.Heading">Başlatma</sys:String>
+    <sys:String x:Key="About.Library.Body">Arclight oyunlarını, notlarını, etiketlerini, koleksiyonlarını ve oynama süreni bu bilgisayardaki yerel bir veritabanında tutar. Hiçbir şey yüklenmez, hesap gerekmez.</sys:String>
+    <sys:String x:Key="About.Library.Heading">Kütüphanen, kendi bilgisayarında</sys:String>
+    <sys:String x:Key="About.Playtime.Body">Oynama süresi yalnızca Arclight oyunun kendi sürecinin çalıştığını gördüğü sürece sayılır; başlatıcılar, çökme raporlayıcıları ve hile önleyici yardımcılar sayılmaz. Arclight, Steam veya diğer mağazalardan süre içe aktarmaz ya da tahmin etmez.</sys:String>
+    <sys:String x:Key="About.Playtime.Heading">Oynama süresi</sys:String>
+    <sys:String x:Key="About.Title">Arclight nasıl çalışır</sys:String>
+
+    <!-- Accent -->
+    <sys:String x:Key="Accent.Amber">Kehribar</sys:String>
+    <sys:String x:Key="Accent.Emerald">Zümrüt</sys:String>
+    <sys:String x:Key="Accent.Fuchsia">Fuşya</sys:String>
+    <sys:String x:Key="Accent.Indigo">Çivit</sys:String>
+    <sys:String x:Key="Accent.Rose">Gül</sys:String>
+    <sys:String x:Key="Accent.Sky">Gök mavisi</sys:String>
+    <sys:String x:Key="Accent.Violet">Mor</sys:String>
+
+    <!-- Action -->
+    <sys:String x:Key="Action.Install">Yükle</sys:String>
+    <sys:String x:Key="Action.LocateGame">Oyunu bul</sys:String>
+    <sys:String x:Key="Action.OpenLauncher">Başlatıcıyı aç</sys:String>
+    <sys:String x:Key="Action.Play">Oyna</sys:String>
+
+    <!-- Badge -->
+    <sys:String x:Key="Badge.Other">DİĞER</sys:String>
+
+    <!-- Chart -->
+    <sys:String x:Key="Chart.Hours">{0} sa</sys:String>
+    <sys:String x:Key="Chart.Minutes">{0} dk</sys:String>
+
+    <!-- Collection -->
+    <sys:String x:Key="Collection.AddGames.Title">{0} koleksiyonuna oyun ekle</sys:String>
+    <sys:String x:Key="Collection.Created.Message">Oyunları kendi menülerinden veya koleksiyon sayfasından ekleyebilirsin.</sys:String>
+    <sys:String x:Key="Collection.Created.Title">"{0}" koleksiyonu oluşturuldu</sys:String>
+    <sys:String x:Key="Collection.Delete.Message">Yalnızca koleksiyon silinir. İçindeki tüm oyunlar kütüphanende kalır.</sys:String>
+    <sys:String x:Key="Collection.Delete.Title">"{0}" silinsin mi?</sys:String>
+    <sys:String x:Key="Collection.Deleted.Message">Oyunları hâlâ kütüphanende.</sys:String>
+    <sys:String x:Key="Collection.Deleted.Title">"{0}" koleksiyonu silindi</sys:String>
+    <sys:String x:Key="Collection.GamesAdded">{0}, {1} koleksiyonuna eklendi</sys:String>
+    <sys:String x:Key="Collection.Menu.New">Yeni koleksiyon…</sys:String>
+    <sys:String x:Key="Collection.Menu.Open">Aç</sys:String>
+    <sys:String x:Key="Collection.NotFound">Koleksiyon bulunamadı</sys:String>
+
+    <!-- CollectionEditor -->
+    <sys:String x:Key="CollectionEditor.ChooseImage">Görsel seç…</sys:String>
+    <sys:String x:Key="CollectionEditor.CoverOptional">Kapak (isteğe bağlı)</sys:String>
+    <sys:String x:Key="CollectionEditor.DescriptionOptional">Açıklama (isteğe bağlı)</sys:String>
+    <sys:String x:Key="CollectionEditor.EGWeekendGames">ör. Hafta Sonu Oyunları</sys:String>
+    <sys:String x:Key="CollectionEditor.Error.NameRequired">Koleksiyona bir ad ver.</sys:String>
+    <sys:String x:Key="CollectionEditor.Error.NameTooLong">Ad 60 karakterden kısa olmalı.</sys:String>
+    <sys:String x:Key="CollectionEditor.Name">Ad</sys:String>
+    <sys:String x:Key="CollectionEditor.Pick.Cover">Bir koleksiyon kapağı seç</sys:String>
+    <sys:String x:Key="CollectionEditor.Save.New">Koleksiyon oluştur</sys:String>
+    <sys:String x:Key="CollectionEditor.Title.Edit">Koleksiyonu düzenle</sys:String>
+    <sys:String x:Key="CollectionEditor.Title.New">Yeni koleksiyon</sys:String>
+    <sys:String x:Key="CollectionEditor.UseGameCoversInstead">Bunun yerine oyun kapaklarını kullan</sys:String>
+    <sys:String x:Key="CollectionEditor.WhatBelongsHere">Buraya neler giriyor?</sys:String>
+
+    <!-- Collections -->
+    <sys:String x:Key="Collections.CollectionOptions">Koleksiyon seçenekleri</sys:String>
+    <sys:String x:Key="Collections.CreateACollection">Koleksiyon oluştur</sys:String>
+    <sys:String x:Key="Collections.CreateCollectionsLikeBacklogCompleted">Sıradakiler, Bitirilenler veya Hafta Sonu Oyunları gibi koleksiyonlar oluştur. Bir oyun istediğin kadar koleksiyonda yer alabilir.</sys:String>
+    <sys:String x:Key="Collections.GroupGamesYourWayDrag">Oyunlarını istediğin gibi grupla. Sırayı değiştirmek için bir koleksiyonu sürükle; bir koleksiyonu silmek içindeki oyunları asla silmez.</sys:String>
+    <sys:String x:Key="Collections.NewCollection">Yeni koleksiyon</sys:String>
+    <sys:String x:Key="Collections.NoCollectionsYet">Henüz koleksiyon yok</sys:String>
+
+    <!-- Common -->
+    <sys:String x:Key="Common.About">Hakkında</sys:String>
+    <sys:String x:Key="Common.AddAGame">Oyun Ekle</sys:String>
+    <sys:String x:Key="Common.AddToCollection">Koleksiyona ekle</sys:String>
+    <sys:String x:Key="Common.Cancel">İptal</sys:String>
+    <sys:String x:Key="Common.Collections">Koleksiyonlar</sys:String>
+    <sys:String x:Key="Common.Confirm">Onayla</sys:String>
+    <sys:String x:Key="Common.Favorite">Favori</sys:String>
+    <sys:String x:Key="Common.Favorites">Favoriler</sys:String>
+    <sys:String x:Key="Common.PlayingNow">Şu an oynanıyor</sys:String>
+    <sys:String x:Key="Common.RecentlyPlayed">Son Oynananlar</sys:String>
+    <sys:String x:Key="Common.Remove">Kaldır</sys:String>
+    <sys:String x:Key="Common.ScanForGames">Oyunları Tara</sys:String>
+    <sys:String x:Key="Common.SelectAll">Tümünü seç</sys:String>
+    <sys:String x:Key="Common.Settings">Ayarlar</sys:String>
+    <sys:String x:Key="Common.Statistics">İstatistikler</sys:String>
+    <sys:String x:Key="Common.Tags">Etiketler</sys:String>
+
+    <!-- Count -->
+    <sys:String x:Key="Count.Day.One">{0} gün</sys:String>
+    <sys:String x:Key="Count.Day.Other">{0} gün</sys:String>
+    <sys:String x:Key="Count.Game.One">{0} oyun</sys:String>
+    <sys:String x:Key="Count.Game.Other">{0} oyun</sys:String>
+    <sys:String x:Key="Count.LogFile.One">{0} günlük dosyası</sys:String>
+    <sys:String x:Key="Count.LogFile.Other">{0} günlük dosyası</sys:String>
+    <sys:String x:Key="Count.NewGame.One">{0} yeni oyun</sys:String>
+    <sys:String x:Key="Count.NewGame.Other">{0} yeni oyun</sys:String>
+    <sys:String x:Key="Count.Session.One">{0} oturum</sys:String>
+    <sys:String x:Key="Count.Session.Other">{0} oturum</sys:String>
+
+    <!-- Detail -->
+    <sys:String x:Key="Detail.Back">Geri</sys:String>
+    <sys:String x:Key="Detail.BackgroundTracking">Arka plan takibi</sys:String>
+    <sys:String x:Key="Detail.Edit">Düzenle</sys:String>
+    <sys:String x:Key="Detail.EditDetails">Ayrıntıları düzenle</sys:String>
+    <sys:String x:Key="Detail.Hint.Tracked">Arclight'tan başlattığında süre takip edilir. Başka yerlerden başlatmaları da saymak için arka plan izleyicisine izin ver.</sys:String>
+    <sys:String x:Key="Detail.Hint.TrackingOff">Oynama süresi takibi Ayarlar'da kapalı.</sys:String>
+    <sys:String x:Key="Detail.Hint.Untrackable">Arclight bu oyunun nereye kurulduğunu bilmediği için süresini takip edemiyor. Kurulum klasörünü ayarlamak için oyunu düzenle.</sys:String>
+    <sys:String x:Key="Detail.Info.Added">Eklenme</sys:String>
+    <sys:String x:Key="Detail.Info.Executable">Çalıştırılabilir dosya</sys:String>
+    <sys:String x:Key="Detail.Info.InstallFolder">Kurulum klasörü</sys:String>
+    <sys:String x:Key="Detail.Info.Launch">Başlatma</sys:String>
+    <sys:String x:Key="Detail.Info.NotSet">Ayarlanmadı</sys:String>
+    <sys:String x:Key="Detail.Info.Through">{0} üzerinden</sys:String>
+    <sys:String x:Key="Detail.Info.WindowsApp">Windows uygulaması (Xbox / Microsoft Store)</sys:String>
+    <sys:String x:Key="Detail.LastPlayed">Son oynanma</sys:String>
+    <sys:String x:Key="Detail.LetTheOptionalBackgroundTracker">İsteğe bağlı arka plan izleyicisi, bu oyun Arclight dışında başlatıldığında da süreyi saysın.</sys:String>
+    <sys:String x:Key="Detail.More">Diğer</sys:String>
+    <sys:String x:Key="Detail.NoSessionsRecordedYet">Henüz kaydedilmiş oturum yok.</sys:String>
+    <sys:String x:Key="Detail.Notes.AutoSave">Notlar otomatik kaydedilir</sys:String>
+    <sys:String x:Key="Detail.Notes.Editing">Düzenleniyor…</sys:String>
+    <sys:String x:Key="Detail.Notes.Saved">Kaydedildi: {0}</sys:String>
+    <sys:String x:Key="Detail.Notes.SavedNow">Az önce kaydedildi</sys:String>
+    <sys:String x:Key="Detail.NotInAnyCollectionYet">Henüz hiçbir koleksiyonda değil.</sys:String>
+    <sys:String x:Key="Detail.PersonalNotes">Kişisel notlar</sys:String>
+    <sys:String x:Key="Detail.PLAYINGNOW">ŞU AN OYNANIYOR</sys:String>
+    <sys:String x:Key="Detail.RecentSessions">Son oturumlar</sys:String>
+    <sys:String x:Key="Detail.RemoveFromThisCollection">Bu koleksiyondan çıkar</sys:String>
+    <sys:String x:Key="Detail.SessionDateFormat">d MMM yyyy, ddd</sys:String>
+    <sys:String x:Key="Detail.Sessions">Oturumlar</sys:String>
+    <sys:String x:Key="Detail.TotalPlaytime">Toplam oynama süresi</sys:String>
+    <sys:String x:Key="Detail.UseTagsLikeToFinish">Bitirilecek, Çok Oyunculu veya Rahatlatıcı gibi etiketler kullan — sonra kütüphaneni bunlara göre filtrele.</sys:String>
+    <sys:String x:Key="Detail.WhereYouLeftOffQuests">Nerede kaldığın, bitirilecek görevler, iyi çalışan ayarlar, kendi incelemen…</sys:String>
+    <sys:String x:Key="Detail.YourRating">Puanın</sys:String>
+
+    <!-- Dialog -->
+    <sys:String x:Key="Dialog.GotIt">Anladım</sys:String>
+    <sys:String x:Key="Dialog.OpenGitHub">GitHub'ı aç</sys:String>
+
+    <!-- Discover -->
+    <sys:String x:Key="Discover.BrowseMyLibrary">Kütüphaneme göz at</sys:String>
+    <sys:String x:Key="Discover.DiscoverIsOnItsWay">Keşfet yolda</sys:String>
+    <sys:String x:Key="Discover.DiscoverWillShowPopularAnd">Arclight lisanslı bir oyun verisi sağlayıcısına bağlandığında Keşfet; popüler ve yeni çıkan oyunları, türlere göre gezinmeyi ve kişisel bir istek listesini gösterecek. O zamana kadar bu sayfa bilerek boş kalıyor — Arclight örnek oyunları canlı mağaza verisiymiş gibi göstermez.</sys:String>
+    <sys:String x:Key="Discover.PlannedForAFutureVersion">Gelecek bir sürüm için planlandı</sys:String>
+
+    <!-- Editor -->
+    <sys:String x:Key="Editor.AllowedSteamComEpicgamesLauncher">İzin verilenler: steam://, com.epicgames.launcher://, goggalaxy://, uplay://, origin2://, link2ea://, battlenet://, itchio:// ve Windows uygulama kimlikleri. Steam için yukarıya App ID yazarsan bu alan kendiliğinden dolar.</sys:String>
+    <sys:String x:Key="Editor.AnythingYouWantToRemember">Bu oyunla ilgili hatırlamak istediğin her şey</sys:String>
+    <sys:String x:Key="Editor.ARTWORK">GÖRSELLER</sys:String>
+    <sys:String x:Key="Editor.BackgroundWide">Arka plan (geniş)</sys:String>
+    <sys:String x:Key="Editor.Browse">Gözat…</sys:String>
+    <sys:String x:Key="Editor.CGamesMyGameGameExe">C:\Oyunlar\Oyunum\Oyun.exe</sys:String>
+    <sys:String x:Key="Editor.Choose">Seç…</sys:String>
+    <sys:String x:Key="Editor.Cover34">Kapak (3:4)</sys:String>
+    <sys:String x:Key="Editor.CToolsModLauncherExe">C:\Araçlar\ModLauncher.exe</sys:String>
+    <sys:String x:Key="Editor.CustomCommand">Özel komut</sys:String>
+    <sys:String x:Key="Editor.Description">Açıklama</sys:String>
+    <sys:String x:Key="Editor.DETAILS">AYRINTILAR</sys:String>
+    <sys:String x:Key="Editor.Developer">Geliştirici</sys:String>
+    <sys:String x:Key="Editor.EGHollowKnight">ör. Hollow Knight</sys:String>
+    <sys:String x:Key="Editor.EGRPGAdventure">ör. RPG, Macera</sys:String>
+    <sys:String x:Key="Editor.Error.ExeMissing">Çalıştırılabilir dosya yok. Oyunun .exe dosyasını seçmek için Gözat'ı kullan.</sys:String>
+    <sys:String x:Key="Editor.Error.ReleaseYear">Çıkış yılı dört haneli bir yıl olmalı, örneğin 2020.</sys:String>
+    <sys:String x:Key="Editor.ExecutableExe">Çalıştırılabilir dosya (.exe)</sys:String>
+    <sys:String x:Key="Editor.ExecutablePath">Çalıştırılabilir dosya yolu</sys:String>
+    <sys:String x:Key="Editor.FilledInFromTheExecutable">Çalıştırılabilir dosyadan doldurulur</sys:String>
+    <sys:String x:Key="Editor.GAME">OYUN</sys:String>
+    <sys:String x:Key="Editor.GameName">Oyun adı *</sys:String>
+    <sys:String x:Key="Editor.Genre">Tür</sys:String>
+    <sys:String x:Key="Editor.HOWTOSTARTIT">NASIL BAŞLATILIR</sys:String>
+    <sys:String x:Key="Editor.InstalledOnThisPC">Bu bilgisayarda yüklü</sys:String>
+    <sys:String x:Key="Editor.InstallFolderUsedForPlaytime">Kurulum klasörü (oynama süresi takibi için kullanılır)</sys:String>
+    <sys:String x:Key="Editor.LaunchArgumentsOptional">Başlatma parametreleri (isteğe bağlı)</sys:String>
+    <sys:String x:Key="Editor.LauncherLink">Başlatıcı bağlantısı</sys:String>
+    <sys:String x:Key="Editor.LaunchSettingsAreCheckedBefore">Başlatma ayarları kaydetmeden önce kontrol edilir. Arclight hiçbir oyunu kendiliğinden yönetici olarak çalıştırmaz.</sys:String>
+    <sys:String x:Key="Editor.Notes">Notlar</sys:String>
+    <sys:String x:Key="Editor.Pick.Background">Bir arka plan görseli seç (geniş görseller en iyi sonucu verir)</sys:String>
+    <sys:String x:Key="Editor.Pick.Cover">Bir kapak görseli seç (dikey görseller en iyi sonucu verir)</sys:String>
+    <sys:String x:Key="Editor.Pick.InstallFolder">Oyunun kurulum klasörünü seç</sys:String>
+    <sys:String x:Key="Editor.PicturesAreCopiedIntoArclights">Görseller Arclight'ın klasörüne kopyalanır; orijinallerini taşısan da bozulmazlar.</sys:String>
+    <sys:String x:Key="Editor.Platform">Platform</sys:String>
+    <sys:String x:Key="Editor.Platform.Other">Diğer başlatıcı</sys:String>
+    <sys:String x:Key="Editor.Platform.Pc">PC (bağımsız)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Epic">Epic kimliği — namespace:item:app (isteğe bağlı)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Gog">GOG ürün kimliği (isteğe bağlı)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Other">Platform kimliği (isteğe bağlı)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Steam">Steam App ID (isteğe bağlı)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Ubisoft">Ubisoft kurulum kimliği (isteğe bağlı)</sys:String>
+    <sys:String x:Key="Editor.PlatformId.Xbox">Paket aile adı (isteğe bağlı)</sys:String>
+    <sys:String x:Key="Editor.ProgramToRun">Çalıştırılacak program</sys:String>
+    <sys:String x:Key="Editor.Publisher">Yayıncı</sys:String>
+    <sys:String x:Key="Editor.ReleaseYear">Çıkış yılı</sys:String>
+    <sys:String x:Key="Editor.Save.Add">Kütüphaneye ekle</sys:String>
+    <sys:String x:Key="Editor.Save.Edit">Değişiklikleri kaydet</sys:String>
+    <sys:String x:Key="Editor.SteamRungameid730">steam://rungameid/730</sys:String>
+    <sys:String x:Key="Editor.TheProgramIsStartedDirectly">Program aşağıdaki parametrelerle doğrudan başlatılır — asla bir komut kabuğu üzerinden değil.</sys:String>
+    <sys:String x:Key="Editor.Title.Add">Oyun Ekle</sys:String>
+    <sys:String x:Key="Editor.Title.Edit">{0} düzenle</sys:String>
+    <sys:String x:Key="Editor.WindowedSkipintro">-windowed -skipintro</sys:String>
+
+    <!-- Error -->
+    <sys:String x:Key="Error.Unexpected">Bir şeyler ters gitti</sys:String>
+
+    <!-- FirstRun -->
+    <sys:String x:Key="FirstRun.Backlog.Description">Sırasını bekleyen oyunlar.</sys:String>
+    <sys:String x:Key="FirstRun.Backlog.Name">Sıradakiler</sys:String>
+    <sys:String x:Key="FirstRun.Completed.Description">Bitirdiğin oyunlar.</sys:String>
+    <sys:String x:Key="FirstRun.Completed.Name">Bitirilenler</sys:String>
+    <sys:String x:Key="FirstRun.Playing.Description">Ortasında olduğun oyunlar.</sys:String>
+    <sys:String x:Key="FirstRun.Playing.Name">Şu An Oynananlar</sys:String>
+
+    <!-- Format -->
+    <sys:String x:Key="Format.DaysAgo">{0} gün önce</sys:String>
+    <sys:String x:Key="Format.Hours">{0} sa</sys:String>
+    <sys:String x:Key="Format.HoursAgo">{0} sa önce</sys:String>
+    <sys:String x:Key="Format.HoursMinutes">{0} sa {1} dk</sys:String>
+    <sys:String x:Key="Format.JustNow">Az önce</sys:String>
+    <sys:String x:Key="Format.LessThanMinute">&lt; 1 dk</sys:String>
+    <sys:String x:Key="Format.LongDate">d MMM yyyy</sys:String>
+    <sys:String x:Key="Format.LongDateTime">d MMM yyyy HH:mm</sys:String>
+    <sys:String x:Key="Format.Minutes">{0} dk</sys:String>
+    <sys:String x:Key="Format.MinutesAgo">{0} dk önce</sys:String>
+    <sys:String x:Key="Format.NeverPlayed">Hiç oynanmadı</sys:String>
+    <sys:String x:Key="Format.NoPlaytime">0 saat takip edildi</sys:String>
+    <sys:String x:Key="Format.NotPlayed">Oynanmadı</sys:String>
+    <sys:String x:Key="Format.ShortDate">d MMM</sys:String>
+    <sys:String x:Key="Format.WeekAgo">1 hafta önce</sys:String>
+    <sys:String x:Key="Format.WeeksAgo">{0} hafta önce</sys:String>
+    <sys:String x:Key="Format.Yesterday">Dün</sys:String>
+
+    <!-- Game -->
+    <sys:String x:Key="Game.AddToANewCollection">Yeni bir koleksiyona ekle…</sys:String>
+    <sys:String x:Key="Game.AddToFavorites">Favorilere ekle</sys:String>
+    <sys:String x:Key="Game.Edit">Düzenle…</sys:String>
+    <sys:String x:Key="Game.FeatureOnHome">Ana Sayfa'da öne çıkar</sys:String>
+    <sys:String x:Key="Game.Installed">Yüklü</sys:String>
+    <sys:String x:Key="Game.LocateExecutable">Çalıştırılabilir dosyayı bul…</sys:String>
+    <sys:String x:Key="Game.NotInstalled">Yüklü değil</sys:String>
+    <sys:String x:Key="Game.OpenInstallFolder">Kurulum klasörünü aç</sys:String>
+    <sys:String x:Key="Game.Playing">Oynanıyor</sys:String>
+    <sys:String x:Key="Game.RemoveFromFavorites">Favorilerden kaldır</sys:String>
+    <sys:String x:Key="Game.RemoveFromLibrary">Kütüphaneden kaldır</sys:String>
+    <sys:String x:Key="Game.ViewDetails">Ayrıntıları gör</sys:String>
+
+    <!-- Grid -->
+    <sys:String x:Key="Grid.ADDED">EKLENME</sys:String>
+    <sys:String x:Key="Grid.LASTPLAYED">SON OYNANMA</sys:String>
+    <sys:String x:Key="Grid.NAME">AD</sys:String>
+    <sys:String x:Key="Grid.PLATFORM">PLATFORM</sys:String>
+    <sys:String x:Key="Grid.PLAYTIME">OYNAMA SÜRESİ</sys:String>
+    <sys:String x:Key="Grid.STATUS">DURUM</sys:String>
+
+    <!-- Home -->
+    <sys:String x:Key="Home.ArclightBringsYourSteamEpic">Arclight; Steam, Epic Games, GOG, Ubisoft Connect ve Xbox oyunlarını bir araya getirir. Yüklü oyunları bulmak için bilgisayarını tara ya da istediğin oyunu kendin ekle.</sys:String>
+    <sys:String x:Key="Home.Change">Değiştir</sys:String>
+    <sys:String x:Key="Home.ChooseAGame">Bir oyun seç</sys:String>
+    <sys:String x:Key="Home.ContinuePlaying">Oynamaya Devam Et</sys:String>
+    <sys:String x:Key="Home.DefaultName">Oyuncu</sys:String>
+    <sys:String x:Key="Home.FEATURED">ÖNE ÇIKAN</sys:String>
+    <sys:String x:Key="Home.GamesYouPlayFromArclight">Arclight'tan oynadığın oyunlar, içlerinde geçirdiğin süreyle birlikte burada görünür.</sys:String>
+    <sys:String x:Key="Home.Greeting.Afternoon">İyi günler, {0}</sys:String>
+    <sys:String x:Key="Home.Greeting.Evening">İyi akşamlar, {0}</sys:String>
+    <sys:String x:Key="Home.Greeting.Morning">Günaydın, {0}</sys:String>
+    <sys:String x:Key="Home.HeresYourGameUniverseToday">İşte bugünkü oyun evrenin.</sys:String>
+    <sys:String x:Key="Home.LearnMore">Daha Fazla Bilgi</sys:String>
+    <sys:String x:Key="Home.NewGamesWereFoundOn">yeni oyun bu bilgisayarda bulundu. Hangilerinin ekleneceğini seç.</sys:String>
+    <sys:String x:Key="Home.OpenLibrary">Kütüphaneyi aç</sys:String>
+    <sys:String x:Key="Home.PickFeatured.Confirm">Öne çıkar</sys:String>
+    <sys:String x:Key="Home.PickFeatured.Title">Öne çıkarılacak oyunu seç</sys:String>
+    <sys:String x:Key="Home.PickTheGameYouWant">Arclight her açıldığında ilk görmek istediğin oyunu seç. Herhangi bir oyuna sağ tıklayıp Ana Sayfa'da öne çıkar'ı da seçebilirsin.</sys:String>
+    <sys:String x:Key="Home.PutAFavoriteInThe">Bir favorini öne çıkar</sys:String>
+    <sys:String x:Key="Home.RecentlyAdded">Son Eklenenler</sys:String>
+    <sys:String x:Key="Home.Review">Gözden geçir</sys:String>
+    <sys:String x:Key="Home.ScrollLeft">Sola kaydır</sys:String>
+    <sys:String x:Key="Home.ScrollRight">Sağa kaydır</sys:String>
+    <sys:String x:Key="Home.SeeAll">Tümünü gör</sys:String>
+    <sys:String x:Key="Home.Tile.Installed">{0} yüklü</sys:String>
+    <sys:String x:Key="Home.Tile.MostPlayed">En Çok Oynanan</sys:String>
+    <sys:String x:Key="Home.Tile.NoSessionsYet">Henüz oturum yok</sys:String>
+    <sys:String x:Key="Home.Tile.PlayedThisWeek">Bu Hafta Oynanan</sys:String>
+    <sys:String x:Key="Home.Tile.PlayToSee">Burada görmek için bir oyun oyna</sys:String>
+    <sys:String x:Key="Home.Tile.TotalGames">Toplam Oyun</sys:String>
+    <sys:String x:Key="Home.Tile.TotalPlaytime">Toplam Süre</sys:String>
+    <sys:String x:Key="Home.Tile.TrackedByArclight">Arclight tarafından takip edildi</sys:String>
+    <sys:String x:Key="Home.ViewDetails">Ayrıntıları Gör</sys:String>
+    <sys:String x:Key="Home.YourGameLibraryStartsHere">Oyun kütüphanen burada başlıyor.</sys:String>
+
+    <!-- Language -->
+    <sys:String x:Key="Language.Auto">Windows dili</sys:String>
+    <sys:String x:Key="Language.English">English</sys:String>
+    <sys:String x:Key="Language.Turkish">Türkçe</sys:String>
+
+    <!-- Launch -->
+    <sys:String x:Key="Launch.AccessDenied.Message">Windows oyun dosyalarına erişimi engelledi. Klasör izinlerini veya antivirüs karantinasını kontrol et.</sys:String>
+    <sys:String x:Key="Launch.AccessDenied.Title">{0} için erişim reddedildi</sys:String>
+    <sys:String x:Key="Launch.Action.EditGame">Oyunu düzenle</sys:String>
+    <sys:String x:Key="Launch.Action.RunAsAdmin">Yönetici olarak çalıştır</sys:String>
+    <sys:String x:Key="Launch.Cancelled.Message">Yönetici izni reddedildiği için oyun başlatılmadı.</sys:String>
+    <sys:String x:Key="Launch.Cancelled.Title">Başlatma iptal edildi</sys:String>
+    <sys:String x:Key="Launch.ConfirmAdmin.Message">Oyun yönetici izni istiyor. Windows bir izin penceresi gösterecek. Yalnızca bu oyuna güveniyorsan devam et; Arclight'ın kendisi bu izne hiçbir zaman ihtiyaç duymaz.</sys:String>
+    <sys:String x:Key="Launch.ConfirmAdmin.Title">{0} yönetici olarak çalıştırılsın mı?</sys:String>
+    <sys:String x:Key="Launch.Elevation.Message">Bu oyun yönetici olarak çalışmak istiyor. Arclight kendiliğinden yetki yükseltmez; oyuna güveniyorsan Yönetici olarak çalıştır'ı seç.</sys:String>
+    <sys:String x:Key="Launch.Elevation.Title">{0} yönetici izni istiyor</sys:String>
+    <sys:String x:Key="Launch.ExeMissing.Message">"{0}" bulunamadı. Oyun güncellenmiş, taşınmış ya da kaldırılmış olabilir. Doğru dosyayı seçmek için Oyunu bul'u kullan.</sys:String>
+    <sys:String x:Key="Launch.ExeMissing.Title">{0} çalıştırılabilir dosyası bulunamadı</sys:String>
+    <sys:String x:Key="Launch.Failed.Title">{0} başlatılamadı</sys:String>
+    <sys:String x:Key="Launch.FolderMissing.Message">"{0}" oyun klasörü artık yok. Oyunu taşıdıysan yeni çalıştırılabilir dosyasını seçmek için Oyunu bul'u kullan.</sys:String>
+    <sys:String x:Key="Launch.FolderMissing.Title">{0} kaldırılmış görünüyor</sys:String>
+    <sys:String x:Key="Launch.Hint.Tracked">Oyun çalışmaya başlayınca oynama süresi takip edilecek.</sys:String>
+    <sys:String x:Key="Launch.Hint.TrackingOff">Oynama süresi takibi Ayarlar'da kapalı.</sys:String>
+    <sys:String x:Key="Launch.Hint.Untrackable">Arclight bu oyunun nereye kurulduğunu bilmediği için süresini takip edemiyor. Kurulum klasörünü Düzenle'den ayarla.</sys:String>
+    <sys:String x:Key="Launch.Invalid.Title">Başlatma ayarları kontrol edilmeli</sys:String>
+    <sys:String x:Key="Launch.LauncherMissing.Message">Bu bilgisayarda "{0}://" bağlantılarını açan bir uygulama yok. {1} uygulamasını yükle ya da onar ve tekrar dene.</sys:String>
+    <sys:String x:Key="Launch.LauncherMissing.Title">{0} kullanılamıyor</sys:String>
+    <sys:String x:Key="Launch.NoLauncherLink.Message">Arclight, {0} oyunları için bir başlatıcı açamıyor.</sys:String>
+    <sys:String x:Key="Launch.NoLauncherLink.Title">Başlatıcı bağlantısı yok</sys:String>
+    <sys:String x:Key="Launch.NotInstalled.Message">Önce {0} üzerinden yükle, sonra yeniden tara.</sys:String>
+    <sys:String x:Key="Launch.NotInstalled.Title">{0} yüklü değil</sys:String>
+    <sys:String x:Key="Launch.Starting">{0} başlatılıyor</sys:String>
+
+    <!-- Library -->
+    <sys:String x:Key="Library.AddGames">Oyun ekle</sys:String>
+    <sys:String x:Key="Library.AddGamesToThisCollection">Bu koleksiyona buradan ya da herhangi bir oyunun menüsünden oyun ekle.</sys:String>
+    <sys:String x:Key="Library.AllGames">Tüm Oyunlar</sys:String>
+    <sys:String x:Key="Library.ClearFilters">Filtreleri temizle</sys:String>
+    <sys:String x:Key="Library.COLLECTION">KOLEKSİYON</sys:String>
+    <sys:String x:Key="Library.CompactGrid">Sıkı ızgara</sys:String>
+    <sys:String x:Key="Library.DeleteCollection">Koleksiyonu sil</sys:String>
+    <sys:String x:Key="Library.EditCollection">Koleksiyonu düzenle</sys:String>
+    <sys:String x:Key="Library.Filter.Genre">Tür</sys:String>
+    <sys:String x:Key="Library.Filter.Platform">Platform</sys:String>
+    <sys:String x:Key="Library.Filter.Tags">Etiketler</sys:String>
+    <sys:String x:Key="Library.Grid">Izgara</sys:String>
+    <sys:String x:Key="Library.Installed">Yüklü</sys:String>
+    <sys:String x:Key="Library.List">Liste</sys:String>
+    <sys:String x:Key="Library.MarkGamesAsFavoritesWith">Oyunları kalp düğmesiyle favorilerine ekle, burada görünsünler.</sys:String>
+    <sys:String x:Key="Library.NeverPlayed">Hiç Oynanmamış</sys:String>
+    <sys:String x:Key="Library.NoMatchFilters">Bu filtrelere uyan oyun yok.</sys:String>
+    <sys:String x:Key="Library.NoMatchSearch">"{0}" ile eşleşen oyun yok.</sys:String>
+    <sys:String x:Key="Library.NothingHereYet">Burada henüz bir şey yok</sys:String>
+    <sys:String x:Key="Library.NotInstalled">Yüklü Değil</sys:String>
+    <sys:String x:Key="Library.PlayedInTheLast14">Son 14 günde oynananlar</sys:String>
+    <sys:String x:Key="Library.ScanYourPCForInstalled">Yüklü oyunlar için bilgisayarını tara ya da kendin bir oyun ekle.</sys:String>
+    <sys:String x:Key="Library.Showing">{1} oyundan {0} tanesi gösteriliyor</sys:String>
+    <sys:String x:Key="Library.Sort">Sırala</sys:String>
+    <sys:String x:Key="Library.TryADifferentSearchClear">Farklı bir arama dene, filtreleri temizle ya da oyun kütüphanende yoksa ekle.</sys:String>
+
+    <!-- Picker -->
+    <sys:String x:Key="Picker.AllFiles">Tüm dosyalar</sys:String>
+    <sys:String x:Key="Picker.Exe.Filter">Programlar ve kısayollar</sys:String>
+    <sys:String x:Key="Picker.Exe.Title">Oyunun çalıştırılabilir dosyasını seç</sys:String>
+    <sys:String x:Key="Picker.Image.Title">Bir görsel seç</sys:String>
+    <sys:String x:Key="Picker.Images">Görseller</sys:String>
+    <sys:String x:Key="Picker.SearchYourLibrary">Kütüphanende ara</sys:String>
+    <sys:String x:Key="Picker.ThereAreNoGamesTo">Henüz seçilebilecek bir oyun yok.</sys:String>
+
+    <!-- Platform -->
+    <sys:String x:Key="Platform.Other">Diğer</sys:String>
+    <sys:String x:Key="Platform.PC">PC</sys:String>
+
+    <!-- Rating -->
+    <sys:String x:Key="Rating.ToolTip">Kişisel puanın</sys:String>
+
+    <!-- Recent -->
+    <sys:String x:Key="Recent.DayFormat">d MMM, ddd</sys:String>
+    <sys:String x:Key="Recent.GoToMyLibrary">Kütüphaneme Git</sys:String>
+    <sys:String x:Key="Recent.LaunchAGameFromArclight">Arclight'tan bir oyun başlat; oturumlarıyla birlikte burada görünür. Başka yerden başlatılan oyunları da saymak için Ayarlar'dan arka plan izleyicisini aç.</sys:String>
+    <sys:String x:Key="Recent.NoCompletedSessionsYet">Henüz tamamlanmış oturum yok.</sys:String>
+    <sys:String x:Key="Recent.NothingPlayedYet">Henüz hiçbir şey oynanmadı</sys:String>
+    <sys:String x:Key="Recent.OnlyVerifiedTimeIsListed">Yalnızca doğrulanmış süre listelenir.</sys:String>
+    <sys:String x:Key="Recent.RemovedGame">Kaldırılmış oyun</sys:String>
+    <sys:String x:Key="Recent.SessionHistory">Oturum geçmişi</sys:String>
+    <sys:String x:Key="Recent.Today">Bugün</sys:String>
+    <sys:String x:Key="Recent.YourLatestGamesAndEvery">Son oyunların ve Arclight'ın doğruladığı her oturum.</sys:String>
+
+    <!-- Remove -->
+    <sys:String x:Key="Remove.DontSuggestAgain">Taramalarda tekrar önerme</sys:String>
+    <sys:String x:Key="Remove.Message">Yalnızca Arclight'taki kaydı silinir; notları, etiketleri ve oynama geçmişi de buna dahil. Oyun dosyaları bilgisayarında kalır, hiçbir şey kaldırılmaz.</sys:String>
+    <sys:String x:Key="Remove.Title">{0} kütüphaneden kaldırılsın mı?</sys:String>
+
+    <!-- Scan -->
+    <sys:String x:Key="Scan.AddSelected">Seçilenleri ekle (</sys:String>
+    <sys:String x:Key="Scan.Done">Bitti</sys:String>
+    <sys:String x:Key="Scan.DontSuggestTheseAgain">Bunları tekrar önerme</sys:String>
+    <sys:String x:Key="Scan.Empty.Hidden">Gizlenen oyun yok. Kaldırdığın oyunları sonraki taramalarda gizleyebilirsin.</sys:String>
+    <sys:String x:Key="Scan.Empty.InLibrary">Algılanan oyunların hiçbiri henüz kütüphanende değil.</sys:String>
+    <sys:String x:Key="Scan.Empty.New">Yeni oyun bulunamadı. Algılanan her şey zaten kütüphanende.</sys:String>
+    <sys:String x:Key="Scan.Error.Unsupported">{0} oyunları için otomatik algılama henüz yok. Onları "Oyun Ekle" ile ekle.</sys:String>
+    <sys:String x:Key="Scan.Header.Reading">Bu bilgisayardaki başlatıcı kayıtları okunuyor…</sys:String>
+    <sys:String x:Key="Scan.Header.Ready">Taramaya hazır</sys:String>
+    <sys:String x:Key="Scan.Header.Summary">{0} bulundu · {1} yeni · {2} zaten kütüphanende</sys:String>
+    <sys:String x:Key="Scan.Hidden" xml:space="preserve">Gizli </sys:String>
+    <sys:String x:Key="Scan.HideSelected">Seçilenleri gizle</sys:String>
+    <sys:String x:Key="Scan.InLibrary" xml:space="preserve">Kütüphanede </sys:String>
+    <sys:String x:Key="Scan.Match.Executable">Eşleşme: aynı çalıştırılabilir dosya</sys:String>
+    <sys:String x:Key="Scan.Match.Folder">Eşleşme: aynı kurulum klasörü</sys:String>
+    <sys:String x:Key="Scan.Match.Other">Eşleşme: {0}</sys:String>
+    <sys:String x:Key="Scan.Match.PlatformId">Eşleşme: aynı platform kimliği</sys:String>
+    <sys:String x:Key="Scan.New" xml:space="preserve">Yeni </sys:String>
+    <sys:String x:Key="Scan.None">Hiçbiri</sys:String>
+    <sys:String x:Key="Scan.Note.NotAGame">Muhtemelen oyun değil (araç, çalışma zamanı veya başlatıcı)</sys:String>
+    <sys:String x:Key="Scan.Note.NotFullyInstalled">Tam olarak yüklenmemiş</sys:String>
+    <sys:String x:Key="Scan.Note.SuggestedExe">Önerilen çalıştırılabilir dosya: {0}</sys:String>
+    <sys:String x:Key="Scan.OnlyLauncherRecordsAreRead">Yalnızca başlatıcı kayıtları okunur. Hiçbir şey yüklenmez, taşınmaz veya değiştirilmez.</sys:String>
+    <sys:String x:Key="Scan.PLATFORMS">PLATFORMLAR</sys:String>
+    <sys:String x:Key="Scan.ScanAgain">Yeniden tara</sys:String>
+    <sys:String x:Key="Scan.SomeItemsWereSkipped">Bazı öğeler atlandı</sys:String>
+    <sys:String x:Key="Scan.Status.AddManually">Oyunları elle ekle</sys:String>
+    <sys:String x:Key="Scan.Status.Failed">Başarısız</sys:String>
+    <sys:String x:Key="Scan.Status.NoFolders">Klasör ayarlanmadı</sys:String>
+    <sys:String x:Key="Scan.Status.Skipped">{0} atlandı</sys:String>
+    <sys:String x:Key="Scan.Status.TurnedOff">Kapalı</sys:String>
+    <sys:String x:Key="Scan.Status.Waiting">Bekliyor</sys:String>
+    <sys:String x:Key="Scan.Toast.Added.Message">Görseller arka planda yükleniyor.</sys:String>
+    <sys:String x:Key="Scan.Toast.Added.Title">Kütüphanene {0} eklendi</sys:String>
+    <sys:String x:Key="Scan.Toast.AddFailed">Bazı oyunlar eklenemedi</sys:String>
+    <sys:String x:Key="Scan.Toast.AutoAdded.Message">Ayarlarda otomatik ekleme açık.</sys:String>
+    <sys:String x:Key="Scan.Toast.AutoAdded.Title">{0} eklendi</sys:String>
+
+    <!-- Scanner -->
+    <sys:String x:Key="Scanner.Folders">Oyun klasörleri</sys:String>
+
+    <!-- Session -->
+    <sys:String x:Key="Session.Source.Arclight">Arclight'tan başlatıldı</sys:String>
+    <sys:String x:Key="Session.Source.Watcher">Arka plan izleyicisi</sys:String>
+
+    <!-- Settings -->
+    <sys:String x:Key="Settings.AccentColor">Vurgu rengi</sys:String>
+    <sys:String x:Key="Settings.Add">Ekle</sys:String>
+    <sys:String x:Key="Settings.AddFolder">Klasör ekle</sys:String>
+    <sys:String x:Key="Settings.AddNewGamesAutomatically">Yeni oyunları otomatik ekle</sys:String>
+    <sys:String x:Key="Settings.AddsArclightToYourUsers">Arclight'ı kullanıcı hesabının başlangıç programlarına ekler (yönetici hakları gerekmez).</sys:String>
+    <sys:String x:Key="Settings.AlsoChangesWhenYouSwitch">Kütüphanede görünüm değiştirdiğinde bu da değişir.</sys:String>
+    <sys:String x:Key="Settings.AlsoCountsTheGamesBelow">Aşağıdaki oyunları Steam'den, Epic'ten veya bir masaüstü kısayolundan başlattığında da sayar. Arclight açıkken (veya tepsideyken) çalışır.</sys:String>
+    <sys:String x:Key="Settings.Appearance">Görünüm</sys:String>
+    <sys:String x:Key="Settings.ArclightIsCurrentlyAvailableIn">Windows dili seçeneği, Windows'un görüntüleme dilini izler. Değişiklik hemen uygulanır.</sys:String>
+    <sys:String x:Key="Settings.ArclightIsOpenSourceSoftware">Arclight, MIT Lisansı ile yayımlanan açık kaynaklı bir yazılımdır. Oyun adları, görselleri ve ticari markaları ilgili sahiplerine aittir; Arclight'ın Valve, Epic Games, Microsoft, CD PROJEKT, Ubisoft veya Electronic Arts ile hiçbir bağlantısı yoktur.</sys:String>
+    <sys:String x:Key="Settings.ArtworkCopiedFromLaunchersOr" xml:space="preserve">Başlatıcılardan kopyalanan veya indirilen görseller: </sys:String>
+    <sys:String x:Key="Settings.AsksGitHubForTheLatest">En son sürümü GitHub'a sorar. Varsayılan olarak kapalıdır — bunu açmadıkça veya Güncellemeleri kontrol et'e basmadıkça hiçbir istek yapılmaz.</sys:String>
+    <sys:String x:Key="Settings.BackgroundTracker">Arka plan izleyicisi</sys:String>
+    <sys:String x:Key="Settings.CardSize">Kart boyutu</sys:String>
+    <sys:String x:Key="Settings.CheckForUpdates">Güncellemeleri kontrol et</sys:String>
+    <sys:String x:Key="Settings.CheckForUpdatesOnStartup">Başlangıçta güncellemeleri kontrol et</sys:String>
+    <sys:String x:Key="Settings.ClearApplicationLogs">Uygulama günlüklerini temizle</sys:String>
+    <sys:String x:Key="Settings.ClearCache">Önbelleği temizle</sys:String>
+    <sys:String x:Key="Settings.ClearCache.Message">İndirilen ve kopyalanan görseller silinir. Kendi seçtiğin görseller korunur. Arclight bir sonraki taramada görselleri yeniden alır.</sys:String>
+    <sys:String x:Key="Settings.ClearCache.Title">Görsel önbelleği temizlensin mi?</sys:String>
+    <sys:String x:Key="Settings.ClearHistory">Geçmişi temizle</sys:String>
+    <sys:String x:Key="Settings.ClearHistory.Message">Bu işlem tek tek oturumların listesini (ne zaman oynadığını) siler. Her oyunun toplam süresi korunur ama haftalık, aylık ve günlük grafikler sıfırdan başlar.</sys:String>
+    <sys:String x:Key="Settings.ClearHistory.Title">Oynama geçmişi temizlensin mi?</sys:String>
+    <sys:String x:Key="Settings.ClearLogs">Günlükleri temizle</sys:String>
+    <sys:String x:Key="Settings.ClearPlayHistory">Oynama geçmişini temizle</sys:String>
+    <sys:String x:Key="Settings.CloseToTray">Tepsiye kapat</sys:String>
+    <sys:String x:Key="Settings.ClosingTheWindowKeepsArclight">Pencereyi kapatınca Arclight bildirim alanında çalışmaya devam eder; böylece arka plan izleyicisi oynama süresini saymayı sürdürebilir.</sys:String>
+    <sys:String x:Key="Settings.CountsTimeWhileAGame">Arclight'tan başlatılan bir oyun çalışırken süreyi sayar. Yalnızca doğrulanmış oturumlar süre ekler.</sys:String>
+    <sys:String x:Key="Settings.DefaultSort">Varsayılan sıralama</sys:String>
+    <sys:String x:Key="Settings.DefaultView">Varsayılan görünüm</sys:String>
+    <sys:String x:Key="Settings.DeletesAllSessionsAndSets">Tüm oturumları siler ve her oyunun oynama süresini sıfırlar.</sys:String>
+    <sys:String x:Key="Settings.DeletesTheListOfIndividual">Tek tek oturumların listesini siler. Oyun başına toplam oynama süresi korunur.</sys:String>
+    <sys:String x:Key="Settings.Density.Comfortable">Rahat</sys:String>
+    <sys:String x:Key="Settings.Density.Compact">Sıkı</sys:String>
+    <sys:String x:Key="Settings.DETECTION">ALGILAMA</sys:String>
+    <sys:String x:Key="Settings.DownloadMissingArtwork">Eksik görselleri indir</sys:String>
+    <sys:String x:Key="Settings.DUPLICATESANDHIDDENGAMES">YİNELENEN VE GİZLENEN OYUNLAR</sys:String>
+    <sys:String x:Key="Settings.EXCLUDEDPROCESSES">HARİÇ TUTULAN SÜREÇLER</sys:String>
+    <sys:String x:Key="Settings.ExperimentalScannersReadUndocumentedLauncher">Deneysel tarayıcılar belgelenmemiş başlatıcı verilerini okur ve bazı oyunları kaçırabilir. Algılanmayan her şey elle eklenebilir.</sys:String>
+    <sys:String x:Key="Settings.Export">Dışa aktar…</sys:String>
+    <sys:String x:Key="Settings.Export.DialogTitle">Arclight verilerini dışa aktar</sys:String>
+    <sys:String x:Key="Settings.Export.Filter">JSON dosyası (*.json)|*.json</sys:String>
+    <sys:String x:Key="Settings.ExportMyData">Verilerimi dışa aktar</sys:String>
+    <sys:String x:Key="Settings.ExtraSteamLibraryFolders">Ek Steam kütüphane klasörleri</sys:String>
+    <sys:String x:Key="Settings.FetchesCoverArtFromSteams">Diskte görseli olmayan Steam oyunları için kapak görsellerini Steam'in herkese açık görsel sunucusundan alır. Görseller önbelleğe alınır ve bir daha indirilmez. Tamamen çevrimdışı kalmak için kapat.</sys:String>
+    <sys:String x:Key="Settings.FilterGames">Oyunları filtrele…</sys:String>
+    <sys:String x:Key="Settings.ForDRMFreeAndStandalone">DRM'siz ve bağımsız oyunlar için: her alt klasör, en olası çalıştırılabilir dosyasıyla birlikte oyun olarak önerilir. Her birini tarama penceresinde sen onaylarsın.</sys:String>
+    <sys:String x:Key="Settings.GameFolders">Oyun klasörleri</sys:String>
+    <sys:String x:Key="Settings.GamesNotesTagsCollectionsSettings">Oyunlar, notlar, etiketler, koleksiyonlar, ayarlar ve oynama süreleri yerel bir SQLite veritabanında saklanır. Arclight'ın hesap sistemi yoktur ve kütüphaneni asla bir yere yüklemez. Ağ istekleri, eksik Steam görsellerinin indirilmesi (kapatılabilir) ve istediğinde GitHub'da güncelleme kontrolüyle sınırlıdır.</sys:String>
+    <sys:String x:Key="Settings.GAMESTHEBACKGROUNDTRACKERMAY">ARKA PLAN İZLEYİCİSİNİN SAYABİLECEĞİ OYUNLAR</sys:String>
+    <sys:String x:Key="Settings.General">Genel</sys:String>
+    <sys:String x:Key="Settings.GitHubRepository">GitHub deposu</sys:String>
+    <sys:String x:Key="Settings.GridDensity">Izgara yoğunluğu</sys:String>
+    <sys:String x:Key="Settings.HowArclightWorks">Arclight nasıl çalışır</sys:String>
+    <sys:String x:Key="Settings.HowTheLibraryIsOrdered">Kütüphanenin nasıl sıralanacağı.</sys:String>
+    <sys:String x:Key="Settings.IfALauncherNoLonger">Bir başlatıcı artık bir oyunu listelemiyorsa oyunu silmek yerine Yüklü değil olarak göster.</sys:String>
+    <sys:String x:Key="Settings.ImageCache">Görsel önbelleği</sys:String>
+    <sys:String x:Key="Settings.ImagesYouPickedYourselfAre">. Kendi seçtiğin görseller asla silinmez.</sys:String>
+    <sys:String x:Key="Settings.Language">Dil</sys:String>
+    <sys:String x:Key="Settings.LaunchArclightWhenWindowsStarts">Windows başladığında Arclight'ı aç</sys:String>
+    <sys:String x:Key="Settings.Library">Kütüphane</sys:String>
+    <sys:String x:Key="Settings.License">Lisans</sys:String>
+    <sys:String x:Key="Settings.LogsHelpDiagnoseProblemsAnd">Günlükler sorunları teşhis etmeye yardımcı olur ve 14 gün saklanır. Bu bilgisayardan asla çıkmaz.</sys:String>
+    <sys:String x:Key="Settings.MarkUninstalledGames">Kaldırılan oyunları işaretle</sys:String>
+    <sys:String x:Key="Settings.ModmanagerExe">modmanager.exe</sys:String>
+    <sys:String x:Key="Settings.NoHiddenGames">Gizlenen oyun yok.</sys:String>
+    <sys:String x:Key="Settings.OLEDBlackUsesPureBlack">OLED siyah, tamamen siyah arka planlar kullanır.</sys:String>
+    <sys:String x:Key="Settings.OnlyNeededIfASteam">Yalnızca bir Steam kütüphanesi Steam'in kendi ayarlarında listelenmiyorsa gerekir.</sys:String>
+    <sys:String x:Key="Settings.OpenFolder">Klasörü aç</sys:String>
+    <sys:String x:Key="Settings.OpenInTheTaskbarOr">Pencereyi göstermek yerine görev çubuğunda (Tepsiye kapat açıksa bildirim alanında) açılır.</sys:String>
+    <sys:String x:Key="Settings.OpenReleasePage">Sürüm sayfasını aç</sys:String>
+    <sys:String x:Key="Settings.Pick.GameFolder">Oyun klasörlerini içeren bir klasör seç</sys:String>
+    <sys:String x:Key="Settings.Pick.SteamFolder">Bir Steam kütüphane klasörü seç ("steamapps" klasörünü içeren)</sys:String>
+    <sys:String x:Key="Settings.PlatformsToScan">Taranacak platformlar</sys:String>
+    <sys:String x:Key="Settings.Player">Oyuncu</sys:String>
+    <sys:String x:Key="Settings.Privacy">Gizlilik</sys:String>
+    <sys:String x:Key="Settings.ProgramsInsideAGamesFolder">Bir oyunun klasöründe olup asla oynama sayılmaması gereken programlar — örneğin bir mod yöneticisi. Joker karakterler çalışır: *helper*. Başlatıcılar, çökme raporlayıcıları, yükleyiciler ve hile önleyici yardımcılar zaten hariç tutulur.</sys:String>
+    <sys:String x:Key="Settings.ReadsLauncherInstallRecordsOnly">Yalnızca başlatıcıların kurulum kayıtlarını okur — Arclight asla tüm diskini taramaz.</sys:String>
+    <sys:String x:Key="Settings.ReduceAnimations">Animasyonları azalt</sys:String>
+    <sys:String x:Key="Settings.Repository">Depo</sys:String>
+    <sys:String x:Key="Settings.Reset">Sıfırla</sys:String>
+    <sys:String x:Key="Settings.ResetStatistics">İstatistikleri sıfırla</sys:String>
+    <sys:String x:Key="Settings.ResetStats.Message">Bu işlem kayıtlı tüm oyun oturumlarını siler ve tüm oyunların oynama süresini, oturum sayısını ve son oynanma tarihini sıfırlar. Oyunların, notların ve koleksiyonların korunur.</sys:String>
+    <sys:String x:Key="Settings.ResetStats.Title">Tüm istatistikler sıfırlansın mı?</sys:String>
+    <sys:String x:Key="Settings.SavesEverythingArclightKnowsAbout">Arclight'ın kütüphanen hakkında bildiği her şeyi okunabilir bir JSON dosyasına kaydeder.</sys:String>
+    <sys:String x:Key="Settings.ScanLaunchersWhenArclightStarts">Arclight açılınca başlatıcıları tara</sys:String>
+    <sys:String x:Key="Settings.ScanNow">Şimdi tara</sys:String>
+    <sys:String x:Key="Settings.ScansNeverAddAGame">Taramalar bir oyunu asla iki kez eklemez: oyunlar önce platform kimliğine, sonra çalıştırılabilir dosyaya, sonra kurulum klasörüne göre eşleştirilir. “Taramalarda tekrar önerme” ile kaldırdığın oyunlar burada listelenir.</sys:String>
+    <sys:String x:Key="Settings.SelectNone">Hiçbirini seçme</sys:String>
+    <sys:String x:Key="Settings.Size.Large">Büyük</sys:String>
+    <sys:String x:Key="Settings.Size.Medium">Orta</sys:String>
+    <sys:String x:Key="Settings.Size.Small">Küçük</sys:String>
+    <sys:String x:Key="Settings.SizeOfGameCoversIn">Izgaradaki oyun kapaklarının boyutu.</sys:String>
+    <sys:String x:Key="Settings.SpaceBetweenCards">Kartlar arasındaki boşluk.</sys:String>
+    <sys:String x:Key="Settings.StartMinimized">Simge durumunda başlat</sys:String>
+    <sys:String x:Key="Settings.StartPage">Başlangıç sayfası</sys:String>
+    <sys:String x:Key="Settings.STARTUP">BAŞLANGIÇ</sys:String>
+    <sys:String x:Key="Settings.Storage.Portable">Taşınabilir mod: veriler Arclight.exe'nin yanında saklanır.</sys:String>
+    <sys:String x:Key="Settings.Storage.Profile">Windows kullanıcı profilinde saklanır.</sys:String>
+    <sys:String x:Key="Settings.SuggestAgain">Yeniden öner</sys:String>
+    <sys:String x:Key="Settings.Theme">Tema</sys:String>
+    <sys:String x:Key="Settings.Theme.Dark">Koyu</sys:String>
+    <sys:String x:Key="Settings.Theme.Oled">OLED siyah</sys:String>
+    <sys:String x:Key="Settings.ThePageArclightOpensOn">Arclight'ın açıldığı sayfa.</sys:String>
+    <sys:String x:Key="Settings.Toast.CacheCleared.Message">Görselleri yeniden indirmek için bir tarama yap.</sys:String>
+    <sys:String x:Key="Settings.Toast.CacheCleared.Title">Görsel önbelleği temizlendi</sys:String>
+    <sys:String x:Key="Settings.Toast.Exported">Veriler dışa aktarıldı</sys:String>
+    <sys:String x:Key="Settings.Toast.ExportFailed">Dışa aktarma başarısız</sys:String>
+    <sys:String x:Key="Settings.Toast.FolderTooBroad.Message">Tüm sürücüyü taramak yavaş olur. Oyunlarının kurulu olduğu klasörü seç.</sys:String>
+    <sys:String x:Key="Settings.Toast.FolderTooBroad.Title">Daha belirli bir klasör seç</sys:String>
+    <sys:String x:Key="Settings.Toast.HistoryCleared">Oynama geçmişi temizlendi</sys:String>
+    <sys:String x:Key="Settings.Toast.LogsCleared.Message">{0} silindi. Bugünün günlüğü Arclight yeniden başlayana kadar tutulur.</sys:String>
+    <sys:String x:Key="Settings.Toast.LogsCleared.Title">Uygulama günlükleri temizlendi</sys:String>
+    <sys:String x:Key="Settings.Toast.ProcessName.Message">Örneğin "modmanager.exe" veya "*helper*".</sys:String>
+    <sys:String x:Key="Settings.Toast.ProcessName.Title">Bir süreç adı gir</sys:String>
+    <sys:String x:Key="Settings.Toast.ShowFile">Dosyayı göster</sys:String>
+    <sys:String x:Key="Settings.Toast.StartupFailed">Başlangıç ayarı değiştirilemedi</sys:String>
+    <sys:String x:Key="Settings.Toast.StatsReset.Message">Oynama süresi sıfırdan başlıyor.</sys:String>
+    <sys:String x:Key="Settings.Toast.StatsReset.Title">İstatistikler sıfırlandı</sys:String>
+    <sys:String x:Key="Settings.Toast.Unhidden.Message">Eklemek için bir tarama yap.</sys:String>
+    <sys:String x:Key="Settings.Toast.Unhidden.Title">{0} yeniden önerilecek</sys:String>
+    <sys:String x:Key="Settings.Tracked.Unknown">Kurulum klasörü bilinmiyor; takip edilemez</sys:String>
+    <sys:String x:Key="Settings.Tracking">Takip</sys:String>
+    <sys:String x:Key="Settings.TrackPlaytime">Oynama süresini takip et</sys:String>
+    <sys:String x:Key="Settings.TurnsOffHoverLiftsPage">Üzerine gelince kalkma efektlerini, sayfa geçişlerini ve görsel geçişlerini kapatır.</sys:String>
+    <sys:String x:Key="Settings.Update.Checking">GitHub kontrol ediliyor…</sys:String>
+    <sys:String x:Key="Settings.UsedForSelectionsProgressAnd">Seçimler, ilerleme göstergeleri ve birincil düğmeler için kullanılır.</sys:String>
+    <sys:String x:Key="Settings.UsedInTheHomeGreeting">Ana Sayfa'daki selamlamada kullanılır. İstersen Oyuncu olarak bırakabilirsin.</sys:String>
+    <sys:String x:Key="Settings.Version" xml:space="preserve">Sürüm </sys:String>
+    <sys:String x:Key="Settings.WhatTheTrackerReadsThe">İzleyicinin okudukları: kütüphanendeki bir oyunun çalışıp çalışmadığını görmek için birkaç saniyede bir, çalışan programların adları ve dosya yolları. Tuş vuruşlarını, ekran içeriğini, pencere başlıklarını ya da diğer programlarla ilgili hiçbir şeyi kaydetmez ve hiçbir şey bilgisayarından dışarı çıkmaz.</sys:String>
+    <sys:String x:Key="Settings.WhenOffNewGamesAre">Kapalıyken yeni oyunlar önerilir ve neyin ekleneceğini sen seçersin. Araçlar ve klasör taraması önerileri asla otomatik eklenmez.</sys:String>
+    <sys:String x:Key="Settings.YourGamesOneUniverse" xml:space="preserve"> · Your Games. One Universe.</sys:String>
+    <sys:String x:Key="Settings.YourLibraryStaysOnThis">Kütüphanen bu bilgisayarda kalır</sys:String>
+    <sys:String x:Key="Settings.YourName">Adın</sys:String>
+
+    <!-- Shell -->
+    <sys:String x:Key="Shell.AddAGameManuallyCtrl">Elle oyun ekle (Ctrl+N)</sys:String>
+    <sys:String x:Key="Shell.AddGame">Oyun Ekle</sys:String>
+    <sys:String x:Key="Shell.BackAltLeft">Geri (Alt+Sol)</sys:String>
+    <sys:String x:Key="Shell.ClearAll">Tümünü temizle</sys:String>
+    <sys:String x:Key="Shell.Close">Kapat</sys:String>
+    <sys:String x:Key="Shell.Discover">Keşfet</sys:String>
+    <sys:String x:Key="Shell.Dismiss">Kapat</sys:String>
+    <sys:String x:Key="Shell.Home">Ana Sayfa</sys:String>
+    <sys:String x:Key="Shell.LIBRARY">KÜTÜPHANE</sys:String>
+    <sys:String x:Key="Shell.Maximize">Ekranı kapla</sys:String>
+    <sys:String x:Key="Shell.Minimize">Simge durumuna küçült</sys:String>
+    <sys:String x:Key="Shell.MyLibrary">Kütüphanem</sys:String>
+    <sys:String x:Key="Shell.Notifications">Bildirimler</sys:String>
+    <sys:String x:Key="Shell.ProfileAndSettings">Profil ve ayarlar</sys:String>
+    <sys:String x:Key="Shell.Restore">Eski boyutuna getir</sys:String>
+    <sys:String x:Key="Shell.Scanning">Taranıyor…</sys:String>
+    <sys:String x:Key="Shell.SearchGamesTagsCollectionsNotes">Oyun, etiket, koleksiyon, not ara…</sys:String>
+    <sys:String x:Key="Shell.YoureAllCaughtUp">Yeni bildirim yok.</sys:String>
+
+    <!-- Sort -->
+    <sys:String x:Key="Sort.InstallationStatus">Kurulum durumu</sys:String>
+    <sys:String x:Key="Sort.LeastPlayed">En az oynanan</sys:String>
+    <sys:String x:Key="Sort.MostPlayed">En çok oynanan</sys:String>
+    <sys:String x:Key="Sort.NameAscending">Ad (A–Z)</sys:String>
+    <sys:String x:Key="Sort.NameDescending">Ad (Z–A)</sys:String>
+    <sys:String x:Key="Sort.RecentlyAdded">Son eklenenler</sys:String>
+    <sys:String x:Key="Sort.RecentlyPlayed">Son oynananlar</sys:String>
+    <sys:String x:Key="Sort.ReleaseYear">Çıkış yılı</sys:String>
+
+    <!-- Startup -->
+    <sys:String x:Key="Startup.AutoAdded.Message">Başlatıcıların taranırken bulundu.</sys:String>
+    <sys:String x:Key="Startup.DatabaseError.Message" xml:space="preserve">{0}&#10;&#10;Evet — mevcut dosyayı yedek olarak sakla ve yeni, boş bir kütüphaneyle başla.&#10;Hayır — veri klasörünü aç ve çık (hiçbir şey değişmez).&#10;İptal — çık.</sys:String>
+    <sys:String x:Key="Startup.DatabaseError.Title">Arclight — kütüphane sorunu</sys:String>
+    <sys:String x:Key="Startup.DataFolderError" xml:space="preserve">Arclight veri klasörüne yazamıyor:&#10;{0}&#10;&#10;{1}</sys:String>
+    <sys:String x:Key="Startup.NewGames.Action">Gözden geçir</sys:String>
+    <sys:String x:Key="Startup.NewGames.Message">Gözden geçir ve eklemek istediklerini seç.</sys:String>
+    <sys:String x:Key="Startup.NewGames.Title">{0} bulundu</sys:String>
+
+    <!-- Stats -->
+    <sys:String x:Key="Stats.ActivitySummary">{1} boyunca {0}</sys:String>
+    <sys:String x:Key="Stats.ArclightCountsTimeOnlyWhile">Arclight yalnızca bir oyunun kendi süreci çalışırken süre sayar — oyunları Arclight'tan başlat ya da Steam, Epic veya masaüstü kısayollarından başlatılan oyunları da dahil etmek için Ayarlar › Takip bölümünden arka plan izleyicisini aç. Diğer platformlardaki oynama süreleri asla içe aktarılmaz.</sys:String>
+    <sys:String x:Key="Stats.CalculatedOnThisPCFrom">Bu bilgisayarda, Arclight'ın doğruladığı oturumlardan hesaplanır. Hiçbir şey içe aktarılmaz ya da tahmin edilmez.</sys:String>
+    <sys:String x:Key="Stats.ChartDayFormat">d MMM ddd</sys:String>
+    <sys:String x:Key="Stats.DonutCaption">oyun</sys:String>
+    <sys:String x:Key="Stats.GamesByPlatform">Platforma göre oyunlar</sys:String>
+    <sys:String x:Key="Stats.GamesWithTrackedPlaytimeWill">Oynama süresi kaydedilen oyunlar burada sıralanacak.</sys:String>
+    <sys:String x:Key="Stats.Last30Days">Son 30 gün</sys:String>
+    <sys:String x:Key="Stats.MostPlayed">En çok oynananlar</sys:String>
+    <sys:String x:Key="Stats.NoPlay">oynanmadı</sys:String>
+    <sys:String x:Key="Stats.NoPlaytimeTrackedYet">Henüz oynama süresi kaydedilmedi</sys:String>
+    <sys:String x:Key="Stats.NoSessions30">Son 30 günde takip edilen oturum yok</sys:String>
+    <sys:String x:Key="Stats.Share">%{0}</sys:String>
+    <sys:String x:Key="Stats.Tile.Average">Oyun başına ortalama</sys:String>
+    <sys:String x:Key="Stats.Tile.AverageDetail">Oynadığın oyunlar arasında</sys:String>
+    <sys:String x:Key="Stats.Tile.Longest">En uzun oturum</sys:String>
+    <sys:String x:Key="Stats.Tile.NotInstalled">{0} yüklü değil</sys:String>
+    <sys:String x:Key="Stats.Tile.Played">{0} oynandı</sys:String>
+    <sys:String x:Key="Stats.Tile.SessionsDetail">Doğrulanmış oyun oturumları</sys:String>
+    <sys:String x:Key="Stats.Tile.ThisMonth">Bu ay</sys:String>
+    <sys:String x:Key="Stats.Tile.ThisWeek">Bu hafta</sys:String>
+    <sys:String x:Key="Stats.Tile.TotalGames">Toplam oyun</sys:String>
+    <sys:String x:Key="Stats.Tile.TrackedPlaytime">Takip edilen süre</sys:String>
+    <sys:String x:Key="Stats.Tile.VerifiedOnly">Yalnızca doğrulanmış oturumlar</sys:String>
+
+    <!-- Status -->
+    <sys:String x:Key="Status.LaunchFromArclight">Arclight'tan başlat</sys:String>
+    <sys:String x:Key="Status.PlayingMany">{0} oyun oynanıyor</sys:String>
+    <sys:String x:Key="Status.PlayingOne">{0} oynanıyor</sys:String>
+    <sys:String x:Key="Status.Ready">Takip hazır</sys:String>
+    <sys:String x:Key="Status.Since">{0} saatinden beri</sys:String>
+    <sys:String x:Key="Status.TrackingOff">Takip kapalı</sys:String>
+    <sys:String x:Key="Status.TrackingPlaytime">Süre takip ediliyor</sys:String>
+    <sys:String x:Key="Status.TurnOnInSettings">Ayarlar'dan açabilirsin</sys:String>
+    <sys:String x:Key="Status.WatcherOn">Arka plan izleyicisi açık</sys:String>
+    <sys:String x:Key="Status.Watching">Oyunların izleniyor</sys:String>
+
+    <!-- Support -->
+    <sys:String x:Key="Support.Experimental">Deneysel</sys:String>
+    <sys:String x:Key="Support.LauncherOnly">Yalnızca başlatıcıyı algılar</sys:String>
+    <sys:String x:Key="Support.ManualOnly">Yalnızca manuel</sys:String>
+
+    <!-- Tags -->
+    <sys:String x:Key="Tags.AddATagAndPress">Bir etiket yaz ve Enter'a bas</sys:String>
+    <sys:String x:Key="Tags.RemoveTag">Etiketi kaldır</sys:String>
+
+    <!-- Toast -->
+    <sys:String x:Key="Toast.AddedToCollection">{0} koleksiyonuna eklendi</sys:String>
+    <sys:String x:Key="Toast.ChangesSaved">Değişiklikler kaydedildi</sys:String>
+    <sys:String x:Key="Toast.Featured">{0} artık Ana Sayfa'da öne çıkıyor</sys:String>
+    <sys:String x:Key="Toast.FileUnusable">Bu dosya kullanılamaz</sys:String>
+    <sys:String x:Key="Toast.FolderNotFound.Message">Oyunun klasörü artık yok. Taşınmış ya da kaldırılmış olabilir.</sys:String>
+    <sys:String x:Key="Toast.FolderNotFound.Title">Klasör bulunamadı</sys:String>
+    <sys:String x:Key="Toast.GameAdded.Message">Ayrıntılarını istediğin zaman düzenleyebilirsin.</sys:String>
+    <sys:String x:Key="Toast.GameAdded.Title">{0} eklendi</sys:String>
+    <sys:String x:Key="Toast.GameRemoved.Message">Diskteki dosyalarına dokunulmadı.</sys:String>
+    <sys:String x:Key="Toast.GameRemoved.Title">{0} Arclight'tan kaldırıldı</sys:String>
+    <sys:String x:Key="Toast.Located">{0} bulundu</sys:String>
+    <sys:String x:Key="Toast.RemovedFromCollection">{0} koleksiyonundan çıkarıldı</sys:String>
+    <sys:String x:Key="Toast.View">Görüntüle</sys:String>
+
+    <!-- Tray -->
+    <sys:String x:Key="Tray.Exit">Çıkış</sys:String>
+    <sys:String x:Key="Tray.Open">Arclight'ı aç</sys:String>
+    <sys:String x:Key="Tray.Status.Running">Arclight — çalışıyor</sys:String>
+    <sys:String x:Key="Tray.Status.Watcher">Arclight — arka plan izleyicisi açık</sys:String>
+
+    <!-- Unit -->
+    <sys:String x:Key="Unit.HoursValue">{0} sa</sys:String>
+
+    <!-- Update -->
+    <sys:String x:Key="Update.Available">Arclight {0} çıktı. Sendeki sürüm: {1}.</sys:String>
+    <sys:String x:Key="Update.NoRelease">GitHub'da henüz bir sürüm yayımlanmadı.</sys:String>
+    <sys:String x:Key="Update.Offline">GitHub'a ulaşılamadı. Bağlantını kontrol edip tekrar dene.</sys:String>
+    <sys:String x:Key="Update.Toast.Action">Sürüm sayfasını aç</sys:String>
+    <sys:String x:Key="Update.Toast.Title">Güncelleme mevcut</sys:String>
+    <sys:String x:Key="Update.UpToDate">Güncelsin ({0}).</sys:String>
+
+    <!-- Validation -->
+    <sys:String x:Key="Validation.AppIdFormat">Windows uygulama kimliği beklenen biçimde değil.</sys:String>
+    <sys:String x:Key="Validation.ArgsControlChars">Başlatma parametreleri satır sonu veya denetim karakteri içeremez.</sys:String>
+    <sys:String x:Key="Validation.ArgsTooLong">Başlatma parametreleri çok uzun.</sys:String>
+    <sys:String x:Key="Validation.ExeInvalidChars">Çalıştırılabilir dosya yolu geçersiz karakterler içeriyor.</sys:String>
+    <sys:String x:Key="Validation.ExeNotFullPath">Tam bir yol kullan, örneğin C:\Oyunlar\Oyunum\oyun.exe.</sys:String>
+    <sys:String x:Key="Validation.ExeRequired">Oyunun çalıştırılabilir dosyasını seç.</sys:String>
+    <sys:String x:Key="Validation.ExeWrongType">Yalnızca .exe, .lnk, .url, .bat ve .cmd dosyaları başlatılabilir.</sys:String>
+    <sys:String x:Key="Validation.NameRequired">Oyunun bir adı olmalı.</sys:String>
+    <sys:String x:Key="Validation.SchemeNotAllowed">'{0}://' bağlantılarına izin verilmiyor. Desteklenenler: {1}.</sys:String>
+    <sys:String x:Key="Validation.UnknownMethod">Bilinmeyen başlatma yöntemi.</sys:String>
+    <sys:String x:Key="Validation.UriInvalidChars">Başlatıcı bağlantısı boşluk veya geçersiz karakterler içeriyor.</sys:String>
+    <sys:String x:Key="Validation.UriNotValid">Başlatıcı bağlantısı geçerli bir URI değil.</sys:String>
+    <sys:String x:Key="Validation.UriRequired">Başlatıcı bağlantısını gir, örneğin steam://rungameid/730.</sys:String>
+</ResourceDictionary>

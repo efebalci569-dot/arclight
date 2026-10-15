@@ -1,0 +1,81 @@
+<UserControl x:Class="Arclight.Desktop.Controls.GameGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Arclight.Desktop.Controls"
+             x:Name="Root">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="VirtualHost" TargetType="ItemsControl">
+            <ScrollViewer x:Name="Scroller" CanContentScroll="True" Focusable="False" Padding="{TemplateBinding Padding}"
+                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ItemsPresenter />
+            </ScrollViewer>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- Grid / compact grid: rows of cards, virtualized row by row. -->
+        <ItemsControl x:Name="GridHost" Template="{StaticResource VirtualHost}" Padding="36,4,26,40"
+                      VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                      VirtualizingPanel.ScrollUnit="Pixel" VirtualizingPanel.CacheLength="2,2" VirtualizingPanel.CacheLengthUnit="Page">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding Items}" ItemTemplate="{Binding CardTemplate, RelativeSource={RelativeSource AncestorType=controls:GameGrid}}"
+                                  Margin="{Binding RowMargin, RelativeSource={RelativeSource AncestorType=controls:GameGrid}}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Rows="1" Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=controls:GameGrid}}" HorizontalAlignment="Left"
+                                             Width="{Binding RowWidth, RelativeSource={RelativeSource AncestorType=controls:GameGrid}}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    </ItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- List view -->
+        <Grid x:Name="ListPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Margin="46,0,36,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="44" />
+                    <ColumnDefinition Width="3*" MinWidth="180" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="Auto" MinWidth="86" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Text="{DynamicResource Grid.NAME}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" Margin="8,0,0,0" />
+                <TextBlock Grid.Column="2" Text="{DynamicResource Grid.PLATFORM}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" />
+                <TextBlock Grid.Column="3" Text="{DynamicResource Grid.STATUS}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" />
+                <TextBlock Grid.Column="4" Text="{DynamicResource Grid.PLAYTIME}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" />
+                <TextBlock Grid.Column="5" Text="{DynamicResource Grid.LASTPLAYED}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" />
+                <TextBlock Grid.Column="6" Text="{DynamicResource Grid.ADDED}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" />
+            </Grid>
+            <Border Grid.Row="0" Style="{StaticResource Divider}" VerticalAlignment="Bottom" Margin="36,0,26,0" />
+            <ItemsControl x:Name="ListHost" Grid.Row="1" Template="{StaticResource VirtualHost}" Padding="36,6,26,40"
+                          ItemTemplate="{StaticResource Template.GameRow}"
+                          VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.ScrollUnit="Pixel">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</UserControl>

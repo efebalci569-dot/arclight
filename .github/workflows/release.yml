@@ -1,0 +1,55 @@
+name: Release
+
+# Push a tag like v0.1.0 to build the installer and portable zip and publish a GitHub release.
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Ensure Inno Setup is available
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe")) {
+            choco install innosetup --no-progress -y
+          }
+
+      - name: Build release files
+        shell: pwsh
+        run: ./scripts/publish.ps1 -Version "${{ github.ref_name }}"
+
+      - name: Extract release notes from CHANGELOG.md
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          $lines = Get-Content CHANGELOG.md
+          $start = ($lines | Select-String -Pattern "^## \[?$([regex]::Escape($version))\]?" | Select-Object -First 1).LineNumber
+          if (-not $start) { "See CHANGELOG.md for details." | Set-Content release-notes.md; exit 0 }
+          $notes = @()
+          foreach ($line in $lines[$start..($lines.Count - 1)]) {
+            if ($line -match '^## ') { break }
+            $notes += $line
+          }
+          $notes += ''
+          $notes += 'Arclight is not code-signed yet, so Windows SmartScreen may warn on first run. Verify the download with SHA256SUMS.txt.'
+          $notes | Set-Content release-notes.md
+
+      - name: Create GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          $files = Get-ChildItem artifacts -File | Where-Object { $_.Extension -in '.exe', '.zip', '.txt' } | ForEach-Object { $_.FullName }
+          gh release create "${{ github.ref_name }}" $files --title "Arclight $version" --notes-file release-notes.md

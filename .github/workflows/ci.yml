@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  desktop:
+    name: Build and test (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore Arclight.sln
+
+      - name: Build
+        run: dotnet build Arclight.sln -c Release --no-restore
+
+      - name: Test
+        run: dotnet test Arclight.sln -c Release --no-build --logger "trx;LogFileName=results.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: tests/**/TestResults/*.trx
+
+  web:
+    name: Build website
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/Arclight.Web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: src/Arclight.Web/package-lock.json
+
+      - run: npm ci
+      - run: npm run build

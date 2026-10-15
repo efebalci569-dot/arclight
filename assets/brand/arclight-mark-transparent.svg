@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 8 48 48" width="48" height="48" role="img" aria-label="Arclight">
+  <defs>
+    <linearGradient id="arclight-arc-t" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <path d="M18.1 42A16 16 0 0 1 45.9 42" fill="none" stroke="url(#arclight-arc-t)" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M13.5 52L32 12L50.5 52" fill="none" stroke="#F5F5F7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

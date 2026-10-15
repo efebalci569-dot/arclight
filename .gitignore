@@ -1,0 +1,29 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+TestResults/
+*.binlog
+
+# Build output
+artifacts/
+publish/
+
+# Node / web
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+
+# Local Arclight data used during development
+.arclight-dev/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Local tool settings
+.claude/

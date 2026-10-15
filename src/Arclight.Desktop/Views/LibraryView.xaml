@@ -1,0 +1,184 @@
+<UserControl x:Class="Arclight.Desktop.Views.LibraryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Arclight.Desktop.Controls"
+             xmlns:vm="clr-namespace:Arclight.Desktop.ViewModels">
+    <UserControl.Resources>
+        <!-- A chip-styled dropdown listing checkable filter options. -->
+        <DataTemplate x:Key="FilterOptionTemplate" DataType="{x:Type vm:FilterOption}">
+            <CheckBox Content="{Binding Label}" IsChecked="{Binding IsSelected}" Margin="10,7" FontSize="13.5" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- ============================================================ Header -->
+        <Grid Margin="36,8,36,18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <controls:GameArt Width="54" Height="54" Margin="0,0,16,0" CornerRadius="12" ImagePath="{Binding CollectionCover}" Title="{Binding Title}"
+                              ShowTitle="False" DecodeWidth="108" Visibility="{Binding IsCollection, Converter={StaticResource VisibleWhen}}" />
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource Library.COLLECTION}" Style="{StaticResource Text.Overline}" Margin="0,0,0,2" Visibility="{Binding IsCollection, Converter={StaticResource VisibleWhen}}" />
+                <TextBlock Text="{Binding Title}" Style="{StaticResource Text.Title}" />
+                <TextBlock Text="{Binding Subtitle}" Style="{StaticResource Text.Secondary}" Margin="0,3,0,0" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Visibility="{Binding IsCollection, Converter={StaticResource VisibleWhen}}">
+                <Button Style="{StaticResource Button.Primary}" Command="{Binding AddGamesToCollectionCommand}" Padding="14,8" FontSize="13" Margin="0,0,8,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource Icon}" Text="&#xE710;" FontSize="12" Foreground="White" Margin="0,0,8,0" />
+                        <TextBlock Text="{DynamicResource Library.AddGames}" />
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource Button.Icon}" Content="&#xE70F;" Command="{Binding EditCollectionCommand}" ToolTip="{DynamicResource Library.EditCollection}" />
+                <Button Style="{StaticResource Button.Icon}" Content="&#xE74D;" Command="{Binding DeleteCollectionCommand}" ToolTip="{DynamicResource Library.DeleteCollection}" />
+            </StackPanel>
+        </Grid>
+
+        <!-- ============================================================ Toolbar -->
+        <Grid Grid.Row="1" Margin="36,0,36,18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <WrapPanel VerticalAlignment="Center">
+                <ToggleButton Style="{StaticResource Chip}" Content="{DynamicResource Library.AllGames}" IsChecked="{Binding HasActiveFilters, Converter={StaticResource InverseBool}, Mode=OneWay}"
+                              Command="{Binding ShowAllCommand}" Margin="0,0,8,8" />
+                <ToggleButton Style="{StaticResource Chip}" Content="{DynamicResource Library.Installed}" IsChecked="{Binding IsInstalledOnly}" Margin="0,0,8,8" />
+                <ToggleButton Style="{StaticResource Chip}" Content="{DynamicResource Library.NotInstalled}" IsChecked="{Binding IsNotInstalledOnly}" Margin="0,0,8,8" />
+                <ToggleButton Style="{StaticResource Chip}" Content="{DynamicResource Common.Favorites}" IsChecked="{Binding FavoritesOnly}" Margin="0,0,8,8"
+                              Visibility="{Binding ShowFavoritesChip, Converter={StaticResource VisibleWhen}}" />
+                <ToggleButton Style="{StaticResource Chip}" Content="{DynamicResource Common.RecentlyPlayed}" IsChecked="{Binding RecentlyPlayedOnly}" Margin="0,0,8,8"
+                              ToolTip="{DynamicResource Library.PlayedInTheLast14}" />
+                <ToggleButton Style="{StaticResource Chip}" Content="{DynamicResource Library.NeverPlayed}" IsChecked="{Binding NeverPlayedOnly}" Margin="0,0,8,8" />
+
+                <Border Width="1" Height="20" Background="{DynamicResource Brush.Border.Default}" Margin="4,0,12,8" VerticalAlignment="Center" />
+
+                <!-- Platform -->
+                <Grid Margin="0,0,8,8">
+                    <ToggleButton x:Name="PlatformToggle" Style="{StaticResource Chip}" Margin="0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding PlatformFilterText}" />
+                            <TextBlock Style="{StaticResource Icon}" Text="&#xE70D;" FontSize="9" Margin="8,1,0,0" />
+                        </StackPanel>
+                    </ToggleButton>
+                    <Popup IsOpen="{Binding IsChecked, ElementName=PlatformToggle}" PlacementTarget="{Binding ElementName=PlatformToggle}" StaysOpen="False"
+                           AllowsTransparency="True" PopupAnimation="Fade" Closed="OnPopupClosed" Tag="{Binding ElementName=PlatformToggle}">
+                        <Border Margin="0,6,12,14" MinWidth="200" Background="{DynamicResource Brush.Bg.Elevated}" BorderBrush="{DynamicResource Brush.Border.Default}"
+                                BorderThickness="1" CornerRadius="12" Padding="4" Effect="{StaticResource Shadow.Popup}">
+                            <ItemsControl ItemsSource="{Binding PlatformFilters}" ItemTemplate="{StaticResource FilterOptionTemplate}" />
+                        </Border>
+                    </Popup>
+                </Grid>
+
+                <!-- Genre -->
+                <Grid Margin="0,0,8,8" Visibility="{Binding HasGenres, Converter={StaticResource VisibleWhen}}">
+                    <ToggleButton x:Name="GenreToggle" Style="{StaticResource Chip}" Margin="0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding GenreFilterText}" />
+                            <TextBlock Style="{StaticResource Icon}" Text="&#xE70D;" FontSize="9" Margin="8,1,0,0" />
+                        </StackPanel>
+                    </ToggleButton>
+                    <Popup IsOpen="{Binding IsChecked, ElementName=GenreToggle}" PlacementTarget="{Binding ElementName=GenreToggle}" StaysOpen="False"
+                           AllowsTransparency="True" PopupAnimation="Fade" Closed="OnPopupClosed" Tag="{Binding ElementName=GenreToggle}">
+                        <Border Margin="0,6,12,14" MinWidth="200" MaxHeight="380" Background="{DynamicResource Brush.Bg.Elevated}" BorderBrush="{DynamicResource Brush.Border.Default}"
+                                BorderThickness="1" CornerRadius="12" Padding="4" Effect="{StaticResource Shadow.Popup}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding GenreFilters}" ItemTemplate="{StaticResource FilterOptionTemplate}" />
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+
+                <!-- Tags -->
+                <Grid Margin="0,0,8,8" Visibility="{Binding HasTags, Converter={StaticResource VisibleWhen}}">
+                    <ToggleButton x:Name="TagToggle" Style="{StaticResource Chip}" Margin="0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding TagFilterText}" />
+                            <TextBlock Style="{StaticResource Icon}" Text="&#xE70D;" FontSize="9" Margin="8,1,0,0" />
+                        </StackPanel>
+                    </ToggleButton>
+                    <Popup IsOpen="{Binding IsChecked, ElementName=TagToggle}" PlacementTarget="{Binding ElementName=TagToggle}" StaysOpen="False"
+                           AllowsTransparency="True" PopupAnimation="Fade" Closed="OnPopupClosed" Tag="{Binding ElementName=TagToggle}">
+                        <Border Margin="0,6,12,14" MinWidth="200" MaxHeight="380" Background="{DynamicResource Brush.Bg.Elevated}" BorderBrush="{DynamicResource Brush.Border.Default}"
+                                BorderThickness="1" CornerRadius="12" Padding="4" Effect="{StaticResource Shadow.Popup}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding TagFilters}" ItemTemplate="{StaticResource FilterOptionTemplate}" />
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+
+                <Button Style="{StaticResource Button.Link}" Content="{DynamicResource Library.ClearFilters}" Command="{Binding ClearFiltersCommand}" VerticalAlignment="Center" Margin="4,0,0,8"
+                        FontSize="13" Visibility="{Binding HasActiveFilters, Converter={StaticResource VisibleWhen}}" />
+            </WrapPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                <TextBlock Text="{Binding ResultText}" Style="{StaticResource Text.Caption}" VerticalAlignment="Center" Margin="0,0,14,0" />
+                <ComboBox ItemsSource="{x:Static vm:LibraryViewModel.SortOptions}" SelectedItem="{Binding SelectedSort}" DisplayMemberPath="Label"
+                          Width="176" MinHeight="36" FontSize="13" ToolTip="{DynamicResource Library.Sort}" Margin="0,0,10,0" />
+                <Border Background="{DynamicResource Brush.Bg.Card}" CornerRadius="10" Padding="2" BorderBrush="{DynamicResource Brush.Border.Subtle}" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Style="{StaticResource Segment}" Content="&#xF0E2;" ToolTip="{DynamicResource Library.Grid}" IsChecked="{Binding IsGrid}" GroupName="ViewMode" />
+                        <RadioButton Style="{StaticResource Segment}" Content="&#xECA5;" ToolTip="{DynamicResource Library.CompactGrid}" IsChecked="{Binding IsCompact}" GroupName="ViewMode" />
+                        <RadioButton Style="{StaticResource Segment}" Content="&#xE8FD;" ToolTip="{DynamicResource Library.List}" IsChecked="{Binding IsList}" GroupName="ViewMode" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- ============================================================ Content -->
+        <controls:GameGrid Grid.Row="2" ItemsSource="{Binding Results}" ViewMode="{Binding ViewMode}" BaseCardWidth="{Binding CardWidth}" Gap="{Binding CardGap}" />
+
+        <!-- Empty library -->
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="460" Margin="0,0,0,80"
+                    Visibility="{Binding IsLibraryEmpty, Converter={StaticResource VisibleWhen}}">
+            <TextBlock Style="{StaticResource Icon}" Text="&#xE7FC;" FontSize="40" Foreground="{DynamicResource Brush.Accent.Text}" />
+            <TextBlock Style="{StaticResource Text.Section}" TextAlignment="Center" Margin="0,16,0,0" Text="{DynamicResource Library.NothingHereYet}" />
+            <TextBlock Foreground="{DynamicResource Brush.Text.Secondary}" TextAlignment="Center" Margin="0,8,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource Text.Body}">
+                        <Setter Property="Text" Value="{DynamicResource Library.ScanYourPCForInstalled}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Mode}" Value="Favorites">
+                                <Setter Property="Text" Value="{DynamicResource Library.MarkGamesAsFavoritesWith}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Mode}" Value="Collection">
+                                <Setter Property="Text" Value="{DynamicResource Library.AddGamesToThisCollection}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,22,0,0">
+                <Button Style="{StaticResource Button.Primary}" Content="{DynamicResource Common.ScanForGames}" Command="{Binding ScanCommand}" Padding="18,10" Margin="0,0,10,0"
+                        Visibility="{Binding IsCollection, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}" />
+                <Button Style="{StaticResource Button.Secondary}" Content="{DynamicResource Common.AddAGame}" Command="{Binding AddGameCommand}" Padding="18,10"
+                        Visibility="{Binding IsCollection, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}" />
+                <Button Style="{StaticResource Button.Primary}" Content="{DynamicResource Library.AddGames}" Command="{Binding AddGamesToCollectionCommand}" Padding="18,10"
+                        Visibility="{Binding IsCollection, Converter={StaticResource VisibleWhen}}" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- No results -->
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="460" Margin="0,0,0,80"
+                    Visibility="{Binding HasNoResults, Converter={StaticResource VisibleWhen}}">
+            <TextBlock Style="{StaticResource Icon}" Text="&#xE721;" FontSize="36" Foreground="{DynamicResource Brush.Text.Muted}" />
+            <TextBlock Text="{Binding NoResultsText}" Style="{StaticResource Text.Section}" TextAlignment="Center" Margin="0,16,0,0" TextWrapping="Wrap" />
+            <TextBlock Style="{StaticResource Text.Body}" Foreground="{DynamicResource Brush.Text.Secondary}" TextAlignment="Center" Margin="0,8,0,0"
+                       Text="{DynamicResource Library.TryADifferentSearchClear}" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,22,0,0">
+                <Button Style="{StaticResource Button.Secondary}" Content="{DynamicResource Library.ClearFilters}" Command="{Binding ClearFiltersCommand}" Padding="18,10" Margin="0,0,10,0" />
+                <Button Style="{StaticResource Button.Primary}" Content="{DynamicResource Common.AddAGame}" Command="{Binding AddGameCommand}" Padding="18,10" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

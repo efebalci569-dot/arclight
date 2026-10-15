@@ -1,0 +1,566 @@
+<UserControl x:Class="Arclight.Desktop.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Arclight.Desktop.Controls"
+             xmlns:vm="clr-namespace:Arclight.Desktop.ViewModels"
+             xmlns:services="clr-namespace:Arclight.Desktop.Services">
+    <UserControl.Resources>
+        <Style x:Key="SettingTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        </Style>
+        <Style x:Key="SettingHint" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12.5" />
+            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,3,24,0" />
+        </Style>
+        <Style x:Key="SectionCard" TargetType="Border" BasedOn="{StaticResource Card}">
+            <Setter Property="Padding" Value="22,6" />
+            <Setter Property="Margin" Value="0,0,0,20" />
+        </Style>
+        <Style x:Key="RowDivider" TargetType="Border" BasedOn="{StaticResource Divider}" />
+        <Style x:Key="Row" TargetType="Grid">
+            <Setter Property="Margin" Value="0,14" />
+        </Style>
+        <DataTemplate x:Key="FolderRow">
+            <Border Background="{DynamicResource Brush.Bg.Input}" CornerRadius="9" Padding="12,6,6,6" Margin="0,0,0,6">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource Icon}" Text="&#xE8B7;" FontSize="13" Foreground="{DynamicResource Brush.Text.Muted}" Margin="0,0,10,0" />
+                    <TextBlock Grid.Column="1" Text="{Binding}" FontSize="13" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding}" />
+                    <Button Grid.Column="2" Style="{StaticResource Button.Icon}" Width="28" Height="28" FontSize="10" Content="&#xE711;" ToolTip="{DynamicResource Common.Remove}"
+                            Command="{Binding Tag, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="28,8,0,0">
+            <TextBlock Text="{DynamicResource Common.Settings}" Style="{StaticResource Text.Title}" Margin="8,0,0,18" />
+            <RadioButton Style="{StaticResource SectionTab}" Tag="&#xE713;" Content="{DynamicResource Settings.General}" IsChecked="{Binding IsGeneral}" GroupName="Section" />
+            <RadioButton Style="{StaticResource SectionTab}" Tag="&#xE8F1;" Content="{DynamicResource Settings.Library}" IsChecked="{Binding IsLibrary}" GroupName="Section" />
+            <RadioButton Style="{StaticResource SectionTab}" Tag="&#xE916;" Content="{DynamicResource Settings.Tracking}" IsChecked="{Binding IsTracking}" GroupName="Section" />
+            <RadioButton Style="{StaticResource SectionTab}" Tag="&#xE790;" Content="{DynamicResource Settings.Appearance}" IsChecked="{Binding IsAppearance}" GroupName="Section" />
+            <RadioButton Style="{StaticResource SectionTab}" Tag="&#xEA18;" Content="{DynamicResource Settings.Privacy}" IsChecked="{Binding IsPrivacy}" GroupName="Section" />
+            <RadioButton Style="{StaticResource SectionTab}" Tag="&#xE946;" Content="{DynamicResource Common.About}" IsChecked="{Binding IsAbout}" GroupName="Section" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="20,58,36,40" MaxWidth="860" HorizontalAlignment="Left">
+
+                <!-- ================================================================ General -->
+                <StackPanel Visibility="{Binding IsGeneral, Converter={StaticResource VisibleWhen}}">
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel>
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="260" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.YourName}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.UsedInTheHomeGreeting}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <TextBox Grid.Column="1" Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Delay=400}" Tag="{DynamicResource Settings.Player}" MaxLength="32" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="260" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.Language}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.ArclightIsCurrentlyAvailableIn}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <ComboBox Grid.Column="1" ItemsSource="{x:Static vm:SettingsViewModel.Languages}" SelectedItem="{Binding Language}" DisplayMemberPath="Label" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="260" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.Theme}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.OLEDBlackUsesPureBlack}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <ComboBox Grid.Column="1" ItemsSource="{x:Static vm:SettingsViewModel.Themes}" SelectedItem="{Binding Theme}" DisplayMemberPath="Label" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="260" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.StartPage}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.ThePageArclightOpensOn}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <ComboBox Grid.Column="1" ItemsSource="{x:Static vm:SettingsViewModel.StartPages}" SelectedItem="{Binding SelectedStartPage}" DisplayMemberPath="Label" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="{DynamicResource Settings.STARTUP}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" Margin="4,0,0,10" />
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel>
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.LaunchArclightWhenWindowsStarts}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.AddsArclightToYourUsers}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding LaunchAtStartup}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.StartMinimized}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.OpenInTheTaskbarOr}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding StartMinimized}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.CloseToTray}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.ClosingTheWindowKeepsArclight}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding CloseToTray}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.CheckForUpdatesOnStartup}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.AsksGitHubForTheLatest}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding CheckUpdatesOnStartup}" VerticalAlignment="Center" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- ================================================================ Library -->
+                <StackPanel Visibility="{Binding IsLibrary, Converter={StaticResource VisibleWhen}}">
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel>
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.ScanLaunchersWhenArclightStarts}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.ReadsLauncherInstallRecordsOnly}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding ScanOnStartup}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.AddNewGamesAutomatically}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.WhenOffNewGamesAre}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding AutoAddNewGames}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.MarkUninstalledGames}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.IfALauncherNoLonger}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding MarkMissingUninstalled}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.DownloadMissingArtwork}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.FetchesCoverArtFromSteams}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding DownloadArtwork}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="220" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.DefaultView}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.AlsoChangesWhenYouSwitch}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <ComboBox Grid.Column="1" ItemsSource="{x:Static vm:SettingsViewModel.ViewModes}" SelectedItem="{Binding DefaultView}" DisplayMemberPath="Label" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="220" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.DefaultSort}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.HowTheLibraryIsOrdered}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding Sorts}" SelectedItem="{Binding DefaultSort}" DisplayMemberPath="Label" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="{DynamicResource Settings.DETECTION}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" Margin="4,0,0,10" />
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="{DynamicResource Settings.PlatformsToScan}" Style="{StaticResource SettingTitle}" />
+                            <TextBlock Text="{DynamicResource Settings.ExperimentalScannersReadUndocumentedLauncher}" Style="{StaticResource SettingHint}" />
+                            <ItemsControl ItemsSource="{Binding Scanners}" Margin="0,12,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vm:ScannerToggle}">
+                                        <Grid Margin="0,7">
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}" FontSize="13.5" VerticalAlignment="Center" />
+                                                <Border Background="{DynamicResource Brush.Warning.Soft}" CornerRadius="5" Padding="7,1" Margin="10,0,0,0" VerticalAlignment="Center"
+                                                        Visibility="{Binding HasSupport, Converter={StaticResource VisibleWhen}}">
+                                                    <TextBlock Text="{Binding Support}" FontSize="11" Foreground="{DynamicResource Brush.Warning}" />
+                                                </Border>
+                                            </StackPanel>
+                                            <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding IsEnabled}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Border Style="{StaticResource RowDivider}" Margin="0,14" />
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.ExtraSteamLibraryFolders}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.OnlyNeededIfASteam}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <Button Style="{StaticResource Button.Secondary}" Content="{DynamicResource Settings.AddFolder}" Command="{Binding AddSteamFolderCommand}" HorizontalAlignment="Right"
+                                        VerticalAlignment="Top" Padding="12,6" FontSize="13" />
+                            </Grid>
+                            <ItemsControl ItemsSource="{Binding ExtraSteamFolders}" ItemTemplate="{StaticResource FolderRow}" Tag="{Binding RemoveSteamFolderCommand}" Margin="0,10,0,0" />
+                            <Border Style="{StaticResource RowDivider}" Margin="0,14" />
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.GameFolders}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.ForDRMFreeAndStandalone}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <Button Style="{StaticResource Button.Secondary}" Content="{DynamicResource Settings.AddFolder}" Command="{Binding AddGameFolderCommand}" HorizontalAlignment="Right"
+                                        VerticalAlignment="Top" Padding="12,6" FontSize="13" />
+                            </Grid>
+                            <ItemsControl ItemsSource="{Binding GameFolders}" ItemTemplate="{StaticResource FolderRow}" Tag="{Binding RemoveGameFolderCommand}" Margin="0,10,0,0" />
+                            <Button Style="{StaticResource Button.Primary}" Content="{DynamicResource Settings.ScanNow}" Command="{Binding ScanNowCommand}" HorizontalAlignment="Left" Padding="16,8" Margin="0,8,0,4" />
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="{DynamicResource Settings.DUPLICATESANDHIDDENGAMES}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" Margin="4,0,0,10" />
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel Margin="0,12">
+                            <TextBlock Style="{StaticResource SettingHint}" Margin="0"
+                                       Text="{DynamicResource Settings.ScansNeverAddAGame}" />
+                            <TextBlock Text="{DynamicResource Settings.NoHiddenGames}" Style="{StaticResource Text.Secondary}" Margin="0,12,0,0"
+                                       Visibility="{Binding HiddenGames.Count, Converter={StaticResource VisibleWhen}, ConverterParameter=invert}" />
+                            <ItemsControl ItemsSource="{Binding HiddenGames}" Margin="0,10,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vm:HiddenGameRow}">
+                                        <Grid Margin="0,4">
+                                            <TextBlock Text="{Binding Name}" FontSize="13.5" VerticalAlignment="Center" />
+                                            <Button Style="{StaticResource Button.Ghost}" Content="{DynamicResource Settings.SuggestAgain}" FontSize="12.5" Padding="10,5" HorizontalAlignment="Right"
+                                                    Command="{Binding DataContext.UnhideCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- ================================================================ Tracking -->
+                <StackPanel Visibility="{Binding IsTracking, Converter={StaticResource VisibleWhen}}">
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel>
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.TrackPlaytime}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.CountsTimeWhileAGame}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding TrackingEnabled}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.BackgroundTracker}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.AlsoCountsTheGamesBelow}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding BackgroundWatcher}" IsEnabled="{Binding TrackingEnabled}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Background="{DynamicResource Brush.Bg.Input}" CornerRadius="10" Padding="14,12" Margin="0,0,0,14">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource Icon}" Text="&#xEA18;" FontSize="14" Foreground="{DynamicResource Brush.Success}" VerticalAlignment="Top" Margin="0,2,10,0" />
+                                    <TextBlock Style="{StaticResource SettingHint}" Margin="0" MaxWidth="720"
+                                               Text="{DynamicResource Settings.WhatTheTrackerReadsThe}" />
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="{DynamicResource Settings.GAMESTHEBACKGROUNDTRACKERMAY}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" Margin="4,0,0,10" />
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel Margin="0,12">
+                            <Grid>
+                                <TextBox Text="{Binding TrackedFilter, UpdateSourceTrigger=PropertyChanged, Delay=150}" Tag="{DynamicResource Settings.FilterGames}" Width="280" HorizontalAlignment="Left" MinHeight="36" Padding="12,6" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Style="{StaticResource Button.Ghost}" Content="{DynamicResource Common.SelectAll}" Command="{Binding SetAllTrackedCommand}" CommandParameter="true" FontSize="12.5" Padding="10,5" />
+                                    <Button Style="{StaticResource Button.Ghost}" Content="{DynamicResource Settings.SelectNone}" Command="{Binding SetAllTrackedCommand}" CommandParameter="false" FontSize="12.5" Padding="10,5" />
+                                </StackPanel>
+                            </Grid>
+                            <ItemsControl ItemsSource="{Binding TrackedGames}" Margin="0,10,0,0" MaxHeight="360"
+                                          VirtualizingPanel.IsVirtualizing="True" ScrollViewer.CanContentScroll="True">
+                                <ItemsControl.Template>
+                                    <ControlTemplate TargetType="ItemsControl">
+                                        <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vm:TrackedGameRow}">
+                                        <Grid Margin="0,6,8,6">
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Item.Name}" FontSize="13.5" />
+                                                <TextBlock Text="{Binding Detail}" Style="{StaticResource Text.Caption}" />
+                                            </StackPanel>
+                                            <CheckBox Grid.Column="1" IsChecked="{Binding IsTracked}" IsEnabled="{Binding CanTrack}" VerticalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="{DynamicResource Settings.EXCLUDEDPROCESSES}" Style="{StaticResource Text.Caption}" FontWeight="SemiBold" Margin="4,0,0,10" />
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel Margin="0,12">
+                            <TextBlock Style="{StaticResource SettingHint}" Margin="0"
+                                       Text="{DynamicResource Settings.ProgramsInsideAGamesFolder}" />
+                            <Grid Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding NewExclusion, UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource Settings.ModmanagerExe}" MinHeight="36" Padding="12,6" />
+                                <Button Grid.Column="1" Style="{StaticResource Button.Secondary}" Content="{DynamicResource Settings.Add}" Command="{Binding AddExclusionCommand}" Padding="16,7" Margin="8,0,0,0" />
+                            </Grid>
+                            <ItemsControl ItemsSource="{Binding ExcludedProcesses}" Margin="0,10,0,0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{DynamicResource Brush.Bg.Hover}" CornerRadius="999" Padding="12,4,5,4" Margin="0,0,6,6">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding}" FontSize="13" VerticalAlignment="Center" />
+                                                <Button Style="{StaticResource Button.Icon}" Width="20" Height="20" FontSize="9" Content="&#xE711;" Margin="6,0,0,0" controls:Ui.CornerRadius="10"
+                                                        Command="{Binding DataContext.RemoveExclusionCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- ================================================================ Appearance -->
+                <StackPanel Visibility="{Binding IsAppearance, Converter={StaticResource VisibleWhen}}">
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel>
+                            <StackPanel Margin="0,14">
+                                <TextBlock Text="{DynamicResource Settings.AccentColor}" Style="{StaticResource SettingTitle}" />
+                                <TextBlock Text="{DynamicResource Settings.UsedForSelectionsProgressAnd}" Style="{StaticResource SettingHint}" />
+                                <ListBox ItemsSource="{Binding Accents}" SelectedItem="{Binding Accent}" Background="Transparent" BorderThickness="0" Margin="-4,12,0,0"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Cursor" Value="Hand" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <StackPanel Margin="4,0,14,4" ToolTip="{Binding DisplayName}">
+                                                            <Grid Width="40" Height="40">
+                                                                <Ellipse x:Name="Ring" Stroke="Transparent" StrokeThickness="2" />
+                                                                <Ellipse Width="30" Height="30" Fill="{Binding Brush}" />
+                                                            </Grid>
+                                                            <TextBlock Text="{Binding DisplayName}" FontSize="11.5" Foreground="{DynamicResource Brush.Text.Secondary}" HorizontalAlignment="Center" Margin="0,4,0,0" />
+                                                        </StackPanel>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="Ring" Property="Stroke" Value="White" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="Ring" Property="Stroke" Value="#66FFFFFF" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </StackPanel>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="220" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.CardSize}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.SizeOfGameCoversIn}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <ComboBox Grid.Column="1" ItemsSource="{x:Static vm:SettingsViewModel.CardSizes}" SelectedItem="{Binding SelectedCardSize}" DisplayMemberPath="Label" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="220" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.GridDensity}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.SpaceBetweenCards}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <ComboBox Grid.Column="1" ItemsSource="{x:Static vm:SettingsViewModel.Densities}" SelectedItem="{Binding Density}" DisplayMemberPath="Label" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.ReduceAnimations}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.TurnsOffHoverLiftsPage}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Style="{StaticResource Switch}" IsChecked="{Binding ReduceAnimations}" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.ImageCache}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Style="{StaticResource SettingHint}">
+                                        <Run Text="{DynamicResource Settings.ArtworkCopiedFromLaunchersOr}" /><Run Text="{Binding CacheSize, Mode=OneWay}" FontWeight="SemiBold" /><Run Text="{DynamicResource Settings.ImagesYouPickedYourselfAre}" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <Button Grid.Column="1" Style="{StaticResource Button.Secondary}" Content="{DynamicResource Settings.ClearCache}" Command="{Binding ClearImageCacheCommand}" Padding="14,7" VerticalAlignment="Center" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- ================================================================ Privacy -->
+                <StackPanel Visibility="{Binding IsPrivacy, Converter={StaticResource VisibleWhen}}">
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel Margin="0,14">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource Brush.Success.Soft}" Margin="0,0,14,0">
+                                    <TextBlock Style="{StaticResource Icon}" Text="&#xEA18;" FontSize="16" Foreground="{DynamicResource Brush.Success}" />
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{DynamicResource Settings.YourLibraryStaysOnThis}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{Binding StorageMode}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock Style="{StaticResource SettingHint}" Margin="0,14,0,0"
+                                       Text="{DynamicResource Settings.GamesNotesTagsCollectionsSettings}" />
+                            <Border Background="{DynamicResource Brush.Bg.Input}" CornerRadius="9" Padding="12,8" Margin="0,14,0,0">
+                                <Grid>
+                                    <TextBlock Text="{Binding DataFolder}" FontSize="12.5" FontFamily="Cascadia Mono, Consolas" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,120,0" />
+                                    <Button Style="{StaticResource Button.Ghost}" Content="{DynamicResource Settings.OpenFolder}" Command="{Binding OpenDataFolderCommand}" HorizontalAlignment="Right" FontSize="12.5" Padding="10,5" />
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel>
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.ExportMyData}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.SavesEverythingArclightKnowsAbout}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <Button Grid.Column="1" Style="{StaticResource Button.Secondary}" Content="{DynamicResource Settings.Export}" Command="{Binding ExportDataCommand}" Padding="14,7" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.ClearPlayHistory}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.DeletesTheListOfIndividual}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <Button Grid.Column="1" Style="{StaticResource Button.Danger}" Content="{DynamicResource Settings.ClearHistory}" Command="{Binding ClearPlayHistoryCommand}" Padding="14,7" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.ResetStatistics}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.DeletesAllSessionsAndSets}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <Button Grid.Column="1" Style="{StaticResource Button.Danger}" Content="{DynamicResource Settings.Reset}" Command="{Binding ResetStatisticsCommand}" Padding="14,7" VerticalAlignment="Center" />
+                            </Grid>
+                            <Border Style="{StaticResource RowDivider}" />
+                            <Grid Style="{StaticResource Row}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Settings.ClearApplicationLogs}" Style="{StaticResource SettingTitle}" />
+                                    <TextBlock Text="{DynamicResource Settings.LogsHelpDiagnoseProblemsAnd}" Style="{StaticResource SettingHint}" />
+                                </StackPanel>
+                                <Button Grid.Column="1" Style="{StaticResource Button.Secondary}" Content="{DynamicResource Settings.ClearLogs}" Command="{Binding ClearLogsCommand}" Padding="14,7" VerticalAlignment="Center" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- ================================================================ About -->
+                <StackPanel Visibility="{Binding IsAbout, Converter={StaticResource VisibleWhen}}">
+                    <Border Style="{StaticResource SectionCard}" Padding="26,24">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Resources/Brand/arclight-mark-128.png" Width="56" Height="56" RenderOptions.BitmapScalingMode="HighQuality" />
+                                <StackPanel Margin="16,0,0,0" VerticalAlignment="Center">
+                                    <TextBlock Text="Arclight" Style="{StaticResource Text.Title}" FontSize="24" />
+                                    <TextBlock Style="{StaticResource Text.Secondary}">
+                                        <Run Text="{DynamicResource Settings.Version}" /><Run Text="{Binding Version, Mode=OneWay}" /><Run Text="{DynamicResource Settings.YourGamesOneUniverse}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,22,0,0">
+                                <Button Style="{StaticResource Button.Primary}" Content="{DynamicResource Settings.CheckForUpdates}" Command="{Binding CheckForUpdatesCommand}" Padding="16,8" Margin="0,0,10,0" />
+                                <Button Style="{StaticResource Button.Secondary}" Content="{DynamicResource Settings.GitHubRepository}" Command="{Binding OpenRepositoryCommand}" Padding="16,8" Margin="0,0,10,0" />
+                                <Button Style="{StaticResource Button.Ghost}" Content="{DynamicResource Settings.HowArclightWorks}" Command="{Binding HowItWorksCommand}" Padding="16,8" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,14,0,0" Visibility="{Binding UpdateStatus, Converter={StaticResource VisibleWhen}}">
+                                <ContentControl Style="{StaticResource Spinner}" Margin="0,0,10,0" Visibility="{Binding IsCheckingUpdates, Converter={StaticResource VisibleWhen}}" />
+                                <TextBlock Text="{Binding UpdateStatus}" Style="{StaticResource Text.Secondary}" VerticalAlignment="Center" />
+                                <Button Style="{StaticResource Button.Link}" Content="{DynamicResource Settings.OpenReleasePage}" Command="{Binding OpenUpdatePageCommand}" Margin="12,0,0,0" FontSize="13"
+                                        Visibility="{Binding UpdateUrl, Converter={StaticResource VisibleWhen}}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource SectionCard}">
+                        <StackPanel Margin="0,14">
+                            <TextBlock Text="{DynamicResource Settings.License}" Style="{StaticResource SettingTitle}" />
+                            <TextBlock Style="{StaticResource SettingHint}"
+                                       Text="{DynamicResource Settings.ArclightIsOpenSourceSoftware}" />
+                            <TextBlock Text="{DynamicResource Settings.Repository}" Style="{StaticResource SettingTitle}" Margin="0,14,0,0" />
+                            <TextBlock Text="{Binding RepositoryUrl}" Style="{StaticResource SettingHint}" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
