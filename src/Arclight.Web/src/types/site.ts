@@ -1,19 +1,27 @@
 export type SupportStatus = 'supported' | 'experimental' | 'manual';
 
+export type PlatformId = 'steam' | 'epic' | 'gog' | 'xbox' | 'ubisoft' | 'ea' | 'other';
+
 export interface PlatformSupport {
-  name: string;
+  id: PlatformId;
   status: SupportStatus;
+}
+
+export interface PlatformText {
+  name: string;
   /** What Arclight reads on the PC to find games. */
   source: string;
   launch: string;
 }
 
+export type FeatureId = 'library' | 'launch' | 'tracking' | 'collections' | 'notes' | 'stats' | 'local' | 'custom';
+
 export interface Feature {
-  id: string;
-  title: string;
-  body: string;
+  id: FeatureId;
   icon: IconName;
 }
+
+export type ScreenId = 'library' | 'detail' | 'stats' | 'collections';
 
 export type IconName =
   | 'library'
@@ -49,6 +57,9 @@ export type ReleaseState =
 export interface ChangelogEntry {
   version: string;
   date: string;
+}
+
+export interface ChangelogNotes {
   summary: string;
   groups: { title: string; items: string[] }[];
 }

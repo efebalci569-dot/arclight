@@ -1,3 +1,4 @@
+import { useLanguage } from '../services/language';
 import { findInstaller, findPortable, formatDate, formatSize, useLatestRelease } from '../services/releases';
 import { repository } from '../services/site';
 import { Icon } from './Icon';
@@ -8,11 +9,13 @@ import { Icon } from './Icon';
  */
 export function ReleaseCard() {
   const state = useLatestRelease();
+  const { t, locale } = useLanguage();
+  const text = t.release;
 
   if (state.kind === 'loading') {
     return (
       <div className="release release--loading" aria-busy="true">
-        <p>Checking GitHub for the latest release…</p>
+        <p>{text.loading}</p>
       </div>
     );
   }
@@ -25,26 +28,26 @@ export function ReleaseCard() {
       <div className="release">
         <div className="release__head">
           <h2>Arclight {release.tag.replace(/^v/i, '')}</h2>
-          <p>Released {formatDate(release.publishedAt)} for Windows 10 and 11 (64-bit).</p>
+          <p>{text.released(formatDate(release.publishedAt, locale))}</p>
         </div>
         <div className="release__actions">
           {installer && (
             <a className="button button--primary button--large" href={installer.url}>
               <Icon name="windows" size={18} />
-              Download installer ({formatSize(installer.size)})
+              {text.installer(formatSize(installer.size))}
             </a>
           )}
           {portable && (
             <a className="button button--ghost button--large" href={portable.url}>
-              Portable .zip ({formatSize(portable.size)})
+              {text.portable(formatSize(portable.size))}
             </a>
           )}
         </div>
         <p className="release__links">
           <a href={release.url} rel="noreferrer" target="_blank">
-            Release page and checksums
+            {text.releasePage}
           </a>
-          <a href="#/changelog">Release notes</a>
+          <a href="#/changelog">{t.common.releaseNotes}</a>
         </p>
       </div>
     );
@@ -53,28 +56,24 @@ export function ReleaseCard() {
   return (
     <div className="release release--empty">
       <div className="release__head">
-        <h2>{state.kind === 'none' ? 'No release has been published yet' : 'GitHub could not be reached'}</h2>
-        <p>
-          {state.kind === 'none'
-            ? 'The first installer will appear here as soon as it is published on GitHub. Until then you can build Arclight from source in a few minutes.'
-            : 'The latest release couldn’t be loaded right now. You can find every published build on the GitHub releases page.'}
-        </p>
+        <h2>{state.kind === 'none' ? text.noneTitle : text.errorTitle}</h2>
+        <p>{state.kind === 'none' ? text.noneBody : text.errorBody}</p>
       </div>
       <div className="release__actions">
         <a className="button button--primary button--large" href={repository.releasesUrl} rel="noreferrer" target="_blank">
           <Icon name="github" size={18} />
-          Open GitHub releases
+          {text.openReleases}
         </a>
         <a className="button button--ghost button--large" href={repository.url} rel="noreferrer" target="_blank">
-          View source
+          {text.viewSource}
         </a>
       </div>
-      <pre className="code" aria-label="Build from source">
+      <pre className="code" aria-label={text.buildLabel}>
         <code>{`git clone ${repository.url}.git
 cd arclight
 dotnet run --project src/Arclight.Desktop`}</code>
       </pre>
-      <p className="release__hint">Requires the .NET 10 SDK on Windows.</p>
+      <p className="release__hint">{text.buildHint}</p>
     </div>
   );
 }

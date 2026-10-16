@@ -3,20 +3,18 @@ import { SiteLayout } from './layouts/SiteLayout';
 import { ChangelogPage } from './pages/ChangelogPage';
 import { DownloadPage } from './pages/DownloadPage';
 import { HomePage } from './pages/HomePage';
+import { useLanguage } from './services/language';
 import { useRoute } from './services/router';
-
-const titles = {
-  home: 'Arclight — Your Games. One Universe.',
-  download: 'Download Arclight for Windows',
-  changelog: 'Release notes — Arclight',
-  'not-found': 'Page not found — Arclight',
-};
 
 export function App() {
   const { route, anchor } = useRoute();
+  const { t } = useLanguage();
 
   useEffect(() => {
-    document.title = titles[route];
+    document.title = t.titles[route];
+  }, [route, t]);
+
+  useEffect(() => {
     if (route !== 'home') {
       window.scrollTo({ top: 0 });
     }
@@ -29,10 +27,10 @@ export function App() {
       {route === 'changelog' && <ChangelogPage />}
       {route === 'not-found' && (
         <div className="page page--center">
-          <h1>That page doesn’t exist</h1>
-          <p>The link may be old. Head back to the start.</p>
+          <h1>{t.notFound.title}</h1>
+          <p>{t.notFound.body}</p>
           <a className="button button--primary" href="#/">
-            Go to the home page
+            {t.notFound.action}
           </a>
         </div>
       )}

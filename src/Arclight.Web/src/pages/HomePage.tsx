@@ -5,8 +5,11 @@ import { Icon } from '../components/Icon';
 import { PlatformTable } from '../components/PlatformTable';
 import { Privacy } from '../components/Privacy';
 import { Screens } from '../components/Screens';
+import { useLanguage } from '../services/language';
 
 export function HomePage({ anchor }: { anchor?: string }) {
+  const { t } = useLanguage();
+
   useEffect(() => {
     if (!anchor) {
       window.scrollTo({ top: 0 });
@@ -26,11 +29,11 @@ export function HomePage({ anchor }: { anchor?: string }) {
       <Screens />
       <Privacy />
       <section className="closing" aria-labelledby="closing-title">
-        <h2 id="closing-title">Bring every game home.</h2>
-        <p>Arclight is free, open source and runs entirely on your PC.</p>
+        <h2 id="closing-title">{t.closing.title}</h2>
+        <p>{t.closing.body}</p>
         <a className="button button--primary button--large" href="#/download">
           <Icon name="windows" size={18} />
-          Download for Windows
+          {t.common.downloadForWindows}
         </a>
       </section>
     </>

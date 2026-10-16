@@ -194,6 +194,36 @@ p {
   gap: 8px;
 }
 
+.lang-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+}
+
+.lang-switch__option {
+  min-width: 34px;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.lang-switch__option:hover {
+  color: var(--ink);
+}
+
+.lang-switch__option[aria-pressed='true'] {
+  background: var(--raised);
+  color: var(--ink);
+}
+
 .site-footer {
   border-top: 1px solid var(--line);
   margin-top: 40px;
@@ -802,6 +832,11 @@ p {
     display: none;
   }
 
+  /* The nav normally pushes the actions right; without it they need their own push. */
+  .site-header__actions {
+    margin-left: auto;
+  }
+
   .feature-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -862,6 +897,15 @@ p {
 }
 
 @media (max-width: 560px) {
+  /* Brand, language and Download must fit one row; the footer still links the source code. */
+  .site-header__inner {
+    gap: 16px;
+  }
+
+  .site-header__github {
+    display: none;
+  }
+
   .feature-grid {
     grid-template-columns: 1fr;
   }

@@ -1,26 +1,21 @@
+import { useLanguage } from '../services/language';
 import { features } from '../services/site';
 import { Icon } from './Icon';
 
-/** A week of play drawn as bars — mirrors the Statistics page's activity chart. */
-const week = [
-  { day: 'Mon', hours: 1.2 },
-  { day: 'Tue', hours: 0 },
-  { day: 'Wed', hours: 2.4 },
-  { day: 'Thu', hours: 0.8 },
-  { day: 'Fri', hours: 3.1 },
-  { day: 'Sat', hours: 4.2 },
-  { day: 'Sun', hours: 2.6 },
-];
+/** A week of play (hours, Monday first) drawn as bars — mirrors the Statistics page's activity chart. */
+const week = [1.2, 0, 2.4, 0.8, 3.1, 4.2, 2.6];
 
 export function Features() {
+  const { t } = useLanguage();
+  const text = t.features;
   const tracking = features.find((f) => f.id === 'tracking')!;
   // Local-first gets its own section further down (Privacy).
   const others = features.filter((f) => f.id !== 'tracking' && f.id !== 'local');
   return (
     <section className="section" id="features" aria-labelledby="features-title">
       <div className="section__head">
-        <h2 id="features-title">Built to be used every day</h2>
-        <p>A launcher you open first: fast to search, honest about what it knows, and yours to arrange.</p>
+        <h2 id="features-title">{text.title}</h2>
+        <p>{text.intro}</p>
       </div>
 
       <div className="spotlight">
@@ -28,29 +23,29 @@ export function Features() {
           <span className="feature-icon">
             <Icon name={tracking.icon} />
           </span>
-          <h3>{tracking.title}</h3>
-          <p>{tracking.body}</p>
+          <h3>{text.items.tracking.title}</h3>
+          <p>{text.items.tracking.body}</p>
           <dl className="counts">
             <div>
-              <dt>Counts</dt>
-              <dd>The game’s own process, while it runs</dd>
+              <dt>{text.counts}</dt>
+              <dd>{text.countsBody}</dd>
             </div>
             <div>
-              <dt>Never counts</dt>
-              <dd>Launchers, crash reporters, anti-cheat helpers, time the PC was asleep</dd>
+              <dt>{text.neverCounts}</dt>
+              <dd>{text.neverCountsBody}</dd>
             </div>
           </dl>
         </div>
-        <figure className="spotlight__chart" aria-label="Example week of tracked playtime">
+        <figure className="spotlight__chart" aria-label={text.chartLabel}>
           <div className="bars">
-            {week.map((d) => (
-              <div className="bars__col" key={d.day}>
-                <div className="bars__bar" style={{ height: `${Math.max(3, (d.hours / 4.2) * 100)}%` }} data-empty={d.hours === 0 || undefined} />
-                <span>{d.day}</span>
+            {week.map((hours, day) => (
+              <div className="bars__col" key={day}>
+                <div className="bars__bar" style={{ height: `${Math.max(3, (hours / 4.2) * 100)}%` }} data-empty={hours === 0 || undefined} />
+                <span>{text.weekdays[day]}</span>
               </div>
             ))}
           </div>
-          <figcaption>Example week. Real totals come only from sessions Arclight verified on your PC.</figcaption>
+          <figcaption>{text.chartCaption}</figcaption>
         </figure>
       </div>
 
@@ -60,8 +55,8 @@ export function Features() {
             <span className="feature-icon">
               <Icon name={feature.icon} />
             </span>
-            <h3>{feature.title}</h3>
-            <p>{feature.body}</p>
+            <h3>{text.items[feature.id].title}</h3>
+            <p>{text.items[feature.id].body}</p>
           </li>
         ))}
       </ul>
